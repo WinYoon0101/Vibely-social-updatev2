@@ -1,0 +1,25 @@
+
+.rhap_container {
+    background-color: #086280 !important; 
+    color: white !important; 
+}
+
+.rhap_time {
+    color: white !important; 
+}
+
+.rhap_progress-indicator {
+    background-color: white !important; 
+}
+
+.rhap_progress-filled {
+    background-color: white !important; 
+}
+
+.rhap_button {
+    color: white !important; 
+}
+
+.rhap_play-pause-button {
+    color: white !important;
+}

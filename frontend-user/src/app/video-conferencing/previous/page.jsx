@@ -1,0 +1,14 @@
+import CallList from "@/app/components/meeting/CallList";
+
+
+const PreviousPage = () => {
+  return (
+    <section className="flex size-full flex-col gap-10 text-white">
+      <h1 className="text-3xl font-bold">Cuộc họp đã kết thúc</h1>
+
+      <CallList type="ended" />
+    </section>
+  );
+};
+
+export default PreviousPage;

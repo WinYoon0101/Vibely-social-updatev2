@@ -1,0 +1,234 @@
+{
+    "info": {
+        "name": "Learning Tree API Tests",
+        "description": "Collection for testing Learning Tree feature APIs",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "1. Quản lý Cây",
+            "item": [
+                {
+                    "name": "Tạo cây mới - Xương rồng",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"tree_type\": \"cactus\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/learning-tree",
+                            "path": [
+                                "api",
+                                "learning-tree"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Lấy thông tin cây",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/learning-tree",
+                            "path": [
+                                "api",
+                                "learning-tree"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Đổi loại cây - Hoa hướng dương",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"tree_type\": \"sunflower\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/learning-tree/type",
+                            "path": [
+                                "api",
+                                "learning-tree",
+                                "type"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "2. Quản lý Mục tiêu",
+            "item": [
+                {
+                    "name": "Tạo mục tiêu mới",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"title\": \"Hoàn thành chương 1 môn Toán\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/learning-goals",
+                            "path": [
+                                "api",
+                                "learning-goals"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Lấy danh sách mục tiêu",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/learning-goals",
+                            "path": [
+                                "api",
+                                "learning-goals"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Cập nhật mục tiêu",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"title\": \"Hoàn thành chương 1 và 2 môn Toán\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/learning-goals/{{goal_id}}",
+                            "path": [
+                                "api",
+                                "learning-goals",
+                                "{{goal_id}}"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Toggle hoàn thành mục tiêu",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/learning-goals/{{goal_id}}/toggle",
+                            "path": [
+                                "api",
+                                "learning-goals",
+                                "{{goal_id}}",
+                                "toggle"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Xóa mục tiêu",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/learning-goals/{{goal_id}}",
+                            "path": [
+                                "api",
+                                "learning-goals",
+                                "{{goal_id}}"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:5000"
+        },
+        {
+            "key": "token",
+            "value": "your_jwt_token_here"
+        },
+        {
+            "key": "goal_id",
+            "value": "goal_id_after_creation"
+        }
+    ]
+}

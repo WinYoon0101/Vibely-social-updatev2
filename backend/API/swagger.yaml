@@ -1,0 +1,2642 @@
+openapi: 3.0.0
+info:
+  title: Vibely API
+  description: API documentation for Vibely Learning Social Network
+  version: 1.0.0
+  contact:
+    email: 22521172@gm.uit.edu.vn
+
+servers:
+  - url: http://localhost:8081
+    description: Local Development Server
+  - url: https://vibely-study-social-web.onrender.com
+    description: Production Server
+
+tags:
+  - name: Authentication
+    description: Authentication and authorization endpoints
+  - name: Users
+    description: User management operations
+  - name: Posts
+    description: Social posts operations
+  - name: Stories
+    description: Story operations
+  - name: Quiz
+    description: Quiz management
+  - name: Documents
+    description: Document management
+  - name: Schedules
+    description: Schedule management
+  - name: Inquiries
+    description: Inquiry and response management
+  - name: Conversations
+    description: Chat conversation management
+  - name: Messages
+    description: Chat message management
+  - name: Admin Authentication
+    description: Admin login, logout and password management
+  - name: Admin Dashboard
+    description: Admin dashboard statistics and analytics
+  - name: Admin User Management
+    description: User management operations for admin
+  - name: Admin Document Management
+    description: Document management operations for admin
+  - name: Admin Inquiry Management
+    description: Inquiry management operations for admin
+  - name: Admin Account
+    description: Admin profile and information management
+paths:
+  # Authentication Routes
+  /auth/login:
+    post:
+      tags: [Authentication]
+      summary: User login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        200:
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  user:
+                    $ref: '#/components/schemas/User'
+        401:
+          description: Invalid credentials
+
+  /auth/register:
+    post:
+      tags: [Authentication]
+      summary: Register new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - email
+                - password
+                - gender
+                - dateOfBirth
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+                gender:
+                  type: string
+                  enum: [male, female, other]
+                dateOfBirth:
+                  type: string
+                  format: date
+      responses:
+        201:
+          description: User created successfully
+        400:
+          description: Invalid input data
+
+  /send-code:
+    post:
+      tags: [Authentication]
+      summary: Request password reset
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+      responses:
+        200:
+          description: Reset email sent
+        404:
+          description: User not found
+
+  /verify-code:
+  post:
+    tags: [Authentication]
+    summary: Verify password reset code
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - email
+              - code
+            properties:
+              email:
+                type: string
+                format: email
+              code:
+                type: string
+                description: 6-digit verification code sent via email
+    responses:
+      200:
+        description: Verification successful
+      400:
+        description: Invalid or expired verification code
+      404:
+        description: User not found
+
+  /reset-password:
+  post:
+    tags: [Authentication]
+    summary: Reset password with verification code
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - email
+              - code
+              - newPassword
+            properties:
+              email:
+                type: string
+                format: email
+              code:
+                type: string
+                description: 6-digit verification code
+              newPassword:
+                type: string
+                format: password
+                description: New password for the user
+    responses:
+      200:
+        description: Password reset successfully
+      400:
+        description: Invalid or expired verification code
+      404:
+        description: User not found
+
+  /update-password:
+    post:
+      tags: [Authentication]
+      summary: Update user password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - token
+                - newPassword
+              properties:
+                token:
+                  type: string
+                  description: Token received from password reset email
+                newPassword:
+                  type: string
+                  format: password
+                  description: New password for the user
+      responses:
+        200:
+          description: Password updated successfully
+        400:
+          description: Invalid token or password
+        404:
+          description: User not found
+
+ 
+  /auth/deleteAccount:
+    delete:
+      tags: [Authentication]
+      summary: Delete user account
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Account deleted successfully
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden - insufficient permissions
+  
+  # User Routes
+  /users:
+    get:
+      tags: [Users]
+      summary: Get all users
+      description: Get list of all users for search profile
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: List of all users retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Lấy tất cả người dùng thành công"
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        username:
+                          type: string
+                          example: "Yoo Jae Yi"
+                        profilePicture:
+                          type: string
+                          format: uri
+                          example: "https://res.cloudinary.com/..."
+                        email:
+                          type: string
+                          format: email
+                          example: "user@example.com"
+                        followerCount:
+                          type: integer
+                          example: 42
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Lỗi máy chủ nội bộ"
+                  error:
+                    type: string 
+  /users/follow:
+    post:
+      tags: [Users]
+      summary: Follow a user
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userIdToFollow:
+                  type: string
+                  description: ID of the user to follow
+      responses:
+        200:
+          description: Successfully followed user
+        400:
+          description: Cannot follow yourself
+        404:
+          description: User not found
+
+  /users/unfollow:
+    post:
+      tags: [Users]
+      summary: Unfollow a user
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userIdToUnfollow:
+                  type: string
+                  description: ID of the user to unfollow
+      responses:
+        200:
+          description: Successfully unfollowed user
+        400:
+          description: Cannot unfollow yourself
+        404:
+          description: User not found
+
+  /users/friend-request/remove:
+    post:
+      tags: [Users]
+      summary: Remove friend request
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                requestSenderId:
+                  type: string
+                  description: ID of the user who sent the friend request
+      responses:
+        200:
+          description: Friend request removed successfully
+        404:
+          description: Request not found
+
+  /users/friend-request:
+    get:
+      tags: [Users]
+      summary: Get all friend requests
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Get all friend requests successfully
+
+  /users/user-to-request:
+    get:
+      tags: [Users]
+      summary: Get all suggested friends
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Get all suggested friends successfully
+
+  /users/mutual-friends/{userId}:
+    get:
+      tags: [Users]
+      summary: Get mutual friends with a user
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Get mutual friends successfully
+ 
+
+  /users/check-auth:
+    get:
+      tags: [Users]
+      summary: Check user authentication status
+      security:
+        - BearerAuth: []
+      responses:
+        201:
+          description: User is authenticated
+        404:
+          description: Not authenticated
+
+  /users/bio/{userId}:
+    put:
+      tags: [Users]
+      summary: Create or update user bio
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bioText:
+                  type: string
+                liveIn:
+                  type: string
+                workplace:
+                  type: string
+                education:
+                  type: string
+                hometown:
+                  type: string
+      responses:
+        200:
+          description: Bio created or updated successfully
+  
+  /users/profile/{userId}:
+    get:
+      tags: [Users]
+      summary: Get logged-in user's profile
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: User profile retrieved successfully
+        404:
+          description: User not found
+    put:
+      tags: [Users]
+      summary: Update user profile
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - username
+                - gender
+                - dateOfBirth
+              properties:
+                profilePicture:
+                  type: string
+                  format: binary
+                username:
+                  type: string
+                gender:
+                  type: string
+                dateOfBirth:
+                  type: string
+                  format: date
+      responses:
+        200:
+          description: Profile updated successfully
+        404:
+          description: User not found
+
+  /users/profile/cover-picture/{userId}:
+    put:
+      tags: [Users]
+      summary: Update user cover picture
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                coverPicture:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: Cover picture updated successfully
+        400:
+          description: Invalid file type or size
+        404:
+          description: User not found
+
+  /users/get-users:
+    post:
+      tags: [Users]
+      summary: Get users by IDs
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userIds:
+                  type: array
+                  items:
+                  type: string
+      responses:
+        200:
+          description: Users retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        400:
+          description: Invalid input data
+
+  /users/saved:
+    get:
+      tags: [Users]
+      summary: Get user's saved documents
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: query
+          name: query
+          schema:
+            type: string
+        - in: query
+          name: level
+          schema:
+            type: string
+        - in: query
+          name: subject
+          schema:
+            type: string
+      responses:
+        200:
+          description: Get saved documents successfully
+
+  /users/saved/{id}:
+    get:
+      tags: [Users]
+      summary: Get specific saved document
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Document details retrieved successfully  
+    delete:
+      tags: [Users]
+      summary: Unsave a document
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Document unsaved successfully
+        404:
+          description: Document not found
+
+  # Post Routes
+  /users/posts:
+    post:
+      tags: [Posts]
+      summary: Create new post
+      description: Create a new post with optional media content
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  description: Text content of the post
+                media:
+                  type: string
+                  format: binary
+                  description: Image or video file
+      responses:
+        201:
+          description: Post created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Tạo bài viết thành công"
+                  data:
+                    $ref: '#/components/schemas/Post'
+        500:
+          description: Server error
+          
+  /users/posts/{postId}:
+    get:
+      tags: [Posts]
+      summary: Get single post by ID
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Post details retrieved successfully
+        404:
+          description: Post not found
+    delete:
+      tags: [Posts]
+      summary: Delete a post
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Post deleted successfully
+        404:
+          description: Post not found
+
+  /users/posts/user/{id}:
+    get:
+      tags: [Posts]
+      summary: Get all posts by user ID
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: List of user's posts
+        404:
+          description: User not found
+
+  /users/posts/reacts/{postId}:
+    post:
+      tags: [Posts]
+      summary: React to a post
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum: [like, love, haha, wow, sad, angry]
+      responses:
+        200:
+          description: Reaction updated successfully
+        404:
+          description: Post not found
+
+  /users/posts/comments/{postId}:
+    post:
+      tags: [Posts]
+      summary: Add comment to post
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+      responses:
+        201:
+          description: Comment added successfully
+        404:
+          description: Post not found
+
+  /users/posts/reply/{postId}:
+    post:
+      tags: [Posts]
+      summary: Add reply to comment
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                commentId:
+                  type: string
+                replyText:
+                  type: string
+      responses:
+        201:
+          description: Reply added successfully
+        404:
+          description: Comment not found
+
+  /users/posts/share/{postId}:
+    post:
+      tags: [Posts]
+      summary: Share a post
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Post shared successfully
+        404:
+          description: Post not found
+
+  /users/posts/deleteComment/{postId}/{commentId}:
+    delete:
+      tags: [Posts]
+      summary: Delete a comment
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: commentId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Comment deleted successfully
+        404:
+          description: Comment not found
+
+  /users/posts/deleteReply/{postId}/{commentId}/{replyId}:
+    delete:
+      tags: [Posts]
+      summary: Delete a reply
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: commentId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: replyId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Reply deleted successfully
+        404:
+          description: Reply not found
+    get:
+      tags: [Posts]
+      summary: Get post by ID
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Post details
+        404:
+          description: Post not found
+
+  # Story Routes
+  /users/story:
+    post:
+      tags: [Stories]
+      summary: Create new story
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - media
+              properties:
+                media:
+                  type: string
+                  format: binary
+                  description: Image or video file for story
+      responses:
+        201:
+          description: Story created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Tạo story thành công"
+                  data:
+                    $ref: '#/components/schemas/Story'
+        400:
+          description: File upload required
+        500:
+          description: Server error
+
+  /users/story:
+    get:
+      tags: [Stories]
+      summary: Get all stories
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: List of stories retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Lấy tất cả story thành công"
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Story'
+        500:
+          description: Server error
+
+  /users/story/reacts/{storyId}:
+    post:
+      tags: [Stories]
+      summary: React to a story
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: storyId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum: [tym]
+      responses:
+        200:
+          description: Reaction updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Đã thích story"
+                  data:
+                    $ref: '#/components/schemas/Story'
+        404:
+          description: Story not found
+
+  # Document Routes
+  /documents:
+    get:
+      tags: [Documents]
+      summary: Get filtered documents
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: Filter by document title
+        - in: query
+          name: level
+          schema:
+            type: string
+          description: Filter by level ID
+        - in: query
+          name: subject
+          schema:
+            type: string
+          description: Filter by subject ID
+      responses:
+        200:
+          description: List of documents retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Lấy tài liệu thành công"
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Document'
+        500:
+          description: Server error
+
+  /documents/{id}:
+    get:
+      tags: [Documents]
+      summary: Get document by ID
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Document details retrieved successfully
+        404:
+          description: Document not found
+
+  /documents/levels:
+    get:
+      tags: [Documents]
+      summary: Get all levels
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: List of levels retrieved successfully
+
+  /documents/subjects/{levelId}:
+    get:
+      tags: [Documents]
+      summary: Get subjects by level
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: levelId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: List of subjects retrieved successfully
+
+  /documents/save:
+    post:
+      tags: [Documents]
+      summary: Save document for user
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - documentId
+              properties:
+                documentId:
+                  type: string
+      responses:
+        200:
+          description: Document saved successfully
+        400:
+          description: Document already saved
+
+
+  # Quiz Routes
+  /quizzes:
+    get:
+      tags: [Quiz]
+      summary: Get all quizzes
+      description: Lấy danh sách tất cả các quiz
+      responses:
+        200:
+          description: Lấy danh sách quiz thành công
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Lấy danh sách quiz thành công!"
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Quiz'
+        500:
+          description: Lỗi server
+    
+    post:
+      tags: [Quiz]
+      summary: Create new quiz
+      description: Create a new quiz
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - quizTitle
+                - icon
+                - quizQuestions
+              properties:
+                quizTitle:
+                  type: string
+                icon:
+                  type: string
+                quizQuestions:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Question'
+      responses:
+        201:
+          description: Quiz created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Quiz đã được tạo thành công!"
+                  data:
+                    $ref: '#/components/schemas/Quiz'
+        400:
+          description: Missing required fields
+        500:
+          description: Server error
+
+  /quizzes/{id}:
+    get:
+      tags: [Quiz]
+      summary: Get quiz by ID
+      description: Lấy thông tin quiz theo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Lấy quiz thành công
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Lấy quiz thành công!"
+                  data:
+                    $ref: '#/components/schemas/Quiz'
+        404:
+          description: Quiz không tồn tại
+        500:
+          description: Lỗi server
+
+    put:
+      tags: [Quiz]
+      summary: Update quiz
+      description: Cập nhật thông tin quiz
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                updateQuiz:
+                  type: object
+                  properties:
+                    icon:
+                      type: string
+                    quizTitle:
+                      type: string
+                    quizQuestions:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Question'
+                updateQuizQuestions:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Question'
+      responses:
+        200:
+          description: Cập nhật quiz thành công
+        404:
+          description: Quiz không tồn tại
+        500:
+          description: Lỗi server
+
+    delete:
+      tags: [Quiz]
+      summary: Delete quiz
+      description: Xóa quiz
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Xóa quiz thành công
+        404:
+          description: Quiz không tồn tại
+        500:
+          description: Lỗi server
+   
+  # Schedule Routes
+  /schedules:
+    post:
+      tags: [Schedules]
+      summary: Create new schedule
+      description: Create a new schedule
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - subject
+                - startTime
+                - endTime
+              properties:
+                subject:
+                  type: string
+                  maxLength: 100
+                startTime:
+                  type: string
+                  format: date-time
+                endTime:
+                  type: string
+                  format: date-time
+                categoryColor:
+                  type: string
+                  default: "#0000FF"
+      responses:
+        201:
+          description: Schedule created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "✅ Lịch trình đã được tạo"
+                  data:
+                    $ref: '#/components/schemas/Schedule'
+        400:
+          description: Invalid input data
+        500:
+          description: Server error
+
+    get:
+      tags: [Schedules]
+      summary: Get user's schedules
+      description: Get all schedules of the authenticated user
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Get schedules successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Schedule'
+        500:
+          description: Server error
+
+  /schedules/{scheduleId}:
+    get:
+      tags: [Schedules]
+      summary: Get schedule by ID
+      description: Get schedule details by ID
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: scheduleId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Get schedule successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/Schedule'
+        404:
+          description: Schedule not found
+        500:
+          description: Server error
+
+    put:
+      tags: [Schedules]
+      summary: Update schedule
+      description: Update schedule details
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: scheduleId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                subject:
+                  type: string
+                startTime:
+                  type: string
+                  format: date-time
+                endTime:
+                  type: string
+                  format: date-time
+                categoryColor:
+                  type: string
+      responses:
+        200:
+          description: Schedule updated successfully
+        400:
+          description: Invalid input data
+        404:
+          description: Schedule not found
+        500:
+          description: Server error
+
+    delete:
+      tags: [Schedules]
+      summary: Delete schedule
+      description: Delete a schedule by ID
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: scheduleId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Schedule deleted successfully
+        404:
+          description: Schedule not found
+        500:
+          description: Server error
+
+  /schedules/user/{userId}:
+    get:
+      tags: [Schedules]
+      summary: Get schedules by user ID
+      description: Get all schedules of a specific user
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Get schedules successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+        404:
+          description: User not found
+        500:
+          description: Server error
+  
+  # Inquiry Routes
+  /inquiry:
+    post:
+      tags: [Inquiries]
+      summary: Create new inquiry
+      description: Create a new inquiry
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - message
+              properties:
+                message:
+                  type: string
+                  description: Inquiry content
+      responses:
+        201:
+          description: Inquiry sent successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Inquiry has been sent!"
+                  data:
+                    $ref: '#/components/schemas/Inquiry'
+        400:
+          description: Missing required information
+        401:
+          description: Unauthorized
+        500:
+          description: Server error
+
+  # Conversation Routes
+  /conversation:
+    post:
+      tags: [Conversations]
+      summary: Create new conversation
+      description: Create a new chat conversation between two users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - senderId
+                - receiverId
+              properties:
+                senderId:
+                  type: string
+                  description: ID of the user initiating the conversation
+                receiverId:
+                  type: string
+                  description: ID of the user receiving the conversation
+      responses:
+        200:
+          description: Conversation created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+        400:
+          description: Missing senderId or receiverId
+        500:
+          description: Server error
+
+  /conversation/{userId}:
+    get:
+      tags: [Conversations]
+      summary: Get user conversations
+      description: Get all conversations for a specific user
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+          description: ID of the user
+      responses:
+        200:
+          description: Successfully retrieved conversations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Conversation'
+        400:
+          description: Missing userId
+        500:
+          description: Server error
+
+  /conversation/find/{firstUserId}/{secondUserId}:
+    get:
+      tags: [Conversations]
+      summary: Get conversation between users
+      description: Find conversation between two specific users
+      parameters:
+        - in: path
+          name: firstUserId
+          required: true
+          schema:
+            type: string
+          description: ID of the first user
+        - in: path
+          name: secondUserId
+          required: true
+          schema:
+            type: string
+          description: ID of the second user
+      responses:
+        200:
+          description: Successfully retrieved conversation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+        400:
+          description: Missing user IDs
+        500:
+          description: Server error
+
+  # Message Routes
+  /message:
+    post:
+      tags: [Messages]
+      summary: Add new message
+      description: Add a new message to a conversation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - conversationId
+                - sender
+                - text
+              properties:
+                conversationId:
+                  type: string
+                  description: ID of the conversation
+                sender:
+                  type: string
+                  description: ID of the user sending the message
+                text:
+                  type: string
+                  description: Message content
+      responses:
+        200:
+          description: Message sent successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        500:
+          description: Server error
+
+  /message/{conversationId}:
+    get:
+      tags: [Messages]
+      summary: Get conversation messages
+      description: Get all messages from a specific conversation
+      parameters:
+        - in: path
+          name: conversationId
+          required: true
+          schema:
+            type: string
+          description: ID of the conversation
+      responses:
+        200:
+          description: Successfully retrieved messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Message'
+        500:
+          description: Server error
+
+# Admin Routes
+  /admin/auth/login:
+    post:
+      tags: [Admin Authentication]
+      summary: Admin login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        200:
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  token:
+                    type: string
+        400:
+          description: Invalid credentials
+        500:
+          description: Server error
+
+  /admin/auth/logout:
+    post:
+      tags: [Admin Authentication]
+      summary: Admin logout
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Logout successful
+        500:
+          description: Server error
+
+  /admin/auth/update-password:
+    put:
+      tags: [Admin Authentication]
+      summary: Update admin password
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - oldPassword
+                - newPassword
+              properties:
+                oldPassword:
+                  type: string
+                newPassword:
+                  type: string
+      responses:
+        200:
+          description: Password updated successfully
+        400:
+          description: Invalid old password
+        401:
+          description: Unauthorized
+        500:
+          description: Server error
+
+# Admin Dashboard Routes
+  /admin/dashboard:
+    get:
+      tags: [Admin Dashboard]
+      summary: Get dashboard overview
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: query
+          name: timeUnit
+          schema:
+            type: string
+            enum: [day, month, year]
+          default: month
+      responses:
+        200:
+          description: Dashboard data retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalUsers:
+                    type: number
+                  totalPosts:
+                    type: number
+                  totalDocuments:
+                    type: number
+                  totalInquiries:
+                    type: number
+                  usersData:
+                    type: array
+                    items:
+                      type: object
+                  postsData:
+                    type: array
+                    items:
+                      type: object
+                  documentsData:
+                    type: array
+                    items:
+                      type: object
+                  inquiriesData:
+                    type: array
+                    items:
+                      type: object
+        500:
+          description: Server error
+
+  /admin/dashboard/stats:
+    get:
+      tags: [Admin Dashboard]
+      summary: Get detailed statistics
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: query
+          name: timeUnit
+          schema:
+            type: string
+            enum: [day, month, year]
+          default: month
+      responses:
+        200:
+          description: Statistics retrieved successfully
+        500:
+          description: Server error
+
+# Admin User Management
+  /admin/users:
+    get:
+      tags: [Admin User Management]
+      summary: Get all users
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Users retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+        500:
+          description: Server error
+
+  /admin/users/search:
+    get:
+      tags: [Admin User Management]
+      summary: Search users
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: query
+          name: q
+          required: true
+          schema:
+            type: string
+          description: Search query
+      responses:
+        200:
+          description: Search results retrieved successfully
+        400:
+          description: Missing search query
+        500:
+          description: Server error
+
+  /admin/users/{userId}:
+    delete:
+      tags: [Admin User Management] 
+      summary: Delete user
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: User deleted successfully
+        404:
+          description: User not found
+        500:
+          description: Server error
+
+# Admin Document Management
+  /admin/documents:
+    get:
+      tags: [Admin Document Management]
+      summary: Get filtered documents
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: Filter by document title
+        - in: query
+          name: level
+          schema:
+            type: string
+          description: Filter by level ID
+        - in: query
+          name: subject
+          schema:
+            type: string
+          description: Filter by subject ID
+      responses:
+        200:
+          description: List of documents retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Lấy tài liệu thành công"
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Document'
+        500:
+          description: Server error
+    
+    post:
+      tags: [Admin Document Management]
+      summary: Create new document
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+                - pages
+                - level
+                - subject
+                - fileType
+                - fileUrl
+              properties:
+                title:
+                  type: string
+                pages:
+                  type: integer
+                level:
+                  type: string
+                subject:
+                  type: string
+                fileType:
+                  type: string
+                  enum: [pdf, docx]
+                fileUrl:
+                  type: string
+                  format: uri
+      responses:
+        201:
+          description: Document created successfully
+        400:
+          description: Invalid input data
+          
+  /admin/documents/{id}:
+    put:
+      tags: [Admin Document Management]
+      summary: Update document
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+                - pages
+                - level
+                - subject
+                - fileType
+                - fileUrl
+              properties:
+                title:
+                  type: string
+                pages:
+                  type: integer
+                level:
+                  type: string
+                subject:
+                  type: string
+                fileType:
+                  type: string
+                  enum: [pdf, docx]
+                fileUrl:
+                  type: string
+                  format: uri
+      responses:
+        200:
+          description: Document updated successfully
+        404:
+          description: Document not found
+        400:
+          description: Invalid input data
+
+    delete:
+      tags: [Admin Document Management]
+      summary: Delete document
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Document deleted successfully
+        404:
+          description: Document not found
+
+  /admin/documents/levels:
+    get:
+      tags: [Admin Document Management]
+      summary: Get all levels
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: List of levels retrieved successfully
+    
+    post:
+      tags: [Admin Document Management]
+      summary: Create new level
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+      responses:
+        201:
+          description: Level created successfully
+        400:
+          description: Level already exists
+
+  /admin/documents/subjects/{levelId}:
+    get:
+      tags: [Admin Document Management]
+      summary: Get subjects by level
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: levelId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: List of subjects retrieved successfully
+
+  /admin/documents/subjects:
+    post:
+      tags: [Admin Document Management]
+      summary: Create new subject
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - levelId
+              properties:
+                name:
+                  type: string
+                levelId:
+                  type: string
+      responses:
+        201:
+          description: Subject created successfully
+        400:
+          description: Subject already exists
+        404:
+          description: Level not found
+
+# Admin Inquiry Management
+  /admin/inquiry:
+    get:
+      tags: [Admin Inquiry Management]
+      summary: Get all inquiries
+      description: Retrieve list of inquiries with optional filters
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: Search by content or user information
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: ["Chưa phản hồi", "Đã phản hồi"]
+          description: Filter by status
+      responses:
+        200:
+          description: Successfully retrieved inquiries
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Successfully retrieved inquiries"
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Inquiry'
+        500:
+          description: Server error
+
+  /admin/inquiry/{id}:
+    put:
+      tags: [Admin Inquiry Management]
+      summary: Update inquiry
+      description: Update inquiry and send response email
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+                - response
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - Đã phản hồi
+                  description: Inquiry status
+                response:
+                  type: string
+                  description: Response content
+      responses:
+        200:
+          description: Updated successfully and response email sent
+        400:
+          description: Missing required information
+        404:
+          description: Inquiry not found
+        500:
+          description: Server error
+
+    delete:
+      tags: [Admin Inquiry Management]
+      summary: Delete inquiry
+      description: Remove an inquiry
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Inquiry deleted successfully
+        404:
+          description: Inquiry not found
+        500:
+          description: Server error
+
+# Admin Account Management
+  /admin/account/{id}:
+    get:
+      tags: [Admin Account]
+      summary: Get admin information
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Admin information retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Admin'
+        404:
+          description: Admin not found
+        500:
+          description: Server error
+
+    put:
+      tags: [Admin Account]
+      summary: Update admin information
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminUpdate'
+      responses:
+        200:
+          description: Admin information updated successfully
+        404:
+          description: Admin not found
+        500:
+          description: Server error
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - id
+        - username
+        - email
+        - password
+        - gender
+        - dateOfBirth
+        - profilePicture
+        - coverPicture
+        - followers
+        - followings
+        - followerCount
+        - followingCount
+        - bio
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+        gender:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date-time
+        profilePicture:
+          type: string
+          format: uri
+        coverPicture:
+          type: string
+          format: uri
+        followers:
+          type: array
+          items:
+            type: string
+        followings:
+          type: array
+          items:
+            type: string
+        followerCount:
+          type: integer
+        followingCount:
+          type: integer
+        bio:
+          type: string
+
+    Post:
+      type: object
+      properties:
+        _id:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+        content:
+          type: string
+        mediaUrl:
+          type: string
+        mediaType:
+          type: string
+          enum: [image, video]
+        reactions:
+          type: array
+          items:
+            type: object
+            properties:
+              user:
+                type: string
+              type:
+                type: string
+                enum: [like, love, haha, wow, sad, angry]
+        reactionStats:
+          type: object
+          properties:
+            like:
+              type: integer
+            love:
+              type: integer
+            haha:
+              type: integer
+            wow:
+              type: integer
+            sad:
+              type: integer
+            angry:
+              type: integer
+        comments:
+          type: array
+          items:
+            type: object
+            properties:
+              user:
+                type: string
+              text:
+                type: string
+              replies:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    user:
+                      type: string
+                    text:
+                      type: string
+        commentCount:
+          type: integer
+        shareCount:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      type: object
+      properties:
+        id:
+          type: string
+        content:
+          type: string
+        images:
+          type: array
+          items:
+            type: string
+        author:
+          $ref: '#/components/schemas/User'
+        likes:
+          type: number
+        comments:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+
+
+   
+    Story:
+      type: object
+      properties:
+        _id:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+        mediaUrl:
+          type: string
+          format: uri
+        mediaType:
+          type: string
+          enum: [image, video]
+        reactions:
+          type: array
+          items:
+            type: object
+            properties:
+              user:
+                type: string
+        reactionStats:
+          type: object
+          properties:
+            tym:
+              type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      type: object
+      properties:
+        id:
+          type: string
+        mediaUrl:
+          type: string
+        type:
+          type: string
+          enum: [image, video]
+        author:
+          $ref: '#/components/schemas/User'
+        viewCount:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+
+    Document:
+      type: object
+      required:
+        - title
+        - pages
+        - level
+        - subject
+        - fileType
+        - fileUrl
+      properties:
+        _id:
+          type: string
+        title:
+          type: string
+        pages:
+          type: integer
+        level:
+          type: string
+          description: Reference to Level ID
+        subject:
+          type: string
+          description: Reference to Subject ID
+        fileType:
+          type: string
+        fileUrl:
+          type: string
+          format: uri
+        uploadDate:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+          
+    Quiz:
+      type: object
+      required:
+        - icon
+        - quizTitle
+        - quizQuestions
+      properties:
+        _id:
+          type: string
+        icon:
+          type: string
+        quizTitle:
+          type: string
+        quizQuestions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+
+    Question:
+      type: object
+      required:
+        - mainQuestion
+        - choices
+        - correctAnswer
+      properties:
+        mainQuestion:
+          type: string
+        choices:
+          type: array
+          items:
+            type: string
+        correctAnswer:
+          type: number
+        answeredResult:
+          type: number
+          default: -1
+        statistics:
+          type: object
+          properties:
+            totalAttempts:
+              type: number
+              default: 0
+            correctAttempts:
+              type: number
+              default: 0
+            incorrectAttempts:
+              type: number
+              default: 0
+
+    Schedule:
+      type: object
+      required:
+        - user
+        - subject
+        - startTime
+        - endTime
+      properties:
+        _id:
+          type: string
+        user:
+          type: string
+          description: Reference to User ID
+        subject:
+          type: string
+          maxLength: 100
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        categoryColor:
+          type: string
+          default: "#0000FF"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    Inquiry:
+      type: object
+      required:
+        - userId
+        - message
+      properties:
+        _id:
+          type: string
+        userId:
+          type: string
+          description: Reference to User ID
+        message:
+          type: string
+          description: Inquiry content
+        status:
+          type: string
+          enum: ["Pending", "Responded"]
+          default: "Pending"
+        response:
+          type: string
+          description: Response content
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    
+    Conversation:
+      type: object
+      required:
+        - members
+      properties:
+        _id:
+          type: string
+        members:
+          type: array
+          items:
+            type: string
+          description: Array of user IDs in the conversation
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    Message:
+      type: object
+      required:
+        - conversationId
+        - sender
+        - text
+      properties:
+        _id:
+          type: string
+        conversationId:
+          type: string
+          description: ID of the conversation this message belongs to
+        sender:
+          type: string
+          description: ID of the user who sent the message
+        text:
+          type: string
+          description: Message content
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    Admin:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - username
+        - email
+        - phone
+        - nationality
+        - city
+      properties:
+        _id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        nationality:
+          type: string
+        city:
+          type: string
+        profilePicture:
+          type: string
+          format: uri
+        role:
+          type: string
+          default: admin
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    AdminUpdate:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        nationality:
+          type: string
+        city:
+          type: string
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - BearerAuth: []

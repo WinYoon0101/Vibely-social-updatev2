@@ -1,0 +1,150 @@
+.messenger {
+    height: calc(100vh - 10px);
+    display: flex;
+}
+
+.chatMenu {
+    flex: 3;
+    margin-top: 14px;
+}
+
+.chatBox {
+    flex: 6;
+    /*tạo đường kẻ giữa 3 phần*/
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-color: rgba(139, 141, 145, 0.3)
+}
+
+.chatOnline {
+    flex: 3;
+}
+
+.chatMenuWrapper {
+    padding: 10px;
+    height: 100%;
+    margin-left: 10px;
+    @media screen and (min-width: 738px) and (max-width: 1200px)  {
+        padding: 10px 5px;
+    }
+}
+
+.chatBoxWrapper,
+.chatOnlineWrapper {
+    padding: 10px;
+    height: 100%;
+}
+
+.chatMenuInput {
+    width: 90%;
+    padding: 10px 0;
+    @media screen and (min-width: 738px) and (max-width: 1200px)  {
+        width: 95%;
+        padding: 3px 0;
+        font-size: x-small;
+    }
+}
+
+.chatBoxBottom {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chatMessageInput {
+    border: none;
+    padding: 10px;
+    height: 45px;
+    width: 95%;
+    background-color: #F0F2F5;
+    border-radius: 30px;
+    outline: none;
+}
+
+.chatSubmitButton {
+    background-color: transparent;
+    border: none;
+    color: #30BDFF;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.chatBoxWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+
+}
+
+.chatBoxTop {
+    height: 100%;
+    overflow-y: scroll;
+    padding-right: 10px;
+}
+
+.noConversationContainer {
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.noConversationText {
+    text-align: center;
+    font-size: 25px;
+    font-style: italic;
+    cursor: default;
+}
+
+.chatImage {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 400px) {
+
+    /*các dòng iphone phổ biến*/
+    .chatImage {
+        width: 200px;
+        height: 200px;
+    }
+
+    .noConversationText {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 340px) {
+
+    /*iphone SE, iphone 6*/
+    .chatImage {
+        width: 150px;
+        height: 150px;
+    }
+
+    .noConversationText {
+        font-size: 15px;
+    }
+}
+
+.messageBottom {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.messageRead {
+    color: #8e8e8e;
+    font-size: 11px;
+}
+
+/* Nếu tin nhắn là của mình gửi (own) */
+.message.own .messageBottom {
+    justify-content: flex-end;
+}

@@ -1,0 +1,60 @@
+{
+  "WHY_CHOOSE": {
+    "title": "Vibely - Cộng đồng học tập dành cho tất cả mọi người",
+    "picture": "/about/vibely_logo_1000.png",
+    "desc": "Khám phá tri thức một cách dễ dàng và đầy cảm hứng cùng Vibely, người bạn đồng hành lý tưởng trên hành trình học tập của bạn.",
+    "reason": [
+      {"img": "/icons/luggage-03.svg", "label": "Nội dung chất lượng"},
+      {"img": "/icons/coin-hand.svg", "label": "Cộng đồng năng động"},
+      {"img": "/icons/compass.svg", "label": "Cá nhân hóa trải nghiệm"}
+    ]
+  },
+  "ABOUT": {
+    "text": [
+      {
+        "title": "Vibely là gì?",
+        "desc": "Vibely là mạng xã hội kết hợp học tập, nơi công nghệ và giáo dục hòa quyện để mang đến trải nghiệm học tập hiệu quả. Với các phương pháp hiện đại và cộng đồng hỗ trợ, Vibely giúp bạn khám phá cách học tốt nhất, truyền cảm hứng và kết nối với những người cùng chí hướng."
+      },
+      {
+        "title": "Sứ mệnh",
+        "desc": "Vibely ra đời với mục tiêu tạo ra một môi trường học tập sáng tạo, nơi mọi người có thể cùng nhau trao đổi kiến thức, phát triển kỹ năng và truyền cảm hứng cho nhau."
+      },
+      {
+        "title": "Cam kết",
+        "desc": "Vibely không chỉ là một nền tảng học tập mà còn là một mạng xã hội kết nối những người yêu thích giáo dục. Chúng tôi cam kết mang đến trải nghiệm học tập chất lượng, xây dựng cộng đồng gắn kết và thúc đẩy sự phát triển bền vững cho mọi thành viên."
+      }
+    ],
+    "img": [
+      "/about/social network.jpg",
+      "/about/image_2.jpg",
+      "/about/image_4.jpg"
+    ]
+  },
+  "TEAM": [
+    {
+      "img": "/about/phuong.png",
+      "name": "Nhất Phương",
+      "role": "CEO & Founder"
+    },
+    {
+      "img": "/about/duong.jpg",
+      "name": "Thùy Dương",
+      "role": "CEO & Founder"
+    },
+    {
+      "img": "/about/uyen.jpg",
+      "name": "Hương Uyên",
+      "role": "CEO & Founder"
+    },
+    {
+      "img": "/about/minh.jpg",
+      "name": "Gia Minh",
+      "role": "CEO & Founder"
+    }
+  ],
+  "ICON_SOCIALS": [
+    "/icons/facebook.svg",
+    "/icons/instagram.svg",
+    "/icons/telegram.svg"
+  ]
+}

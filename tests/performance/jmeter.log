@@ -1,0 +1,1069 @@
+2025-04-18 20:42:02,895 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
+2025-04-18 20:42:02,921 INFO o.a.j.JMeter: Loading user properties from: /opt/apache-jmeter-5.5/bin/user.properties
+2025-04-18 20:42:02,922 INFO o.a.j.JMeter: Loading system properties from: /opt/apache-jmeter-5.5/bin/system.properties
+2025-04-18 20:42:02,922 INFO o.a.j.JMeter: Setting System property: log4j2.formatMsgNoLookups=true
+2025-04-18 20:42:02,932 INFO o.a.j.JMeter: Copyright (c) 1998-2022 The Apache Software Foundation
+2025-04-18 20:42:02,933 INFO o.a.j.JMeter: Version 5.5
+2025-04-18 20:42:02,933 INFO o.a.j.JMeter: java.version=1.8.0_275
+2025-04-18 20:42:02,934 INFO o.a.j.JMeter: java.vm.name=OpenJDK 64-Bit Server VM
+2025-04-18 20:42:02,934 INFO o.a.j.JMeter: os.name=Linux
+2025-04-18 20:42:02,935 INFO o.a.j.JMeter: os.arch=amd64
+2025-04-18 20:42:02,935 INFO o.a.j.JMeter: os.version=5.15.167.4-microsoft-standard-WSL2
+2025-04-18 20:42:02,936 INFO o.a.j.JMeter: file.encoding=UTF-8
+2025-04-18 20:42:02,936 INFO o.a.j.JMeter: java.awt.headless=true
+2025-04-18 20:42:02,936 INFO o.a.j.JMeter: Max memory     =5528092672
+2025-04-18 20:42:02,937 INFO o.a.j.JMeter: Available Processors =12
+2025-04-18 20:42:02,943 INFO o.a.j.JMeter: Default Locale=English (EN)
+2025-04-18 20:42:02,944 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
+2025-04-18 20:42:02,944 INFO o.a.j.JMeter: JMeterHome=/opt/apache-jmeter-5.5
+2025-04-18 20:42:02,944 INFO o.a.j.JMeter: user.dir  =/tests
+2025-04-18 20:42:02,945 INFO o.a.j.JMeter: PWD       =/tests
+2025-04-18 20:42:02,945 INFO o.a.j.JMeter: IP: 172.17.0.2 Name: 8d5ebb394ea3 FullName: 8d5ebb394ea3
+2025-04-18 20:42:02,972 INFO o.a.j.JMeter: Setting property 'jmeter.reportgenerator.outputdir' to:'/tests/report'
+2025-04-18 20:42:02,979 INFO o.a.j.s.FileServer: Default base='/tests'
+2025-04-18 20:42:02,981 INFO o.a.j.s.FileServer: Set new base='/tests'
+2025-04-18 20:42:03,111 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
+2025-04-18 20:42:03,127 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
+2025-04-18 20:42:03,134 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
+2025-04-18 20:42:03,140 INFO o.a.j.s.SaveService: Loading file: test.jmx
+2025-04-18 20:42:03,193 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2025-04-18 20:42:03,194 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2025-04-18 20:42:03,194 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2025-04-18 20:42:03,194 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2025-04-18 20:42:03,194 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser
+2025-04-18 20:42:03,195 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser
+2025-04-18 20:42:03,580 INFO o.a.j.JMeter: Creating summariser <summary>
+2025-04-18 20:42:03,585 INFO o.a.j.r.d.ReportGenerator: ReportGenerator will use for Parsing the separator: ','
+2025-04-18 20:42:03,586 INFO o.a.j.r.d.ReportGenerator: Will generate report at end of test from  results file: results.jtl
+2025-04-18 20:42:03,587 INFO o.a.j.r.d.ReportGenerator: Reading report generator properties from: /opt/apache-jmeter-5.5/bin/reportgenerator.properties
+2025-04-18 20:42:03,588 INFO o.a.j.r.d.ReportGenerator: Merging with JMeter properties
+2025-04-18 20:42:03,593 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.temp_dir' not found, using default value 'temp' instead.
+2025-04-18 20:42:03,596 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.apdex_per_transaction' not found, using default value 'null' instead.
+2025-04-18 20:42:03,597 INFO o.a.j.r.c.ReportGeneratorConfiguration: apdex_per_transaction is empty, not APDEX per transaction customization
+2025-04-18 20:42:03,597 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.sample_filter' not found, using default value 'null' instead.
+2025-04-18 20:42:03,598 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.report_title' not found, using default value 'null' instead.
+2025-04-18 20:42:03,598 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.start_date' not found, using default value 'null' instead.
+2025-04-18 20:42:03,598 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.end_date' not found, using default value 'null' instead.
+2025-04-18 20:42:03,598 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.date_format' not found, using default value 'null' instead.
+2025-04-18 20:42:03,599 INFO o.a.j.r.c.ReportGeneratorConfiguration: Will use date range start date: null, end date: null
+2025-04-18 20:42:03,604 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.totalTPS.exclude_controllers' not found, using default value 'false' instead.
+2025-04-18 20:42:03,604 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.activeThreadsOverTime.exclude_controllers' not found, using default value 'false' instead.
+2025-04-18 20:42:03,605 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.timeVsThreads.exclude_controllers' not found, using default value 'false' instead.
+2025-04-18 20:42:03,605 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.responseTimeDistribution.exclude_controllers' not found, using default value 'false' instead.
+2025-04-18 20:42:03,605 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.transactionsPerSecond.exclude_controllers' not found, using default value 'false' instead.
+2025-04-18 20:42:03,605 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.responseTimePercentiles.exclude_controllers' not found, using default value 'false' instead.
+2025-04-18 20:42:03,606 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.responseTimePercentilesOverTime.exclude_controllers' not found, using default value 'false' instead.
+2025-04-18 20:42:03,606 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.responseTimesOverTime.exclude_controllers' not found, using default value 'false' instead.
+2025-04-18 20:42:03,606 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.connectTimeOverTime.exclude_controllers' not found, using default value 'false' instead.
+2025-04-18 20:42:03,606 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.latenciesOverTime.exclude_controllers' not found, using default value 'false' instead.
+2025-04-18 20:42:03,607 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.json.filters_only_sample_series' not found, using default value 'true' instead.
+2025-04-18 20:42:03,607 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.json.series_filter' not found, using default value '' instead.
+2025-04-18 20:42:03,608 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.json.show_controllers_only' not found, using default value 'false' instead.
+2025-04-18 20:42:03,609 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.html.filters_only_sample_series' not found, using default value 'true' instead.
+2025-04-18 20:42:03,609 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.html.series_filter' not found, using default value '' instead.
+2025-04-18 20:42:03,609 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.html.show_controllers_only' not found, using default value 'false' instead.
+2025-04-18 20:42:03,618 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2025-04-18 20:42:03,619 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2025-04-18 20:42:03,619 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2025-04-18 20:42:03,624 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must contain the string: '.functions.'
+2025-04-18 20:42:03,624 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must not contain the string: '.gui.'
+2025-04-18 20:42:04,110 INFO o.a.j.JMeter: Running test (1745001724110)
+2025-04-18 20:42:04,190 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : Thread Group: Load Test User Flow
+2025-04-18 20:42:04,190 INFO o.a.j.e.StandardJMeterEngine: Starting 100 threads for group Thread Group: Load Test User Flow.
+2025-04-18 20:42:04,191 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2025-04-18 20:42:04,191 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=100 ramp-up=100 delayedStart=false
+2025-04-18 20:42:04,213 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-1
+2025-04-18 20:42:05,040 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2025-04-18 20:42:05,041 INFO o.a.j.e.StandardJMeterEngine: Waiting for thread group: Thread Group: Load Test User Flow to finish before starting next group
+2025-04-18 20:42:05,210 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-2
+2025-04-18 20:42:06,205 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-3
+2025-04-18 20:42:06,235 INFO o.a.j.p.h.s.HTTPHCAbstractImpl: Local host = 8d5ebb394ea3
+2025-04-18 20:42:06,241 INFO o.a.j.p.h.s.HTTPHC4Impl: HTTP request retry count = 0
+2025-04-18 20:42:06,243 INFO o.a.j.s.SampleResult: Note: Sample TimeStamps are START times
+2025-04-18 20:42:06,243 INFO o.a.j.s.SampleResult: sampleresult.default.encoding is set to ISO-8859-1
+2025-04-18 20:42:06,244 INFO o.a.j.s.SampleResult: sampleresult.useNanoTime=true
+2025-04-18 20:42:06,244 INFO o.a.j.s.SampleResult: sampleresult.nanoThreadSleep=5000
+2025-04-18 20:42:07,205 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-4
+2025-04-18 20:42:07,578 INFO o.a.j.p.h.s.h.LazyLayeredConnectionSocketFactory: Setting up HTTPS TrustAll Socket Factory
+2025-04-18 20:42:07,584 INFO o.a.j.u.JsseSSLManager: Using default SSL protocol: TLS
+2025-04-18 20:42:07,584 INFO o.a.j.u.JsseSSLManager: SSL session context: per-thread
+2025-04-18 20:42:07,667 INFO o.a.j.u.SSLManager: JmeterKeyStore Location:  type JKS
+2025-04-18 20:42:07,671 INFO o.a.j.u.SSLManager: KeyStore created OK
+2025-04-18 20:42:07,672 WARN o.a.j.u.SSLManager: Keystore file not found, loading empty keystore
+2025-04-18 20:42:08,203 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-5
+2025-04-18 20:42:09,204 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-6
+2025-04-18 20:42:09,542 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_1_f80d4966-c87b-417c-b452-4146ef96ca8f@example.com
+2025-04-18 20:42:09,788 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_2_07ee4b6d-9b5e-4b53-a0f3-7ae70d9972de@example.com
+2025-04-18 20:42:10,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-7
+2025-04-18 20:42:10,401 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_3_17878343-5dfc-4469-85f8-ba6b0aa280bd@example.com
+2025-04-18 20:42:10,684 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_4_0dcedd74-a863-410c-9a3f-0f6765143419@example.com
+2025-04-18 20:42:11,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-8
+2025-04-18 20:42:12,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-9
+2025-04-18 20:42:12,688 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_5_d2ff3409-1ba5-4209-894d-4ba76d09a6be@example.com
+2025-04-18 20:42:13,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-10
+2025-04-18 20:42:14,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-11
+2025-04-18 20:42:15,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-12
+2025-04-18 20:42:15,498 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_6_0096834f-a770-4dcc-ada7-21cd1156a4b8@example.com
+2025-04-18 20:42:16,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-13
+2025-04-18 20:42:16,745 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_7_a200a747-7ceb-4dc3-8fe9-f31a75b0389e@example.com
+2025-04-18 20:42:17,087 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_8_475925c3-f67f-4c0c-9e29-53d33bb26375@example.com
+2025-04-18 20:42:17,198 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-14
+2025-04-18 20:42:18,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-15
+2025-04-18 20:42:18,819 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:18,819 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:18,826 INFO o.a.j.s.FileServer: Stored: test-image.jpg
+2025-04-18 20:42:18,893 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_9_d120aa79-9732-4ca7-81c1-d737d4b05b78@example.com
+2025-04-18 20:42:18,985 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_10_a94c61a5-7751-499f-8597-dc2363daaea2@example.com
+2025-04-18 20:42:19,198 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-16
+2025-04-18 20:42:20,092 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:20,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-17
+2025-04-18 20:42:20,289 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_11_6818fb7d-75d1-4bf0-9303-64e9115d0716@example.com
+2025-04-18 20:42:20,696 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:21,199 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_12_3698e8a0-efb8-4046-be45-dbb9fcd53d11@example.com
+2025-04-18 20:42:21,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-18
+2025-04-18 20:42:22,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-19
+2025-04-18 20:42:22,269 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:23,202 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-20
+2025-04-18 20:42:24,005 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_13_5b38bad3-7117-4c0e-b249-ab031881e763@example.com
+2025-04-18 20:42:24,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-21
+2025-04-18 20:42:24,695 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:24,782 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_14_0bd0e3eb-6c47-4ac4-81fa-725255ca892c@example.com
+2025-04-18 20:42:25,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-22
+2025-04-18 20:42:25,999 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_15_a56c89a5-97b2-489d-9c67-aa0f0adec5ff@example.com
+2025-04-18 20:42:26,188 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:26,203 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-23
+2025-04-18 20:42:26,797 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:27,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-24
+2025-04-18 20:42:27,497 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_16_1ce17afe-a30f-4286-a779-2c6350140dfa@example.com
+2025-04-18 20:42:28,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-25
+2025-04-18 20:42:29,203 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-26
+2025-04-18 20:42:29,789 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:29,905 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_18_01b41066-385b-4378-9ffc-13f12de83fc2@example.com
+2025-04-18 20:42:29,966 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_17_d7e6962e-b8db-4e6c-a12d-7eebd66e4344@example.com
+2025-04-18 20:42:30,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-27
+2025-04-18 20:42:30,447 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:31,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-28
+2025-04-18 20:42:31,801 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:31,985 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_19_b1f4c55a-1b3f-44b8-a51c-b38bf48e3c7a@example.com
+2025-04-18 20:42:31,987 INFO o.a.j.r.Summariser: summary +     34 in 00:00:28 =    1.2/s Avg:  4614 Min:  1476 Max:  8570 Err:     0 (0.00%) Active: 28 Started: 28 Finished: 0
+2025-04-18 20:42:32,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-29
+2025-04-18 20:42:32,593 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:33,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-30
+2025-04-18 20:42:34,198 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-31
+2025-04-18 20:42:34,990 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:35,197 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-32
+2025-04-18 20:42:35,784 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_20_b6db5ed7-40ba-4fdb-8559-7d1120d3c5fb@example.com
+2025-04-18 20:42:36,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-33
+2025-04-18 20:42:37,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-34
+2025-04-18 20:42:37,992 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_21_0baac994-2b1d-4224-a962-9afa0a8ef350@example.com
+2025-04-18 20:42:38,202 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-35
+2025-04-18 20:42:39,019 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:39,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-36
+2025-04-18 20:42:40,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-37
+2025-04-18 20:42:41,206 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-38
+2025-04-18 20:42:41,492 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_22_59e2f00a-d7f0-4914-999b-e404bd116eb2@example.com
+2025-04-18 20:42:42,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-39
+2025-04-18 20:42:43,089 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:43,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-40
+2025-04-18 20:42:44,202 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-41
+2025-04-18 20:42:45,202 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-42
+2025-04-18 20:42:45,908 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_23_6589d887-e6a7-48cb-be0f-340baf497477@example.com
+2025-04-18 20:42:46,202 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-43
+2025-04-18 20:42:47,093 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_25_0215679a-d803-43b9-82ac-f8c6e6c18527@example.com
+2025-04-18 20:42:47,202 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-44
+2025-04-18 20:42:48,202 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-45
+2025-04-18 20:42:48,384 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_24_17560fe5-e2ec-4c69-9b65-14be32dc4d45@example.com
+2025-04-18 20:42:49,202 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-46
+2025-04-18 20:42:49,298 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:49,998 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_29_125df910-6f3d-4288-bdd1-95974dfa8f78@example.com
+2025-04-18 20:42:50,202 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-47
+2025-04-18 20:42:51,101 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:51,189 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_27_191edbc9-4d28-4bf0-8816-e434e4ad9db6@example.com
+2025-04-18 20:42:51,193 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_31_6ed97c4f-fc65-45ab-87ec-91c55909b6db@example.com
+2025-04-18 20:42:51,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-48
+2025-04-18 20:42:52,202 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-49
+2025-04-18 20:42:52,382 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_26_7ad02712-7e34-4c66-9e90-197ad96e1b62@example.com
+2025-04-18 20:42:53,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-50
+2025-04-18 20:42:54,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-51
+2025-04-18 20:42:55,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-52
+2025-04-18 20:42:55,595 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:56,184 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:56,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-53
+2025-04-18 20:42:56,285 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:56,288 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:56,994 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_37_520fd00b-b098-4945-ab66-89dcb0162ea2@example.com
+2025-04-18 20:42:57,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-54
+2025-04-18 20:42:57,390 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:42:58,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-55
+2025-04-18 20:42:59,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-56
+2025-04-18 20:43:00,202 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-57
+2025-04-18 20:43:00,792 INFO o.a.j.r.Summariser: summary +     36 in 00:00:29 =    1.2/s Avg: 14520 Min:  3318 Max: 28992 Err:     4 (11.11%) Active: 57 Started: 57 Finished: 0
+2025-04-18 20:43:00,792 INFO o.a.j.r.Summariser: summary =     70 in 00:00:57 =    1.2/s Avg:  9709 Min:  1476 Max: 28992 Err:     4 (5.71%)
+2025-04-18 20:43:00,993 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_39_d886aefe-d635-49bc-abbf-d0b904929496@example.com
+2025-04-18 20:43:00,995 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_40_eb403ec5-5408-4df2-b5d4-d20946043f8b@example.com
+2025-04-18 20:43:01,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-58
+2025-04-18 20:43:01,996 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_28_03decb7f-6804-49fe-99ea-86929b204d79@example.com
+2025-04-18 20:43:02,002 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_41_bc939eaf-50f3-4d6f-ac45-b65e800a3acd@example.com
+2025-04-18 20:43:02,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-59
+2025-04-18 20:43:03,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-60
+2025-04-18 20:43:04,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-61
+2025-04-18 20:43:04,786 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_43_6ae00f3b-9b93-490e-825d-91fc21e4b817@example.com
+2025-04-18 20:43:04,808 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_42_4023878a-d15a-411d-afe9-3dd3ebd3a502@example.com
+2025-04-18 20:43:04,903 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:05,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-62
+2025-04-18 20:43:05,798 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_45_1550265b-c02a-4ca9-8179-335a45c223eb@example.com
+2025-04-18 20:43:06,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-63
+2025-04-18 20:43:07,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-64
+2025-04-18 20:43:07,500 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_46_90b5f81d-e5b9-4027-84bf-b660fb176e94@example.com
+2025-04-18 20:43:08,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-65
+2025-04-18 20:43:08,590 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:09,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-66
+2025-04-18 20:43:10,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-67
+2025-04-18 20:43:11,198 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-68
+2025-04-18 20:43:11,287 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_47_9d60f985-610d-40dd-9e8e-3628fe2a8c64@example.com
+2025-04-18 20:43:11,287 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_30_1a0607c3-4fff-4c2e-b0db-a58a50009977@example.com
+2025-04-18 20:43:11,287 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_32_de5358ce-0504-442c-91b2-4480fbd37565@example.com
+2025-04-18 20:43:12,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-69
+2025-04-18 20:43:12,597 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:12,598 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:13,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-70
+2025-04-18 20:43:14,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-71
+2025-04-18 20:43:14,698 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_52_f546769f-4e6c-4a96-8ab8-2f0ac9a7869f@example.com
+2025-04-18 20:43:14,783 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_54_efba3765-fa59-4202-8612-f31298c93d7a@example.com
+2025-04-18 20:43:15,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-72
+2025-04-18 20:43:16,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-73
+2025-04-18 20:43:16,790 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:17,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-74
+2025-04-18 20:43:18,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-75
+2025-04-18 20:43:18,585 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_57_a0c4b4aa-b0a8-4191-b08e-7eab6078c2d0@example.com
+2025-04-18 20:43:18,591 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_56_d9e15d5a-9012-47d6-96f8-2ae926b980d1@example.com
+2025-04-18 20:43:19,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-76
+2025-04-18 20:43:19,888 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:19,894 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_55_b36bd11e-78f9-4c32-98db-36fd5c53884c@example.com
+2025-04-18 20:43:20,024 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_34_2b62f025-a0ac-4610-8d11-9aba35d700d1@example.com
+2025-04-18 20:43:20,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-77
+2025-04-18 20:43:21,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-78
+2025-04-18 20:43:21,803 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:21,891 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:22,191 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:22,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-79
+2025-04-18 20:43:22,786 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_33_63ac9ae2-a589-4c4b-b29c-a90061cfe28f@example.com
+2025-04-18 20:43:22,896 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_63_804dbb3d-1005-448f-8067-80d99ee4a9ce@example.com
+2025-04-18 20:43:22,896 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_62_b105ff5d-9a67-4b4d-9712-d48df2d2e8c8@example.com
+2025-04-18 20:43:23,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-80
+2025-04-18 20:43:23,786 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:24,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-81
+2025-04-18 20:43:24,281 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_66_821b6f44-4c42-47c9-bb95-0e053c95f435@example.com
+2025-04-18 20:43:24,330 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_64_c70e9d8f-b8eb-4c6a-a669-58317ab5ad66@example.com
+2025-04-18 20:43:25,185 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:25,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-82
+2025-04-18 20:43:25,587 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_35_dd2c0dcd-54c7-47e2-83d0-5fdbb1ba4850@example.com
+2025-04-18 20:43:26,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-83
+2025-04-18 20:43:26,786 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:27,185 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_68_8eaab795-02d1-4e46-9cf2-54a6049d9d3e@example.com
+2025-04-18 20:43:27,195 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_65_bb134299-e0d0-4529-995f-32f621d71871@example.com
+2025-04-18 20:43:27,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-84
+2025-04-18 20:43:28,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-85
+2025-04-18 20:43:28,396 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_70_90bb1927-227f-4552-b7e3-08d45d2b71dc@example.com
+2025-04-18 20:43:28,485 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_36_35fe9e4d-7ad4-4969-b82c-978259ae4fe6@example.com
+2025-04-18 20:43:29,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-86
+2025-04-18 20:43:29,817 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_72_d70eb3fb-704a-408c-b477-25929ccae3e7@example.com
+2025-04-18 20:43:30,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-87
+2025-04-18 20:43:30,293 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_73_402eaf27-c6ca-4253-a96e-f928bf591599@example.com
+2025-04-18 20:43:30,294 INFO o.a.j.r.Summariser: summary +     53 in 00:00:30 =    1.8/s Avg: 21135 Min:  4129 Max: 47285 Err:     6 (11.32%) Active: 87 Started: 87 Finished: 0
+2025-04-18 20:43:30,294 INFO o.a.j.r.Summariser: summary =    123 in 00:01:26 =    1.4/s Avg: 14632 Min:  1476 Max: 47285 Err:    10 (8.13%)
+2025-04-18 20:43:30,788 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:31,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-88
+2025-04-18 20:43:31,589 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-9
+2025-04-18 20:43:31,590 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-9
+2025-04-18 20:43:31,592 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_74_94beec76-5e26-47d1-9424-9806a0c4b2b9@example.com
+2025-04-18 20:43:32,194 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:32,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-89
+2025-04-18 20:43:32,284 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:32,888 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_75_63309817-a5c3-44b9-876c-eaabc2a419f8@example.com
+2025-04-18 20:43:33,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-90
+2025-04-18 20:43:34,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-91
+2025-04-18 20:43:34,288 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_76_83007829-1840-42dd-8978-c1792c5de173@example.com
+2025-04-18 20:43:34,489 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_78_382c3a56-a131-461c-b8b7-5a4a664c9b0a@example.com
+2025-04-18 20:43:35,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-92
+2025-04-18 20:43:35,391 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:35,601 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:35,894 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_38_496702c7-4351-4876-bcbe-fddc788df0bc@example.com
+2025-04-18 20:43:36,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-93
+2025-04-18 20:43:36,807 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:37,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-94
+2025-04-18 20:43:37,386 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_79_e707a947-50db-47ee-920a-1f1e5fdc8eb4@example.com
+2025-04-18 20:43:38,200 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-95
+2025-04-18 20:43:38,299 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:38,303 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:38,994 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_81_1a6e7751-e07c-406d-88d6-54bc79d46333@example.com
+2025-04-18 20:43:39,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-96
+2025-04-18 20:43:40,197 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-97
+2025-04-18 20:43:40,387 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_82_00e57db2-b376-40a5-9f6d-55d85e3a0462@example.com
+2025-04-18 20:43:41,094 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:41,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-98
+2025-04-18 20:43:41,746 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_84_897898e2-05f0-4581-bb66-b02e6192b1b6@example.com
+2025-04-18 20:43:42,086 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_83_63468cc0-0533-4df6-bd9b-ea1433929142@example.com
+2025-04-18 20:43:42,199 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-99
+2025-04-18 20:43:42,695 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:42,797 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_85_39de5d18-24cf-4e35-9f2d-aec280f58d52@example.com
+2025-04-18 20:43:42,959 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_44_5d0d09db-7ccb-4b93-8f48-b5df4c4ca4cf@example.com
+2025-04-18 20:43:43,201 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Load Test User Flow 1-100
+2025-04-18 20:43:44,384 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:44,887 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_48_67b4efcd-211e-4c60-8869-6dd83bf210a6@example.com
+2025-04-18 20:43:44,887 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_88_5cc66b5d-6d05-46c2-a1fd-2f3213db0ee8@example.com
+2025-04-18 20:43:44,902 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_87_9a9c5676-8197-4335-ad30-8744c21ca5d0@example.com
+2025-04-18 20:43:45,893 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_89_311a6918-eeb1-4d40-a08a-1064ce503b01@example.com
+2025-04-18 20:43:45,937 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_91_d0f089df-e8e9-43cf-b566-49275ef6099f@example.com
+2025-04-18 20:43:46,790 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:47,986 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:48,984 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:48,985 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:49,189 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_92_5f62fada-079b-4785-bd5e-1b836e8b7c25@example.com
+2025-04-18 20:43:51,490 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_50_a3f1fd2d-d839-401d-aeca-80cb7c03a460@example.com
+2025-04-18 20:43:51,582 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_49_b19981fa-06d2-4860-8f88-e6846d77004b@example.com
+2025-04-18 20:43:51,629 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_94_eb11bea5-03cd-4ca3-ae52-5803d427415c@example.com
+2025-04-18 20:43:53,384 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_95_078cb8b6-7892-49ac-b95e-09ffd9781480@example.com
+2025-04-18 20:43:55,297 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-3
+2025-04-18 20:43:55,298 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-3
+2025-04-18 20:43:55,381 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_97_7d7c76a8-c385-4d48-803f-95ed8ed0efa4@example.com
+2025-04-18 20:43:57,596 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:58,620 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:59,487 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:43:59,487 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:01,194 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_100_f6e1eb55-f861-4c4e-9f76-fa30d6c050c5@example.com
+2025-04-18 20:44:01,196 INFO o.a.j.r.Summariser: summary +     57 in 00:00:31 =    1.8/s Avg: 22657 Min:  7843 Max: 62413 Err:    10 (17.54%) Active: 98 Started: 100 Finished: 2
+2025-04-18 20:44:01,197 INFO o.a.j.r.Summariser: summary =    180 in 00:01:57 =    1.5/s Avg: 17173 Min:  1476 Max: 62413 Err:    20 (11.11%)
+2025-04-18 20:44:01,294 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:02,986 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:05,783 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_51_930dae5a-1235-411e-831a-ed72cb83ed5f@example.com
+2025-04-18 20:44:08,694 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:10,292 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_53_37a28576-272d-49f0-a6d5-5e510c1a2f1e@example.com
+2025-04-18 20:44:11,497 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:11,498 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:12,495 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:13,196 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:15,383 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:15,383 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:15,387 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:18,006 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:19,098 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:19,129 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:19,385 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_59_89f73451-d76d-4d4d-b2a1-774763400954@example.com
+2025-04-18 20:44:19,490 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:20,885 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_60_100683de-6dcb-434c-9851-64cb46e3a46d@example.com
+2025-04-18 20:44:21,680 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_58_987fc9af-dd8c-4a87-96e9-2c64eb872fbf@example.com
+2025-04-18 20:44:22,286 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_61_629df01e-400f-4438-83e8-d3bb767e37d2@example.com
+2025-04-18 20:44:24,387 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:24,901 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:25,999 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:27,296 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:28,188 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:28,294 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-6
+2025-04-18 20:44:28,295 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-6
+2025-04-18 20:44:30,089 INFO o.a.j.r.Summariser: summary +     52 in 00:00:29 =    1.8/s Avg: 31651 Min:  2073 Max: 79851 Err:    17 (32.69%) Active: 97 Started: 100 Finished: 3
+2025-04-18 20:44:30,090 INFO o.a.j.r.Summariser: summary =    232 in 00:02:26 =    1.6/s Avg: 20418 Min:  1476 Max: 79851 Err:    37 (15.95%)
+2025-04-18 20:44:30,598 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:30,692 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-12
+2025-04-18 20:44:30,692 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-12
+2025-04-18 20:44:31,069 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-35
+2025-04-18 20:44:31,070 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-35
+2025-04-18 20:44:31,298 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:35,091 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:35,396 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_67_46feb49a-714d-4ce3-8064-c11b12f60407@example.com
+2025-04-18 20:44:35,688 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-65
+2025-04-18 20:44:35,688 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-65
+2025-04-18 20:44:35,973 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:36,892 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_69_c61b89b0-0fea-4684-98c2-9024d506c97e@example.com
+2025-04-18 20:44:37,691 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:38,597 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:38,597 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:38,780 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:38,819 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:38,988 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:39,502 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:39,686 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:39,785 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-19
+2025-04-18 20:44:39,785 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-19
+2025-04-18 20:44:41,387 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_71_33796f38-cba7-49d8-9859-a46a944e8252@example.com
+2025-04-18 20:44:41,683 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-26
+2025-04-18 20:44:41,683 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-26
+2025-04-18 20:44:41,918 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:45,901 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:46,585 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:46,792 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:46,793 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:46,886 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-84
+2025-04-18 20:44:46,886 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-84
+2025-04-18 20:44:46,888 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_77_401e99c6-110d-4195-b382-41ed72540eda@example.com
+2025-04-18 20:44:47,984 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-5
+2025-04-18 20:44:47,984 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-5
+2025-04-18 20:44:47,985 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-1
+2025-04-18 20:44:47,985 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-1
+2025-04-18 20:44:48,892 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:50,886 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:53,490 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:55,386 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:56,600 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:57,085 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_80_60355c31-dfa7-4a2c-9509-b6181827be4c@example.com
+2025-04-18 20:44:58,498 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-2
+2025-04-18 20:44:58,499 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-2
+2025-04-18 20:44:58,499 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:59,583 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:44:59,583 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:00,785 INFO o.a.j.r.Summariser: summary +     69 in 00:00:31 =    2.2/s Avg: 42563 Min:  1043 Max: 91885 Err:     8 (11.59%) Active: 88 Started: 100 Finished: 12
+2025-04-18 20:45:00,785 INFO o.a.j.r.Summariser: summary =    301 in 00:02:57 =    1.7/s Avg: 25495 Min:  1043 Max: 91885 Err:    45 (14.95%)
+2025-04-18 20:45:02,092 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:02,094 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:03,086 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:03,395 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-14
+2025-04-18 20:45:03,396 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-14
+2025-04-18 20:45:03,589 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:04,102 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:04,480 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_86_d4e08814-b31d-4889-867f-9a7a5cd0fb8d@example.com
+2025-04-18 20:45:05,786 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:06,089 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-23
+2025-04-18 20:45:06,089 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-23
+2025-04-18 20:45:06,388 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:07,791 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:08,613 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_90_dc23b997-b28b-4370-9f31-a5c931855838@example.com
+2025-04-18 20:45:09,490 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-53
+2025-04-18 20:45:09,490 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-53
+2025-04-18 20:45:09,492 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:09,992 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:13,883 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:15,469 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:16,087 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:17,291 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:17,380 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-40
+2025-04-18 20:45:17,381 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-40
+2025-04-18 20:45:17,596 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_93_1e800b57-44c1-46b5-97ea-9ffc7ed7a51d@example.com
+2025-04-18 20:45:17,795 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:19,987 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-4
+2025-04-18 20:45:19,988 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-4
+2025-04-18 20:45:20,394 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-54
+2025-04-18 20:45:20,394 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-54
+2025-04-18 20:45:22,602 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:23,688 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_96_b76a5365-7624-4419-a598-7aa1e73d1238@example.com
+2025-04-18 20:45:23,988 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:24,587 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:24,994 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:25,896 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:26,596 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:27,539 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_98_c690ab48-6840-40fc-97b7-a2a6c88fe045@example.com
+2025-04-18 20:45:28,681 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-67
+2025-04-18 20:45:28,682 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-67
+2025-04-18 20:45:29,192 INFO o.a.j.u.BeanShellTestElement: Đã lưu biến login_email: user_99_f02e0bcc-e8df-4842-b6c4-bdf2654708f3@example.com
+2025-04-18 20:45:30,590 INFO o.a.j.r.Summariser: summary +     56 in 00:00:30 =    1.9/s Avg: 40032 Min:  1632 Max: 104993 Err:     2 (3.57%) Active: 81 Started: 100 Finished: 19
+2025-04-18 20:45:30,594 INFO o.a.j.r.Summariser: summary =    357 in 00:03:26 =    1.7/s Avg: 27775 Min:  1043 Max: 104993 Err:    47 (13.17%)
+2025-04-18 20:45:30,595 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-15
+2025-04-18 20:45:30,595 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-15
+2025-04-18 20:45:31,185 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-7
+2025-04-18 20:45:31,185 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-7
+2025-04-18 20:45:32,600 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:33,798 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:37,200 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-64
+2025-04-18 20:45:37,201 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-64
+2025-04-18 20:45:37,491 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:37,498 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:37,886 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:39,088 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:39,290 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:40,583 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:41,392 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:42,585 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-77
+2025-04-18 20:45:42,585 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-77
+2025-04-18 20:45:43,299 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:43,377 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:44,498 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:46,301 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-52
+2025-04-18 20:45:46,301 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-52
+2025-04-18 20:45:46,489 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:48,385 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:48,423 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-25
+2025-04-18 20:45:48,424 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-25
+2025-04-18 20:45:48,483 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:48,505 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:48,684 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:49,395 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:49,895 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:50,688 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:53,586 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:54,389 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:55,400 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:55,585 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-33
+2025-04-18 20:45:55,586 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-33
+2025-04-18 20:45:55,689 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-74
+2025-04-18 20:45:55,690 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-74
+2025-04-18 20:45:55,887 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-66
+2025-04-18 20:45:55,888 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-66
+2025-04-18 20:45:56,486 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:45:58,340 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-22
+2025-04-18 20:45:58,340 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-22
+2025-04-18 20:45:58,579 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-86
+2025-04-18 20:45:58,580 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-86
+2025-04-18 20:45:59,582 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-20
+2025-04-18 20:45:59,582 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-20
+2025-04-18 20:46:00,089 INFO o.a.j.r.Summariser: summary +     69 in 00:00:29 =    2.3/s Avg: 47894 Min:   806 Max: 110504 Err:    11 (15.94%) Active: 69 Started: 100 Finished: 31
+2025-04-18 20:46:00,090 INFO o.a.j.r.Summariser: summary =    426 in 00:03:56 =    1.8/s Avg: 31034 Min:   806 Max: 110504 Err:    58 (13.62%)
+2025-04-18 20:46:01,202 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-17
+2025-04-18 20:46:01,203 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-17
+2025-04-18 20:46:01,486 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:01,488 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-24
+2025-04-18 20:46:01,490 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-24
+2025-04-18 20:46:01,885 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-85
+2025-04-18 20:46:01,888 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-85
+2025-04-18 20:46:02,389 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:02,595 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-11
+2025-04-18 20:46:02,596 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-11
+2025-04-18 20:46:03,497 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:04,092 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:05,582 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-13
+2025-04-18 20:46:05,584 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-13
+2025-04-18 20:46:05,887 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:05,986 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:06,982 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-18
+2025-04-18 20:46:06,983 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-18
+2025-04-18 20:46:10,383 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:11,689 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-48
+2025-04-18 20:46:11,690 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-48
+2025-04-18 20:46:14,986 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:15,093 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:15,684 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-37
+2025-04-18 20:46:15,684 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-37
+2025-04-18 20:46:15,685 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-29
+2025-04-18 20:46:15,685 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-29
+2025-04-18 20:46:16,682 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-28
+2025-04-18 20:46:16,683 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-28
+2025-04-18 20:46:16,689 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-8
+2025-04-18 20:46:16,689 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-8
+2025-04-18 20:46:17,098 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:19,679 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-88
+2025-04-18 20:46:19,680 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-88
+2025-04-18 20:46:22,087 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-31
+2025-04-18 20:46:22,088 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-31
+2025-04-18 20:46:23,071 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:23,488 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:23,489 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:23,599 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:24,696 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:24,780 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:24,871 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:27,786 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-41
+2025-04-18 20:46:27,787 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-41
+2025-04-18 20:46:27,991 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:28,090 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-16
+2025-04-18 20:46:28,091 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-16
+2025-04-18 20:46:28,289 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:28,587 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:28,879 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:29,387 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:29,387 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:29,584 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:29,690 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:29,988 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:30,384 INFO o.a.j.r.Summariser: summary +     67 in 00:00:30 =    2.2/s Avg: 43958 Min:   981 Max: 91891 Err:     2 (2.99%) Active: 54 Started: 100 Finished: 46
+2025-04-18 20:46:30,385 INFO o.a.j.r.Summariser: summary =    493 in 00:04:26 =    1.9/s Avg: 32790 Min:   806 Max: 110504 Err:    60 (12.17%)
+2025-04-18 20:46:30,802 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:31,185 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:33,290 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-62
+2025-04-18 20:46:33,290 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-62
+2025-04-18 20:46:34,889 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:36,092 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-75
+2025-04-18 20:46:36,093 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-75
+2025-04-18 20:46:36,286 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:36,983 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-39
+2025-04-18 20:46:36,983 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-44
+2025-04-18 20:46:36,984 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-44
+2025-04-18 20:46:36,984 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-39
+2025-04-18 20:46:37,487 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:39,595 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-47
+2025-04-18 20:46:39,596 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-47
+2025-04-18 20:46:39,629 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-57
+2025-04-18 20:46:39,632 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-57
+2025-04-18 20:46:40,840 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-56
+2025-04-18 20:46:40,841 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-56
+2025-04-18 20:46:40,883 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-21
+2025-04-18 20:46:40,884 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-21
+2025-04-18 20:46:40,986 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:42,386 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-79
+2025-04-18 20:46:42,387 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-79
+2025-04-18 20:46:42,685 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:43,293 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:44,294 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-76
+2025-04-18 20:46:44,295 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-76
+2025-04-18 20:46:44,588 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-98
+2025-04-18 20:46:44,589 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-98
+2025-04-18 20:46:44,588 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-95
+2025-04-18 20:46:44,589 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-95
+2025-04-18 20:46:44,589 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-97
+2025-04-18 20:46:44,590 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-97
+2025-04-18 20:46:44,893 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:45,599 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:45,817 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-83
+2025-04-18 20:46:45,817 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-83
+2025-04-18 20:46:46,389 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:46,419 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:46,483 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:46,497 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:47,795 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:47,982 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-45
+2025-04-18 20:46:47,982 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-59
+2025-04-18 20:46:47,983 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-59
+2025-04-18 20:46:47,983 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-45
+2025-04-18 20:46:47,985 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-32
+2025-04-18 20:46:47,985 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-32
+2025-04-18 20:46:48,189 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:48,194 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-50
+2025-04-18 20:46:48,195 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-50
+2025-04-18 20:46:48,690 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:48,795 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:49,386 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-60
+2025-04-18 20:46:49,387 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-60
+2025-04-18 20:46:52,083 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:53,181 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-49
+2025-04-18 20:46:53,182 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-49
+2025-04-18 20:46:53,183 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-46
+2025-04-18 20:46:53,184 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-46
+2025-04-18 20:46:53,182 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-61
+2025-04-18 20:46:53,182 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-100
+2025-04-18 20:46:53,185 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-61
+2025-04-18 20:46:53,185 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-42
+2025-04-18 20:46:53,184 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-70
+2025-04-18 20:46:53,187 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-70
+2025-04-18 20:46:53,183 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-68
+2025-04-18 20:46:53,188 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-68
+2025-04-18 20:46:53,187 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-42
+2025-04-18 20:46:53,189 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-100
+2025-04-18 20:46:53,988 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:54,055 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:54,087 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:55,386 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-34
+2025-04-18 20:46:55,386 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-34
+2025-04-18 20:46:56,353 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-38
+2025-04-18 20:46:56,354 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-38
+2025-04-18 20:46:56,390 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-51
+2025-04-18 20:46:56,391 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-51
+2025-04-18 20:46:56,397 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-87
+2025-04-18 20:46:56,398 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-87
+2025-04-18 20:46:56,417 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-94
+2025-04-18 20:46:56,418 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-94
+2025-04-18 20:46:56,580 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-55
+2025-04-18 20:46:56,580 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-55
+2025-04-18 20:46:57,390 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-43
+2025-04-18 20:46:57,391 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-43
+2025-04-18 20:46:57,390 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-36
+2025-04-18 20:46:57,392 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-36
+2025-04-18 20:46:57,394 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-78
+2025-04-18 20:46:57,394 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-78
+2025-04-18 20:46:57,396 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-89
+2025-04-18 20:46:57,396 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-73
+2025-04-18 20:46:57,396 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-89
+2025-04-18 20:46:57,396 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-99
+2025-04-18 20:46:57,396 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-63
+2025-04-18 20:46:57,397 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-99
+2025-04-18 20:46:57,397 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-91
+2025-04-18 20:46:57,397 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-91
+2025-04-18 20:46:57,397 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-63
+2025-04-18 20:46:57,397 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-27
+2025-04-18 20:46:57,397 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-93
+2025-04-18 20:46:57,398 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-27
+2025-04-18 20:46:57,397 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-73
+2025-04-18 20:46:57,398 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-93
+2025-04-18 20:46:58,089 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-30
+2025-04-18 20:46:58,089 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-69
+2025-04-18 20:46:58,089 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-30
+2025-04-18 20:46:58,089 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-69
+2025-04-18 20:46:59,387 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:59,495 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:59,587 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:59,587 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:46:59,784 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:47:00,062 INFO o.a.j.r.Summariser: summary +     94 in 00:00:30 =    3.2/s Avg: 20615 Min:    91 Max: 70695 Err:     3 (3.19%) Active: 10 Started: 100 Finished: 90
+2025-04-18 20:47:00,063 INFO o.a.j.r.Summariser: summary =    587 in 00:04:56 =    2.0/s Avg: 30841 Min:    91 Max: 110504 Err:    63 (10.73%)
+2025-04-18 20:47:00,258 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-96
+2025-04-18 20:47:00,259 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-96
+2025-04-18 20:47:00,447 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-82
+2025-04-18 20:47:00,448 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-82
+2025-04-18 20:47:00,496 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-71
+2025-04-18 20:47:00,497 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-71
+2025-04-18 20:47:00,507 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-72
+2025-04-18 20:47:00,508 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-72
+2025-04-18 20:47:00,727 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-58
+2025-04-18 20:47:00,727 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-58
+2025-04-18 20:47:03,392 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:47:03,602 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:47:04,064 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:47:04,351 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-92
+2025-04-18 20:47:04,351 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-92
+2025-04-18 20:47:04,485 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-90
+2025-04-18 20:47:04,486 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-90
+2025-04-18 20:47:05,006 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-81
+2025-04-18 20:47:05,007 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-81
+2025-04-18 20:47:07,354 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:47:08,222 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-80
+2025-04-18 20:47:08,223 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-80
+2025-04-18 20:48:52,836 INFO o.a.j.p.h.s.HTTPHC4Impl: Content-Header is set already on the request! Will be replaced by a Multipart-Header. Old headers: [Content-Type: multipart/form-data]
+2025-04-18 20:48:54,385 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Load Test User Flow 1-10
+2025-04-18 20:48:54,386 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Load Test User Flow 1-10
+2025-04-18 20:48:54,387 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 2 : Thread Group: Cleanup Users
+2025-04-18 20:48:54,387 INFO o.a.j.e.StandardJMeterEngine: Starting 100 threads for group Thread Group: Cleanup Users.
+2025-04-18 20:48:54,387 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2025-04-18 20:48:54,387 INFO o.a.j.t.ThreadGroup: Starting thread group... number=2 threads=100 ramp-up=100 delayedStart=false
+2025-04-18 20:48:54,414 INFO o.a.j.t.ThreadGroup: Started thread group number 2
+2025-04-18 20:48:54,414 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2025-04-18 20:48:54,472 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-1
+2025-04-18 20:48:54,475 INFO o.a.j.s.FileServer: Stored: tokens.txt
+2025-04-18 20:48:55,278 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-1
+2025-04-18 20:48:55,278 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-1
+2025-04-18 20:48:55,471 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-2
+2025-04-18 20:48:56,302 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-2
+2025-04-18 20:48:56,303 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-2
+2025-04-18 20:48:56,473 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-3
+2025-04-18 20:48:57,234 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-3
+2025-04-18 20:48:57,235 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-3
+2025-04-18 20:48:57,470 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-4
+2025-04-18 20:48:58,320 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-4
+2025-04-18 20:48:58,321 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-4
+2025-04-18 20:48:58,473 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-5
+2025-04-18 20:48:59,247 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-5
+2025-04-18 20:48:59,248 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-5
+2025-04-18 20:48:59,473 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-6
+2025-04-18 20:49:00,237 INFO o.a.j.r.Summariser: summary +     19 in 00:02:00 =    0.2/s Avg: 18503 Min:   160 Max: 339337 Err:     2 (10.53%) Active: 1 Started: 106 Finished: 105
+2025-04-18 20:49:00,238 INFO o.a.j.r.Summariser: summary =    606 in 00:06:56 =    1.5/s Avg: 30454 Min:    91 Max: 339337 Err:    65 (10.73%)
+2025-04-18 20:49:00,238 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-6
+2025-04-18 20:49:00,239 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-6
+2025-04-18 20:49:00,471 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-7
+2025-04-18 20:49:01,235 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-7
+2025-04-18 20:49:01,235 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-7
+2025-04-18 20:49:01,471 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-8
+2025-04-18 20:49:02,289 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-8
+2025-04-18 20:49:02,290 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-8
+2025-04-18 20:49:02,471 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-9
+2025-04-18 20:49:03,222 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-9
+2025-04-18 20:49:03,222 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-9
+2025-04-18 20:49:03,472 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-10
+2025-04-18 20:49:04,469 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-11
+2025-04-18 20:49:04,642 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-10
+2025-04-18 20:49:04,642 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-10
+2025-04-18 20:49:05,310 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-11
+2025-04-18 20:49:05,311 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-11
+2025-04-18 20:49:05,470 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-12
+2025-04-18 20:49:06,218 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-12
+2025-04-18 20:49:06,218 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-12
+2025-04-18 20:49:06,470 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-13
+2025-04-18 20:49:07,245 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-13
+2025-04-18 20:49:07,246 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-13
+2025-04-18 20:49:07,469 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-14
+2025-04-18 20:49:08,321 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-14
+2025-04-18 20:49:08,322 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-14
+2025-04-18 20:49:08,467 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-15
+2025-04-18 20:49:09,251 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-15
+2025-04-18 20:49:09,252 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-15
+2025-04-18 20:49:09,467 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-16
+2025-04-18 20:49:10,319 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-16
+2025-04-18 20:49:10,319 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-16
+2025-04-18 20:49:10,460 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-17
+2025-04-18 20:49:11,255 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-17
+2025-04-18 20:49:11,256 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-17
+2025-04-18 20:49:11,466 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-18
+2025-04-18 20:49:12,247 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-18
+2025-04-18 20:49:12,247 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-18
+2025-04-18 20:49:12,470 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-19
+2025-04-18 20:49:13,228 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-19
+2025-04-18 20:49:13,229 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-19
+2025-04-18 20:49:13,467 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-20
+2025-04-18 20:49:14,231 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-20
+2025-04-18 20:49:14,232 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-20
+2025-04-18 20:49:14,468 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-21
+2025-04-18 20:49:15,228 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-21
+2025-04-18 20:49:15,228 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-21
+2025-04-18 20:49:15,459 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-22
+2025-04-18 20:49:16,219 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-22
+2025-04-18 20:49:16,220 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-22
+2025-04-18 20:49:16,467 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-23
+2025-04-18 20:49:17,239 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-23
+2025-04-18 20:49:17,239 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-23
+2025-04-18 20:49:17,466 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-24
+2025-04-18 20:49:18,382 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-24
+2025-04-18 20:49:18,383 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-24
+2025-04-18 20:49:18,466 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-25
+2025-04-18 20:49:19,454 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-25
+2025-04-18 20:49:19,455 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-25
+2025-04-18 20:49:19,464 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-26
+2025-04-18 20:49:20,213 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-26
+2025-04-18 20:49:20,214 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-26
+2025-04-18 20:49:20,467 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-27
+2025-04-18 20:49:21,233 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-27
+2025-04-18 20:49:21,234 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-27
+2025-04-18 20:49:21,465 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-28
+2025-04-18 20:49:22,232 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-28
+2025-04-18 20:49:22,233 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-28
+2025-04-18 20:49:22,467 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-29
+2025-04-18 20:49:23,231 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-29
+2025-04-18 20:49:23,232 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-29
+2025-04-18 20:49:23,465 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-30
+2025-04-18 20:49:24,227 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-30
+2025-04-18 20:49:24,228 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-30
+2025-04-18 20:49:24,465 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-31
+2025-04-18 20:49:25,217 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-31
+2025-04-18 20:49:25,217 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-31
+2025-04-18 20:49:25,463 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-32
+2025-04-18 20:49:26,379 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-32
+2025-04-18 20:49:26,380 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-32
+2025-04-18 20:49:26,457 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-33
+2025-04-18 20:49:27,283 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-33
+2025-04-18 20:49:27,284 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-33
+2025-04-18 20:49:27,463 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-34
+2025-04-18 20:49:28,292 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-34
+2025-04-18 20:49:28,293 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-34
+2025-04-18 20:49:28,464 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-35
+2025-04-18 20:49:29,414 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-35
+2025-04-18 20:49:29,414 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-35
+2025-04-18 20:49:29,465 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-36
+2025-04-18 20:49:30,465 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-37
+2025-04-18 20:49:31,221 INFO o.a.j.r.Summariser: summary +     30 in 00:00:31 =    1.0/s Avg:   313 Min:   239 Max:   669 Err:     0 (0.00%) Active: 2 Started: 137 Finished: 135
+2025-04-18 20:49:31,222 INFO o.a.j.r.Summariser: summary =    636 in 00:07:27 =    1.4/s Avg: 29032 Min:    91 Max: 339337 Err:    65 (10.22%)
+2025-04-18 20:49:31,223 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-37
+2025-04-18 20:49:31,223 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-37
+2025-04-18 20:49:31,464 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-38
+2025-04-18 20:49:31,526 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-36
+2025-04-18 20:49:31,526 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-36
+2025-04-18 20:49:32,228 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-38
+2025-04-18 20:49:32,229 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-38
+2025-04-18 20:49:32,460 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-39
+2025-04-18 20:49:33,280 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-39
+2025-04-18 20:49:33,281 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-39
+2025-04-18 20:49:33,460 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-40
+2025-04-18 20:49:34,240 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-40
+2025-04-18 20:49:34,240 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-40
+2025-04-18 20:49:34,460 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-41
+2025-04-18 20:49:35,300 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-41
+2025-04-18 20:49:35,300 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-41
+2025-04-18 20:49:35,463 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-42
+2025-04-18 20:49:36,239 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-42
+2025-04-18 20:49:36,240 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-42
+2025-04-18 20:49:36,464 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-43
+2025-04-18 20:49:37,196 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-43
+2025-04-18 20:49:37,196 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-43
+2025-04-18 20:49:37,460 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-44
+2025-04-18 20:49:38,280 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-44
+2025-04-18 20:49:38,280 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-44
+2025-04-18 20:49:38,461 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-45
+2025-04-18 20:49:39,213 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-45
+2025-04-18 20:49:39,213 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-45
+2025-04-18 20:49:39,458 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-46
+2025-04-18 20:49:40,266 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-46
+2025-04-18 20:49:40,266 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-46
+2025-04-18 20:49:40,460 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-47
+2025-04-18 20:49:41,205 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-47
+2025-04-18 20:49:41,206 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-47
+2025-04-18 20:49:41,460 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-48
+2025-04-18 20:49:42,228 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-48
+2025-04-18 20:49:42,228 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-48
+2025-04-18 20:49:42,459 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-49
+2025-04-18 20:49:43,214 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-49
+2025-04-18 20:49:43,215 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-49
+2025-04-18 20:49:43,460 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-50
+2025-04-18 20:49:44,231 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-50
+2025-04-18 20:49:44,231 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-50
+2025-04-18 20:49:44,459 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-51
+2025-04-18 20:49:45,302 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-51
+2025-04-18 20:49:45,302 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-51
+2025-04-18 20:49:45,459 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-52
+2025-04-18 20:49:46,220 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-52
+2025-04-18 20:49:46,221 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-52
+2025-04-18 20:49:46,457 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-53
+2025-04-18 20:49:47,215 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-53
+2025-04-18 20:49:47,216 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-53
+2025-04-18 20:49:47,457 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-54
+2025-04-18 20:49:48,234 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-54
+2025-04-18 20:49:48,235 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-54
+2025-04-18 20:49:48,456 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-55
+2025-04-18 20:49:49,310 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-55
+2025-04-18 20:49:49,311 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-55
+2025-04-18 20:49:49,456 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-56
+2025-04-18 20:49:50,455 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-57
+2025-04-18 20:49:51,455 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-58
+2025-04-18 20:49:51,522 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-56
+2025-04-18 20:49:51,523 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-56
+2025-04-18 20:49:51,555 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-57
+2025-04-18 20:49:51,555 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-57
+2025-04-18 20:49:52,208 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-58
+2025-04-18 20:49:52,208 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-58
+2025-04-18 20:49:52,456 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-59
+2025-04-18 20:49:53,209 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-59
+2025-04-18 20:49:53,209 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-59
+2025-04-18 20:49:53,456 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-60
+2025-04-18 20:49:54,303 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-60
+2025-04-18 20:49:54,303 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-60
+2025-04-18 20:49:54,456 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-61
+2025-04-18 20:49:55,225 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-61
+2025-04-18 20:49:55,225 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-61
+2025-04-18 20:49:55,457 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-62
+2025-04-18 20:49:56,381 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-62
+2025-04-18 20:49:56,382 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-62
+2025-04-18 20:49:56,457 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-63
+2025-04-18 20:49:57,293 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-63
+2025-04-18 20:49:57,293 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-63
+2025-04-18 20:49:57,457 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-64
+2025-04-18 20:49:58,244 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-64
+2025-04-18 20:49:58,245 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-64
+2025-04-18 20:49:58,454 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-65
+2025-04-18 20:49:59,222 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-65
+2025-04-18 20:49:59,224 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-65
+2025-04-18 20:49:59,453 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-66
+2025-04-18 20:50:00,186 INFO o.a.j.r.Summariser: summary +     30 in 00:00:29 =    1.0/s Avg:   381 Min:   230 Max:  1564 Err:     0 (0.00%) Active: 1 Started: 166 Finished: 165
+2025-04-18 20:50:00,186 INFO o.a.j.r.Summariser: summary =    666 in 00:07:56 =    1.4/s Avg: 27741 Min:    91 Max: 339337 Err:    65 (9.76%)
+2025-04-18 20:50:00,187 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-66
+2025-04-18 20:50:00,187 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-66
+2025-04-18 20:50:00,455 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-67
+2025-04-18 20:50:01,210 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-67
+2025-04-18 20:50:01,210 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-67
+2025-04-18 20:50:01,447 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-68
+2025-04-18 20:50:02,213 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-68
+2025-04-18 20:50:02,214 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-68
+2025-04-18 20:50:02,453 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-69
+2025-04-18 20:50:03,206 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-69
+2025-04-18 20:50:03,207 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-69
+2025-04-18 20:50:03,455 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-70
+2025-04-18 20:50:04,254 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-70
+2025-04-18 20:50:04,254 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-70
+2025-04-18 20:50:04,447 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-71
+2025-04-18 20:50:05,260 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-71
+2025-04-18 20:50:05,260 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-71
+2025-04-18 20:50:05,446 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-72
+2025-04-18 20:50:06,291 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-72
+2025-04-18 20:50:06,291 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-72
+2025-04-18 20:50:06,447 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-73
+2025-04-18 20:50:07,260 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-73
+2025-04-18 20:50:07,260 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-73
+2025-04-18 20:50:07,447 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-74
+2025-04-18 20:50:08,314 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-74
+2025-04-18 20:50:08,315 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-74
+2025-04-18 20:50:08,445 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-75
+2025-04-18 20:50:09,196 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-75
+2025-04-18 20:50:09,196 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-75
+2025-04-18 20:50:09,452 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-76
+2025-04-18 20:50:10,196 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-76
+2025-04-18 20:50:10,197 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-76
+2025-04-18 20:50:10,454 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-77
+2025-04-18 20:50:11,208 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-77
+2025-04-18 20:50:11,209 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-77
+2025-04-18 20:50:11,453 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-78
+2025-04-18 20:50:12,220 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-78
+2025-04-18 20:50:12,221 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-78
+2025-04-18 20:50:12,453 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-79
+2025-04-18 20:50:13,196 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-79
+2025-04-18 20:50:13,196 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-79
+2025-04-18 20:50:13,452 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-80
+2025-04-18 20:50:14,228 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-80
+2025-04-18 20:50:14,228 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-80
+2025-04-18 20:50:14,453 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-81
+2025-04-18 20:50:15,224 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-81
+2025-04-18 20:50:15,224 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-81
+2025-04-18 20:50:15,452 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-82
+2025-04-18 20:50:16,201 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-82
+2025-04-18 20:50:16,201 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-82
+2025-04-18 20:50:16,450 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-83
+2025-04-18 20:50:17,301 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-83
+2025-04-18 20:50:17,302 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-83
+2025-04-18 20:50:17,451 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-84
+2025-04-18 20:50:18,200 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-84
+2025-04-18 20:50:18,200 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-84
+2025-04-18 20:50:18,450 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-85
+2025-04-18 20:50:19,231 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-85
+2025-04-18 20:50:19,232 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-85
+2025-04-18 20:50:19,443 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-86
+2025-04-18 20:50:20,202 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-86
+2025-04-18 20:50:20,202 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-86
+2025-04-18 20:50:20,444 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-87
+2025-04-18 20:50:21,212 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-87
+2025-04-18 20:50:21,212 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-87
+2025-04-18 20:50:21,443 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-88
+2025-04-18 20:50:22,442 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-89
+2025-04-18 20:50:23,451 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-90
+2025-04-18 20:50:23,524 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-89
+2025-04-18 20:50:23,524 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-89
+2025-04-18 20:50:23,532 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-88
+2025-04-18 20:50:23,533 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-88
+2025-04-18 20:50:24,266 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-90
+2025-04-18 20:50:24,267 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-90
+2025-04-18 20:50:24,449 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-91
+2025-04-18 20:50:25,289 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-91
+2025-04-18 20:50:25,290 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-91
+2025-04-18 20:50:25,447 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-92
+2025-04-18 20:50:26,323 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-92
+2025-04-18 20:50:26,323 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-92
+2025-04-18 20:50:26,447 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-93
+2025-04-18 20:50:27,220 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-93
+2025-04-18 20:50:27,221 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-93
+2025-04-18 20:50:27,447 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-94
+2025-04-18 20:50:28,248 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-94
+2025-04-18 20:50:28,249 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-94
+2025-04-18 20:50:28,441 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-95
+2025-04-18 20:50:29,196 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-95
+2025-04-18 20:50:29,197 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-95
+2025-04-18 20:50:29,448 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-96
+2025-04-18 20:50:30,279 INFO o.a.j.r.Summariser: summary +     30 in 00:00:30 =    1.0/s Avg:   338 Min:   241 Max:  1587 Err:     0 (0.00%) Active: 1 Started: 196 Finished: 195
+2025-04-18 20:50:30,280 INFO o.a.j.r.Summariser: summary =    696 in 00:08:26 =    1.4/s Avg: 26560 Min:    91 Max: 339337 Err:    65 (9.34%)
+2025-04-18 20:50:30,280 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-96
+2025-04-18 20:50:30,281 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-96
+2025-04-18 20:50:30,447 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-97
+2025-04-18 20:50:31,281 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-97
+2025-04-18 20:50:31,281 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-97
+2025-04-18 20:50:31,448 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-98
+2025-04-18 20:50:32,254 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-98
+2025-04-18 20:50:32,254 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-98
+2025-04-18 20:50:32,440 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-99
+2025-04-18 20:50:33,212 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-99
+2025-04-18 20:50:33,213 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-99
+2025-04-18 20:50:33,449 INFO o.a.j.t.JMeterThread: Thread started: Thread Group: Cleanup Users 2-100
+2025-04-18 20:50:34,606 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group: Cleanup Users 2-100
+2025-04-18 20:50:34,607 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group: Cleanup Users 2-100
+2025-04-18 20:50:34,608 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2025-04-18 20:50:34,608 INFO o.a.j.s.FileServer: Close: tokens.txt
+2025-04-18 20:50:34,624 INFO o.a.j.r.Summariser: summary +      4 in 00:00:04 =    0.9/s Avg:   389 Min:   270 Max:   655 Err:     0 (0.00%) Active: 0 Started: 200 Finished: 200
+2025-04-18 20:50:34,624 INFO o.a.j.r.Summariser: summary =    700 in 00:08:31 =    1.4/s Avg: 26411 Min:    91 Max: 339337 Err:    65 (9.29%)
+2025-04-18 20:50:34,625 INFO o.a.j.JMeter: Generating Dashboard
+2025-04-18 20:50:34,626 INFO o.a.j.r.d.ReportGenerator: Flushing result collector before report Generation
+2025-04-18 20:50:34,654 INFO o.a.j.r.p.NormalizerSampleConsumer: Using format, 'ms', to parse timeStamp field
+2025-04-18 20:50:34,790 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.AggregateConsumer#stopProducing(): beginDate produced 0 samples
+2025-04-18 20:50:34,791 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.AggregateConsumer#stopProducing(): endDate produced 0 samples
+2025-04-18 20:50:34,794 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.ApdexSummaryConsumer#stopProducing(): apdexSummary produced 0 samples
+2025-04-18 20:50:34,795 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.RequestsSummaryConsumer#stopProducing(): requestsSummary produced 0 samples
+2025-04-18 20:50:34,801 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.StatisticsSummaryConsumer#stopProducing(): statisticsSummary produced 0 samples
+2025-04-18 20:50:34,807 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.Top5ErrorsBySamplerConsumer#stopProducing(): top5ErrorsBySampler produced 0 samples
+2025-04-18 20:50:34,807 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.ErrorsSummaryConsumer#stopProducing(): errorsSummary produced 0 samples
+2025-04-18 20:50:34,808 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.HitsPerSecondGraphConsumer#stopProducing(): hitsPerSecond produced 0 samples
+2025-04-18 20:50:34,843 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.LatencyVSRequestGraphConsumer#stopProducing(): latencyVsRequest produced 0 samples
+2025-04-18 20:50:34,843 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.SyntheticResponseTimeDistributionGraphConsumer#stopProducing(): syntheticResponseTimeDistribution produced 0 samples
+2025-04-18 20:50:34,844 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.BytesThroughputGraphConsumer#stopProducing(): bytesThroughputOverTime produced 0 samples
+2025-04-18 20:50:34,844 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.CodesPerSecondGraphConsumer#stopProducing(): codesPerSecond produced 0 samples
+2025-04-18 20:50:34,867 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ResponseTimeVSRequestGraphConsumer#stopProducing(): responseTimeVsRequest produced 0 samples
+2025-04-18 20:50:34,868 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.FilterConsumer#stopProducing(): startIntervalControlerFilter produced 4900 samples
+2025-04-18 20:50:34,868 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.TotalTPSGraphConsumer#stopProducing(): totalTPS produced 0 samples
+2025-04-18 20:50:34,868 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ActiveThreadsGraphConsumer#stopProducing(): activeThreadsOverTime produced 0 samples
+2025-04-18 20:50:34,869 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.TimeVSThreadGraphConsumer#stopProducing(): timeVsThreads produced 0 samples
+2025-04-18 20:50:34,870 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ResponseTimeDistributionGraphConsumer#stopProducing(): responseTimeDistribution produced 0 samples
+2025-04-18 20:50:34,870 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.TransactionsPerSecondGraphConsumer#stopProducing(): transactionsPerSecond produced 0 samples
+2025-04-18 20:50:34,871 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ResponseTimePercentilesGraphConsumer#stopProducing(): responseTimePercentiles produced 0 samples
+2025-04-18 20:50:34,874 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ResponseTimePercentilesOverTimeGraphConsumer#stopProducing(): responseTimePercentilesOverTime produced 0 samples
+2025-04-18 20:50:34,875 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ResponseTimeOverTimeGraphConsumer#stopProducing(): responseTimesOverTime produced 0 samples
+2025-04-18 20:50:34,875 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ConnectTimeOverTimeGraphConsumer#stopProducing(): connectTimeOverTime produced 0 samples
+2025-04-18 20:50:34,875 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.LatencyOverTimeGraphConsumer#stopProducing(): latenciesOverTime produced 0 samples
+2025-04-18 20:50:34,876 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.FilterConsumer#stopProducing(): nameFilter produced 10500 samples
+2025-04-18 20:50:34,876 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.FilterConsumer#stopProducing(): dateRangeFilter produced 2100 samples
+2025-04-18 20:50:34,876 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.NormalizerSampleConsumer#stopProducing(): normalizer produced 700 samples
+2025-04-18 20:50:34,878 INFO o.a.j.r.p.CsvFileSampleSource: produce(): 700 samples produced in 199ms on channel 0
+2025-04-18 20:50:34,878 INFO o.a.j.r.d.ReportGenerator: Exporting data using exporter:'json' of className:'org.apache.jmeter.report.dashboard.JsonExporter'
+2025-04-18 20:50:35,035 INFO o.a.j.r.d.JsonExporter: Found data for consumer statisticsSummary in context
+2025-04-18 20:50:35,036 INFO o.a.j.r.d.JsonExporter: Creating statistics for overall
+2025-04-18 20:50:35,037 INFO o.a.j.r.d.JsonExporter: Creating statistics for other transactions
+2025-04-18 20:50:35,038 INFO o.a.j.r.d.JsonExporter: Checking output folder
+2025-04-18 20:50:35,041 INFO o.a.j.r.d.JsonExporter: Writing statistics JSON to /tests/report/statistics.json
+2025-04-18 20:50:35,084 INFO o.a.j.r.d.ReportGenerator: Exporting data using exporter:'html' of className:'org.apache.jmeter.report.dashboard.HtmlTemplateExporter'
+2025-04-18 20:50:35,095 INFO o.a.j.r.d.HtmlTemplateExporter: Will generate dashboard in folder: /tests/report
+2025-04-18 20:50:35,224 INFO o.a.j.r.d.HtmlTemplateExporter: Report will be generated in: /tests/report, creating folder structure
+2025-04-18 20:50:35,235 INFO o.a.j.r.d.TemplateVisitor: Copying folder from '/opt/apache-jmeter-5.5/bin/report-template' to '/tests/report', got message: /tests/report, found non empty folder with following content [/tests/report/statistics.json], will be ignored
+2025-04-18 20:50:36,008 INFO o.a.j.JMeter: Dashboard generated

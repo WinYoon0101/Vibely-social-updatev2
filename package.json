@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "@clerk/nextjs": "^6.12.8",
+    "mongoose": "^8.13.2",
+    "selenium-webdriver": "^4.30.0"
+  },
+  "devDependencies": {
+    "cypress": "^14.2.1",
+    "cypress-file-upload": "^5.0.8",
+    "cypress-localstorage-commands": "^2.2.7",
+    "jest-html-reporters": "^3.1.7",
+    "scrollreveal": "^4.0.9"
+  }
+}

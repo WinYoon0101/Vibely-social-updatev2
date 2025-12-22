@@ -1,0 +1,81 @@
+.conversation {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 15px 10px;
+    border-radius: 8px;
+    width: 90%;
+    gap: 10px;
+}
+
+.conversation:hover {
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.1s ease;
+}
+
+.conversationImg {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.conversationName {
+    font-weight: 500;
+    font-size: 15px;
+    white-space: nowrap;
+    flex: 1;
+}
+
+/* Style cho tin nhắn chưa đọc */
+.unread-message {
+    font-weight: 600;
+    color: #000;
+}
+
+/* Container cho avatar và status */
+.avatar-container {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+/* Style cho online status */
+.online-status {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    background-color: #31a24c;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+/* Style cho message preview */
+.message-preview {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    /* Để text-overflow hoạt động */
+}
+
+.message-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.9rem;
+}
+
+/* Badge cho số tin nhắn chưa đọc */
+.unread-badge {
+    background-color: #0084ff;
+    color: white;
+    border-radius: 999px;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: 500;
+}
