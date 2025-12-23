@@ -144,6 +144,10 @@ const getAllPosts = async (req, res) => {
             path: 'reactions.user',
             select: 'username profilePicture'
         })
+        .populate({
+            path: 'group',
+            select: 'name description privacySetting coverPhotoUrl'
+        })
         return response(res, 200, "Lấy tất cả bài viết thành công", posts);
     } catch (error) {
         console.error("Lỗi khi lấy tất cả bài viết:", error);
@@ -185,6 +189,10 @@ const getPostByUserId = async (req, res) => {
         .populate({
             path: 'comments.replies.user',
             select: 'username profilePicture'
+        })
+        .populate({
+            path: 'group',
+            select: 'name description privacySetting coverPhotoUrl'
         })
         return response(res, 200, "Lấy bài viết theo ID người dùng thành công", posts);
     }
@@ -423,6 +431,10 @@ const getSinglePost = async(req,res) =>{
         .populate({
             path: 'comments.replies.user',
             select: 'username profilePicture'
+        })
+        .populate({
+            path: 'group',
+            select: 'name description privacySetting coverPhotoUrl'
         })
         if (!post) return response(res, 404, "Không tìm thấy bài viết");
         return response(res, 200, "Lấy bài viết thành công", post);

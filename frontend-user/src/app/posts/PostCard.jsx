@@ -220,9 +220,14 @@ const PostCard = ({ post, onReact, onComment, onShare, onDelete, onEdit }) => {
               </Avatar>
               {/*Tên người đăng, thời gian đăng, khi nhấp vào sẽ chuyển đến trang tương ứng*/}
               <div>
-                <p className="font-semibold" onClick={handleUserProfile}>
-                  {post?.user?.username} {/*tên người đăng bài*/}
-                </p>
+                <div className='flex gap-2'>
+                  <p className="font-semibold" onClick={handleUserProfile}>
+                    {post?.user?.username} {/*tên người đăng bài*/}
+                  </p>
+                  {post?.group && (
+                    <p className='truncate'>{"\>"} {post.group.name}</p>
+                  )}
+                </div>
                 <p className="font-sm text-gray-500 text-xs" onClick={handleSinglePost}>
                   {formatedDate(post?.createdAt)} {/*thời gian đăng bài*/}
                 </p>

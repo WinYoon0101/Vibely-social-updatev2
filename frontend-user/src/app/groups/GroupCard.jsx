@@ -1,0 +1,53 @@
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { Eye, LogIn } from "lucide-react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import JoinGroupDialog from "./JoinGroupDialog";
+
+function GroupCard({ group, myGroup = false }) {
+  const router = useRouter();
+  return (
+    <div
+      initial={{ opacity: 0, x: 50 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.3 }}
+      className="bg-white mb-4 p-4 shadow rounded-lg border border-gray-200 cursor-pointer hover:shadow-lg"
+    >
+      <img
+        src={group?.coverPhotoUrl}
+        alt={group.name}
+        className="w-full h-48 object-cover rounded mb-4"
+      />
+      <Link href={`/groups/${group._id}`} className="block">
+        <h3 className="text-lg font-semibold mb-2 hover:underline truncate">
+          {group.name}
+        </h3>
+      </Link>
+
+      <p className="text-sm mb-4 h-4 truncate">
+        {group.description ? group.description : " "}
+      </p>
+      <div className="flex flex-col justify-between">
+        {myGroup ? (
+          <Button
+            className="bg-blue-500 text-white hover:bg-blue-800"
+            size="lg"
+          >
+            <Link
+              href={`/groups/${group._id}`}
+              className="flex gap-2 items-center"
+            >
+              {" "}
+              <Eye className="mr-2 h-4 w-4" /> Xem nhóm
+            </Link>
+          </Button>
+        ) : (
+          <JoinGroupDialog group={group} />
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default GroupCard;

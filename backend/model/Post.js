@@ -5,7 +5,7 @@ const postSchema = new mongoose.Schema({
     content: { type: String },
     mediaUrl: { type: String },
     mediaType: { type: String, enum: ['image', 'video'] },
-    
+    group: { type: mongoose.Schema.Types.ObjectId, ref: 'Group', default: null },
     reactions: [
         {
             user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },  
