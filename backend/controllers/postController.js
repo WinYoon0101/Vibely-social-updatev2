@@ -1,4 +1,5 @@
 const { uploadFileToCloudinary } = require("../config/cloudinary");
+const Group = require("../model/Group");
 const Post = require("../model/Post");
 const Story = require("../model/Story");
 const response = require("../utils/responseHandler");
@@ -128,8 +129,25 @@ const editPost = async(req,res) =>{
 }
 //Lấy tất cả bài viết
 const getAllPosts = async (req, res) => {
+    const userId = req.user.userId;     
     try {
-        const posts = await Post.find()
+        const posts = await Post.find({
+            $or: [
+                { group: null },
+
+                {
+                    group: {
+                        $in: await Group.find({
+                            $or: [
+                                { members: userId },
+                                { admins: userId },
+                                { createdBy: userId }
+                            ]
+                        }).distinct('_id')
+                    }
+                }
+            ]
+        })
         .sort({ createdAt: -1 })
         .populate("user", "_id username profilePicture email")
         .populate({

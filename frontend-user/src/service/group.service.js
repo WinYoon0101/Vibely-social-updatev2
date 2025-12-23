@@ -55,3 +55,30 @@ export const joinGroup = async (groupId) => {
         throw error;
     }
 };
+
+export const leaveGroup = async (groupId) => {
+    try {
+        const token = localStorage.getItem("token");
+        const result = await axiosInstance.put(`/groups/join/${groupId}`, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return result?.data?.data;
+    } catch (error) {
+        console.error("Lỗi khi rời nhóm:", error);
+        throw error;
+    }
+}
+
+// Lấy thông tin nhóm theo ID
+export const getGroupById = async (groupId) => {
+    try {
+        const token = localStorage.getItem("token");
+        const result = await axiosInstance.get(`/groups/${groupId}`, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return result?.data?.data;
+    } catch (error) {
+        console.error("Lỗi khi lấy thông tin nhóm:", error);
+        throw error;
+    }
+};

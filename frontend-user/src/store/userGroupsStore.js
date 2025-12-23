@@ -1,4 +1,4 @@
-import { createGroup, getMyGroups, getOtherGroups, joinGroup } from "@/service/group.service";
+import { createGroup, getMyGroups, getOtherGroups, joinGroup, leaveGroup } from "@/service/group.service";
 import toast from "react-hot-toast";
 import { create } from "zustand";
 
@@ -47,7 +47,6 @@ export const useUserGroupsStore = create((set, get) => ({
     }
   },
     
-
   joinGroup: async(groupId) =>{
     set({ loading: true });
     try {
@@ -64,8 +63,21 @@ export const useUserGroupsStore = create((set, get) => ({
       set({ loading: false });
     }
   },
-  leaveGroup: (groupId) =>
-    set((state) => ({
-      userGroups: state.userGroups.filter((group) => group.id !== groupId),
-    })),
+
+  leaveGroup: async(groupId) =>{
+    set({ loading: true });
+    try {
+      const data = await leaveGroup(groupId);
+      set((state) => ({
+        userGroups: state.userGroups.filter((group) => group !== groupId),
+        otherGroups: [...state.otherGroups, data],
+      }));
+      toast.success("Rời nhóm thành công");
+    } catch (error) {
+      toast.error("Đã có lỗi xảy ra khi rời nhóm");
+      console.log(error.message);
+    }finally {
+      set({ loading: false });
+    }
+  }
 }));
