@@ -33,7 +33,7 @@ const LeftSideBar = () => {
       <div className="flex flex-col h-full overflow-y-auto bg-[#f0fcff] p-4">
         {/* navigation menu yaha pr */}
 
-        <nav className="space-y-6 flex-grow">
+        <nav className="space-y-4 flex-grow">
           <div className="flex items-center space-x-2 cursor-pointer pb-2 " onClick={() => handleNavigation(`/user-profile/${user?._id}`)}>
             <Avatar className="h-9 w-9 ml-4 mt-2">
 
@@ -58,6 +58,15 @@ const LeftSideBar = () => {
           >
             <img src="/images/friend_sidebar.png" alt="friend" className="mr-2" />
             Bạn bè
+          </Button>
+          <br></br>
+          <Button
+            variant="ghost"
+            className="full justify-start"
+            onClick={() => handleNavigation("/groups")}
+          >
+            <img src="/images/group_sidebar.png" alt="group" className="mr-2" />
+            Nhóm
           </Button>
           <br></br>
           <Button

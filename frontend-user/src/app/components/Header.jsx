@@ -54,7 +54,7 @@ const Header = () => {
     { icon: "/images/home_navbar.svg", path: "/" },
     { icon: "/images/video_navbar.svg", path: "/video-feed" },
     { icon: "/images/document_navbar.svg", path: "/document" },
-    { icon: "/images/calendar_navbar.svg", path: "/calendar" },
+    { icon: "/images/group_navbar.svg", path: "/groups" },
     { icon: "/images/game_navbar.svg", path: "/quiz" },
   ];
 
