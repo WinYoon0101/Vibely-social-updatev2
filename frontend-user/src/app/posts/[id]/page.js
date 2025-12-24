@@ -4,12 +4,14 @@ import { useParams } from "next/navigation";
 import { getSinglePost } from '@/service/post.service';
 import PostCard from '../PostCard';
 import { usePostStore } from '@/store/usePostStore'
+import toast from 'react-hot-toast';
 
 function Page() {
     const params = useParams();
     const postId = params.id;   //postId
     const [post, setPost] = useState(null)
     const [loading, setLoading] = useState(false);
+    const [forbidden, setForbidden] = useState(false);
     const { handleReactPost, handleCommentPost, handleSharePost, handleDeletePost } = usePostStore();
     const fetchPost = async () => {
         setLoading(true);
@@ -17,6 +19,9 @@ function Page() {
           const result = await getSinglePost(postId);
           setPost(result);
         } catch (error) {
+          if (error.response && error.response.status === 403) {
+            setForbidden(true)
+          }
         } finally {
           setLoading(false);
         }
@@ -29,6 +34,7 @@ function Page() {
 
   return (
     <div className='max-w-3xl mx-auto px-4 md:px-6 lg:px-8 pt-16 mt-4'>
+      {forbidden && <p className='w-full font-semibold text-[1.5rem] text-center mt-20'>Bạn không có quyền xem bài viết này.</p>}
       {post &&
         <PostCard
           post={post}

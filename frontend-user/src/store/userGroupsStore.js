@@ -1,4 +1,4 @@
-import { createGroup, getMyGroups, getOtherGroups, joinGroup, leaveGroup } from "@/service/group.service";
+import { createGroup, editGroup, getMyGroups, getOtherGroups, joinGroup, leaveGroup } from "@/service/group.service";
 import toast from "react-hot-toast";
 import { create } from "zustand";
 
@@ -79,5 +79,23 @@ export const useUserGroupsStore = create((set, get) => ({
     }finally {
       set({ loading: false });
     }
-  }
+  },
+
+  editGroup: async(groupId,formData) =>{
+    set({ loading: true });
+    try {
+      const data = await editGroup(groupId, formData);
+      set((state) => ({
+        userGroups: state.userGroups.map((group) =>
+          group._id === data._id ? data : group
+        ),
+      }));
+      return data;
+    } catch (error) {
+      toast.error("Không thể chỉnh sửa nhóm")
+      console.log(error.message);
+    }finally {
+      set({ loading: false });
+    }
+  },
 }));

@@ -4,7 +4,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Separator } from '@/components/ui/separator'
 import { AnimatePresence, motion } from 'framer-motion'
-import { MessageCircle, MoreHorizontal, ThumbsUp } from 'lucide-react'
+import { ChevronRight, MessageCircle, MoreHorizontal, ThumbsUp } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { PiShareFatBold } from "react-icons/pi"
 import { FaXTwitter } from "react-icons/fa6";
@@ -79,7 +79,9 @@ export const PostsContent = ({ post, onReact, onComment, onShare, onDelete }) =>
   const handleUserProfile = () => {
     router.push(`/user-profile/${post?.user?._id}`)
   }
-
+  const handleGroup = () => {
+    router.push(`/groups/${post?.group?._id}`);
+  };
   const handleSinglePost = () => {
     router.push(`/posts/${post?._id}`)
   }
@@ -183,10 +185,24 @@ export const PostsContent = ({ post, onReact, onComment, onShare, onDelete }) =>
                 )}
               </Avatar>
               <div>
-                <p className="font-semibold" onClick={handleUserProfile}>
-                  {post?.user?.username} {/*tên người đăng bài*/}
-                </p>
-                <p className="font-sm text-gray-500 text-xs" onClick={handleSinglePost}>
+                <div className="flex gap-2">
+                  <p className="font-semibold hover:underline" onClick={handleUserProfile}>
+                    {post?.user?.username} {/*tên người đăng bài*/}
+                  </p>
+                  {post?.group && (
+                    <div className="flex gap-2 items-center">
+                      <ChevronRight />
+                      <p className="font-semibold truncate hover:underline" onClick={handleGroup}>
+                      {post.group.name}
+                    </p>
+                    </div>
+                   
+                  )}
+                </div>
+                <p
+                  className="font-sm text-gray-500 text-xs hover:underline"
+                  onClick={handleSinglePost}
+                >
                   {formatedDate(post?.createdAt)} {/*thời gian đăng bài*/}
                 </p>
               </div>
@@ -363,71 +379,102 @@ export const PostsContent = ({ post, onReact, onComment, onShare, onDelete }) =>
               <MessageCircle style={{ width: "20px", height: "20px" }} /> Bình luận
             </Button>
 
-            <Dialog
-              open={isShareDialogOpen}
-              onOpenChange={setIsShareDialogOpen}
-            >
-              <DialogTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="flex-1 hover:bg-gray-100 text-gray-500 hover:text-gray-500 text-[15px] h-8"
-                >
-                  <PiShareFatBold style={{ width: "20px", height: "20px" }} /> Chia sẻ
-                </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Chia sẻ bài viết này</DialogTitle>
-                  <DialogDescription>
-                    Chọn cách bạn muốn chia sẻ bài viết này
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="flex items-center justify-around my-[10px]">
+            {post?.group && post.group.privacySetting === "private" ? (
+              <></>
+            ) : (
+              <Dialog
+                open={isShareDialogOpen}
+                onOpenChange={setIsShareDialogOpen}
+              >
+                <DialogTrigger asChild>
                   <Button
-                    className="hover:bg-gray-200 flex-col justify-between"
                     variant="ghost"
-                    size="bigIcon"
-                    onClick={() => handleShare("facebook")}
+                    className="flex-1 hover:bg-gray-100 text-gray-500 hover:text-gray-500 text-[15px] h-8"
                   >
-                    <FaFacebook style={{ width: "40px", height: "40px", color: "#1877F2" }} />
-                    Facebook
+                    <PiShareFatBold style={{ width: "20px", height: "20px" }} />{" "}
+                    Chia sẻ
                   </Button>
-                  <Button
-                    className="hover:bg-gray-200 flex-col justify-between"
-                    variant="ghost"
-                    size="bigIcon"
-                    onClick={() => handleShare("x")}
-                  >
-                    <FaXTwitter style={{ width: "40px", height: "40px", color: "#000000" }} />
-                    X
-                  </Button>
-                  <Button
-                    className="hover:bg-gray-200 flex-col justify-between"
-                    variant="ghost"
-                    size="bigIcon"
-                    onClick={() => handleShare("linkedin")}
-                  >
-                    <FaLinkedin style={{ width: "40px", height: "40px", color: "#0088CC" }} />
-                    LinkedIn
-                  </Button>
-                  <Button
-                    className="hover:bg-gray-200 flex-col justify-between"
-                    variant="ghost"
-                    size="bigIcon"
-                    onClick={() => handleShare("copy")}
-                  >
-                    <AiOutlineCopy style={{ width: "40px", height: "40px", color: "#000000" }} />
-                    Sao chép liên kết
-                  </Button>
-                </div>
-                <div>
-                  <div className='flex justify-center items-center'>
-
-                    <QRCodeCanvas value={generateSharedLink()} size={200} />
+                </DialogTrigger>
+                {/*Bảng chọn các chia sẻ bài viết*/}
+                <DialogContent>
+                  <DialogHeader>
+                    <p className="font-bold  text-[20px]">
+                      Chia sẻ bài viết này
+                    </p>
+                    <DialogDescription>
+                      Chọn cách bạn muốn chia sẻ bài viết này
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="flex items-center justify-around my-[10px]">
+                    <Button
+                      className="hover:bg-gray-200 flex-col justify-between"
+                      variant="ghost"
+                      size="bigIcon"
+                      onClick={() => handleShare("facebook")}
+                    >
+                      <FaFacebook
+                        style={{
+                          width: "40px",
+                          height: "40px",
+                          color: "#1877F2",
+                        }}
+                      />
+                      Facebook
+                    </Button>
+                    <Button
+                      className="hover:bg-gray-200 flex-col justify-between"
+                      variant="ghost"
+                      size="bigIcon"
+                      onClick={() => handleShare("x")}
+                    >
+                      <FaXTwitter
+                        style={{
+                          width: "40px",
+                          height: "40px",
+                          color: "#000000",
+                        }}
+                      />
+                      X
+                    </Button>
+                    <Button
+                      className="hover:bg-gray-200 flex-col justify-between"
+                      variant="ghost"
+                      size="bigIcon"
+                      onClick={() => handleShare("linkedin")}
+                    >
+                      <FaLinkedin
+                        style={{
+                          width: "40px",
+                          height: "40px",
+                          color: "#0088CC",
+                        }}
+                      />
+                      LinkedIn
+                    </Button>
+                    <Button
+                      className="hover:bg-gray-200 flex-col justify-between"
+                      variant="ghost"
+                      size="bigIcon"
+                      onClick={() => handleShare("copy")}
+                    >
+                      <AiOutlineCopy
+                        style={{
+                          width: "40px",
+                          height: "40px",
+                          color: "#000000",
+                        }}
+                      />
+                      Sao chép liên kết
+                    </Button>
                   </div>
-                </div>
-              </DialogContent>
-            </Dialog>
+                  <div>
+                    <div className="flex justify-center items-center">
+                      <QRCodeCanvas value={generateSharedLink()} size={200} />
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            )}
           </div>
           <Separator className="border-b border-gray-300" />
           <AnimatePresence>

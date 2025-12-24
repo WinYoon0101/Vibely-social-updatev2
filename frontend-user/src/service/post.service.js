@@ -105,7 +105,6 @@ export const getSinglePost = async (postId) => {
         const result = await axiosInstance.get(`/users/posts/${postId}`)
         return result?.data?.data
     } catch (error) {
-        //console.error(error)
         throw error
     }
 }

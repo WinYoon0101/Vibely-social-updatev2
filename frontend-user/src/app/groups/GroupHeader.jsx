@@ -2,12 +2,12 @@ import React from "react";
 import EditGroupDialog from "./EditGroupDialog";
 import LeaveGroup from "./LeaveGroup";
 
-function GroupHeader({ info, isAdmin, isCreator }) {
+function GroupHeader({ info, setInfo, isAdmin, isCreator }) {
   return (
     <div className="relative">
       <div className="h-64 md:h-80 bg-gray-300 overflow-hidden ">
         <img
-          src={info?.coverPhotoUrl || "/images/about/image_2.jpg"}
+          src={info?.coverPhotoUrl || "/about/image_2.jpg"}
           alt="cover"
           className="w-full h-full object-cover"
         />
@@ -21,7 +21,7 @@ function GroupHeader({ info, isAdmin, isCreator }) {
             </p>
           </div>
           <div className="flex flex-col">
-          {isAdmin && <EditGroupDialog groupInfo={info} />}
+          {isAdmin && <EditGroupDialog groupInfo={info} setInfo={setInfo}/>}
           {!isCreator && <LeaveGroup groupId={info?._id} />}
           </div>
         </div>

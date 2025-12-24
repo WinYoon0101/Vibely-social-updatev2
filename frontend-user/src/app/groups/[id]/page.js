@@ -35,7 +35,7 @@ function Group() {
       <div className="md:hidden">
         <LeftSideBar/>
       </div>
-      <GroupHeader info={groupInfo} isAdmin={isAdmin} isCreator={isCreator}/>
+      <GroupHeader info={groupInfo} setInfo={setInfo} isAdmin={isAdmin} isCreator={isCreator}/>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 border-t border-gray-200 dark:border-gray-700 pt-1">
       <Tabs
         defaultValue="posts"
@@ -45,12 +45,12 @@ function Group() {
         <TabsList className="grid w-full md:w-1/2 grid-cols-4">
           <TabsTrigger value="intro" className="data-[state=active]:text-[#086280]">Giới thiệu</TabsTrigger>
           <TabsTrigger value="posts" className="data-[state=active]:text-[#086280]">Bài viết</TabsTrigger>
-          <TabsTrigger value="member" className="data-[state=active]:text-[#086280]">Thành viên</TabsTrigger>
+          <TabsTrigger value="members" className="data-[state=active]:text-[#086280]">Thành viên</TabsTrigger>
           <TabsTrigger value="files" className="data-[state=active]:text-[#086280]">File phương tiện</TabsTrigger>
         </TabsList>
 
         <div className='mt-6'>
-          <GroupTabContent />
+          <GroupTabContent activeTab={activeTab} groupInfo={groupInfo} isAdmin={isAdmin} isCreator={isCreator}/>
         </div>
       </Tabs>
     </div>

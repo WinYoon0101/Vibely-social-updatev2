@@ -82,3 +82,32 @@ export const getGroupById = async (groupId) => {
         throw error;
     }
 };
+
+// Chỉnh sửa nhóm
+export const editGroup = async (groupId, formData) => {
+    try {
+        console.log(formData)
+        const token = localStorage.getItem("token");
+        const result = await axiosInstance.put(`/groups/${groupId}`, formData, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return result?.data?.data;
+    } catch (error) {
+        console.error("Lỗi khi chỉnh sửa nhóm:", error);
+        throw error;
+    }
+}
+
+export const createGroupPost = async (groupId, formData) => {
+    try {
+        console.log(formData)
+        const token = localStorage.getItem("token");
+        const result = await axiosInstance.post(`/groups/${groupId}`, formData, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return result?.data?.data;
+    } catch (error) {
+        console.error("Lỗi khi chỉnh sửa nhóm:", error);
+        throw error;
+    }
+}
