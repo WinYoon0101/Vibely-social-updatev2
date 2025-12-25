@@ -21,7 +21,7 @@ import { useUserGroupsStore } from "@/store/userGroupsStore";
 import toast from "react-hot-toast";
 import { usePostStore } from "@/store/usePostStore";
 
-function EditGroupDialog({ groupInfo, setInfo }) {
+function EditGroupDialog({ groupInfo, refetch }) {
   const { editGroup } = useUserGroupsStore();
   const [open, setOpen] = useState(false);
   const {fetchPosts} = usePostStore()
@@ -84,9 +84,9 @@ function EditGroupDialog({ groupInfo, setInfo }) {
       if(!selectedFile && !filePreview){
         formData.append("deletePhoto", true);
       }
-      const edited = await editGroup(groupInfo._id, formData);
+      await editGroup(groupInfo._id, formData);
       toast.success("Cập nhật thông tin nhóm thành công");
-      setInfo(edited)
+      await refetch()
       await fetchPosts();
       setOpen(false);
     } catch (error) {

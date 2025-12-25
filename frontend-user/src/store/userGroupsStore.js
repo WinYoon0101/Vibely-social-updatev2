@@ -1,4 +1,4 @@
-import { createGroup, editGroup, getMyGroups, getOtherGroups, joinGroup, leaveGroup } from "@/service/group.service";
+import { addAdmin, createGroup, editGroup, getMyGroups, getOtherGroups, joinGroup, kickMember, leaveGroup, removeAdmin } from "@/service/group.service";
 import toast from "react-hot-toast";
 import { create } from "zustand";
 
@@ -90,7 +90,6 @@ export const useUserGroupsStore = create((set, get) => ({
           group._id === data._id ? data : group
         ),
       }));
-      return data;
     } catch (error) {
       toast.error("Không thể chỉnh sửa nhóm")
       console.log(error.message);
@@ -98,4 +97,53 @@ export const useUserGroupsStore = create((set, get) => ({
       set({ loading: false });
     }
   },
+
+  addAdmin:async(groupId, userId) =>{
+    set({ loading: true });
+    try {
+      const data = await addAdmin(groupId, userId);
+      set((state) => ({
+        userGroups: state.userGroups.map((group) =>
+          group._id === data._id ? data : group
+        ),
+      }));
+    } catch (error) {
+      toast.error("Không thể thêm quản trị viên")
+      console.log(error.message);
+    }finally {
+      set({ loading: false });
+    }
+  },
+  removeAdmin:async(groupId, userId) =>{
+    set({ loading: true });
+    try {
+      const data = await removeAdmin(groupId, userId);
+      set((state) => ({
+        userGroups: state.userGroups.map((group) =>
+          group._id === data._id ? data : group
+        ),
+      }));
+    } catch (error) {
+      toast.error("Không thể xóa quản trị viên")
+      console.log(error.message);
+    }finally {
+      set({ loading: false });
+    }
+  },
+  kickMember:async(groupId, userId) =>{
+    set({ loading: true });
+    try {
+      const data = await kickMember(groupId, userId);
+      set((state) => ({
+        userGroups: state.userGroups.map((group) =>
+          group._id === data._id ? data : group
+        ),
+      }));
+    } catch (error) {
+      toast.error("Không thể kick thành viên")
+      console.log(error.message);
+    }finally {
+      set({ loading: false });
+    }
+  }
 }));

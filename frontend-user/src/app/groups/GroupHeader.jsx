@@ -2,7 +2,7 @@ import React from "react";
 import EditGroupDialog from "./EditGroupDialog";
 import LeaveGroup from "./LeaveGroup";
 
-function GroupHeader({ info, setInfo, isAdmin, isCreator }) {
+function GroupHeader({ info, refetch, isAdmin, isCreator }) {
   return (
     <div className="relative">
       <div className="h-64 md:h-80 bg-gray-300 overflow-hidden ">
@@ -21,7 +21,7 @@ function GroupHeader({ info, setInfo, isAdmin, isCreator }) {
             </p>
           </div>
           <div className="flex flex-col">
-          {isAdmin && <EditGroupDialog groupInfo={info} setInfo={setInfo}/>}
+          {isAdmin && <EditGroupDialog groupInfo={info} refetch={refetch}/>}
           {!isCreator && <LeaveGroup groupId={info?._id} />}
           </div>
         </div>

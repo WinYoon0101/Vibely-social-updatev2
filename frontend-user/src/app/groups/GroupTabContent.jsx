@@ -6,8 +6,10 @@ import Link from "next/link";
 import React, { useState } from "react";
 import GroupPosts from "./GroupPosts";
 import GroupMedia from "./GroupMedia";
+import AdminCard from "./AdminCard";
+import MemberCard from "./MemberCard";
 
-function GroupTabContent({ activeTab, groupInfo, isAdmin, isCreator }) {
+function GroupTabContent({ activeTab, groupInfo, refetch, isAdmin, isCreator }) {
   const [query, setQuery] = useState("");
   const { user } = userStore((state) => state);
   const isMember = groupInfo?.members.find((member) => member._id === user._id);
@@ -82,7 +84,7 @@ function GroupTabContent({ activeTab, groupInfo, isAdmin, isCreator }) {
         {!isMember && groupInfo?.privacySetting === "private" ? (
           <div>Bạn phải là thành viên của nhóm để xem bài viết.</div>
         ) : (
-          <div>
+          <div className="flex">
             <GroupPosts groupInfo={groupInfo} />
           </div>
         )}
@@ -118,31 +120,7 @@ function GroupTabContent({ activeTab, groupInfo, isAdmin, isCreator }) {
           <h2 className="text-[1.2rem] font-semibold my-5">Quản trị viên</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-10">
             {groupInfo?.admins.map((admin) => {
-              return (
-                <div key={admin._id} className="flex gap-2 items-center">
-                  <Avatar className="!outline outline-1 outline-blue-500">
-                    {admin.profilePicture ? (
-                      <AvatarImage
-                        src={admin.profilePicture}
-                        alt={admin.username}
-                      />
-                    ) : (
-                      <AvatarFallback>
-                        {admin.username
-                          .split(" ")
-                          .map((name) => name[0])
-                          .join("")}
-                      </AvatarFallback>
-                    )}
-                  </Avatar>
-                  <Link
-                    href={`/user-profile/${admin._id}`}
-                    className="text-gray-500 hover:underline"
-                  >
-                    {admin.username}
-                  </Link>
-                </div>
-              );
+              return <AdminCard key={admin._id} admin={admin} isAdmin={isAdmin} info={groupInfo} refetch={refetch}/>;
             })}
           </div>
           <div className="w-full flex justify-between items-center mt-5">
@@ -174,58 +152,10 @@ function GroupTabContent({ activeTab, groupInfo, isAdmin, isCreator }) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-10">
               {query !== ""
                 ? filteredMembers.map((member) => {
-                    return (
-                      <div key={member._id} className="flex gap-2 items-center">
-                        <Avatar className="!outline outline-1 outline-blue-500">
-                          {member.profilePicture ? (
-                            <AvatarImage
-                              src={member.profilePicture}
-                              alt={member.username}
-                            />
-                          ) : (
-                            <AvatarFallback>
-                              {member.username
-                                .split(" ")
-                                .map((name) => name[0])
-                                .join("")}
-                            </AvatarFallback>
-                          )}
-                        </Avatar>
-                        <Link
-                          href={`/user-profile/${member._id}`}
-                          className="text-gray-500 hover:underline"
-                        >
-                          {member.username}
-                        </Link>
-                      </div>
-                    );
+                    return <MemberCard key={member._id} member={member} isAdmin={isAdmin} info={groupInfo} refetch={refetch}/>;
                   })
                 : groupInfo?.members.map((member) => {
-                    return (
-                      <div key={member._id} className="flex gap-2 items-center">
-                        <Avatar className="!outline outline-1 outline-blue-500">
-                          {member.profilePicture ? (
-                            <AvatarImage
-                              src={member.profilePicture}
-                              alt={member.username}
-                            />
-                          ) : (
-                            <AvatarFallback>
-                              {member.username
-                                .split(" ")
-                                .map((name) => name[0])
-                                .join("")}
-                            </AvatarFallback>
-                          )}
-                        </Avatar>
-                        <Link
-                          href={`/user-profile/${member._id}`}
-                          className="text-gray-500 hover:underline"
-                        >
-                          {member.username}
-                        </Link>
-                      </div>
-                    );
+                    return <MemberCard key={member._id} member={member} isAdmin={isAdmin} info={groupInfo} refetch={refetch} />;
                   })}
             </div>
           )}

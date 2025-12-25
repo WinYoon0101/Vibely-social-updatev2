@@ -111,3 +111,42 @@ export const createGroupPost = async (groupId, formData) => {
         throw error;
     }
 }
+
+export const addAdmin = async (groupId, userId) => {
+    try {
+        const token = localStorage.getItem("token");
+        const result = await axiosInstance.post(`/groups/${groupId}/admins/${userId}`, null, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return result?.data?.data;
+    } catch (error) {
+        console.error("Lỗi khi thêm quản trị viên:", error);
+        throw error;
+    }
+}
+
+export const removeAdmin = async (groupId, userId) => {
+    try {
+        const token = localStorage.getItem("token");
+        const result = await axiosInstance.put(`/groups/${groupId}/admins/${userId}`, null, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return result?.data?.data;
+    } catch (error) {
+        console.error("Lỗi khi xóa quản trị viên:", error);
+        throw error;
+    }
+}
+
+export const kickMember = async (groupId, userId) => {
+    try {
+        const token = localStorage.getItem("token");
+        const result = await axiosInstance.post(`/groups/${groupId}/kick/${userId}`, null, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return result?.data?.data;
+    } catch (error) {
+        console.error("Lỗi khi xóa thành viên khỏi nhóm:", error);
+        throw error;
+    }
+ }

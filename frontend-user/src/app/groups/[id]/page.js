@@ -14,7 +14,7 @@ function Group() {
   const [groupInfo, setInfo] = useState(null);
   const user = userStore((state) => state.user);
 
-  const fetchGroupInfo = async (groupId) => {
+  const fetchGroupInfo = async () => {
     try {
       const res = await getGroupById(groupId);
       setInfo(res);
@@ -26,7 +26,7 @@ function Group() {
   const isAdmin = groupInfo?.admins.find((admin) => admin._id === user._id);
   const isCreator = groupInfo?.createdBy._id === user._id;
   useEffect(() => {
-    fetchGroupInfo(groupId);
+    fetchGroupInfo();
   }, []);
 
   const [activeTab, setActiveTab] = useState("posts");
@@ -35,7 +35,7 @@ function Group() {
       <div className="md:hidden">
         <LeftSideBar/>
       </div>
-      <GroupHeader info={groupInfo} setInfo={setInfo} isAdmin={isAdmin} isCreator={isCreator}/>
+      <GroupHeader info={groupInfo} refetch={fetchGroupInfo} isAdmin={isAdmin} isCreator={isCreator}/>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 border-t border-gray-200 dark:border-gray-700 pt-1">
       <Tabs
         defaultValue="posts"
@@ -50,7 +50,7 @@ function Group() {
         </TabsList>
 
         <div className='mt-6'>
-          <GroupTabContent activeTab={activeTab} groupInfo={groupInfo} isAdmin={isAdmin} isCreator={isCreator}/>
+          <GroupTabContent activeTab={activeTab} groupInfo={groupInfo} refetch={fetchGroupInfo} isAdmin={isAdmin} isCreator={isCreator}/>
         </div>
       </Tabs>
     </div>

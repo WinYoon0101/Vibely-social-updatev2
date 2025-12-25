@@ -238,3 +238,101 @@ export const createGroupPost = async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error" });
 }
 };
+
+export const addAdmin = async (req, res) => {
+  try {
+    const userId = req.user.userId; 
+    const { groupId, userId: newAdminId } = req.params;
+    const group = await Group.findById(groupId);
+    if (!group) {
+      res.status(404).json({ success: false, message: "Group not found" });
+    }
+    if(!group.admins.includes(userId)){
+        return res.status(403).json({ success: false, message: "Only admins can add new admins" });
+    }
+    if (group.admins.includes(newAdminId)) {
+      return res
+        .status(409)
+        .json({ success: false, message: "User is already an admin" });
+    }
+    if (!group.members.includes(newAdminId)) {
+      return res
+        .status(400)
+        .json({ success: false, message: "User is not a member of the group" });
+    }
+    group.admins.push(newAdminId);
+    await group.save();
+    res.status(200).json({ success: true, data: group });
+  } catch (error) {
+    console.error("Lỗi khi thêm quản trị viên:", error);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+}
+
+export const removeAdmin = async (req, res) => {
+  try {
+    const userId = req.user.userId; 
+    const { groupId, userId: oldAdminId } = req.params;
+    const group = await Group.findById(groupId);
+    if (!group) {
+      res.status(404).json({ success: false, message: "Group not found" });
+    }
+    if(!group.admins.includes(userId)){
+        return res.status(403).json({ success: false, message: "Only admins can remove admins" });
+    }
+    if (!group.admins.includes(oldAdminId)) {
+      return res
+        .status(400)
+        .json({ success: false, message: "User is not an admin" });
+    }
+    if (!group.members.includes(oldAdminId)) {
+      return res
+        .status(400)
+        .json({ success: false, message: "User is not a member of the group" });
+    }
+    if(group.createdBy.toString() === oldAdminId){
+        return res.status(400).json({ success: false, message: "Cannot remove group creator from admins" });
+    }
+    group.admins = group.admins.filter(
+      (adminId) => adminId.toString() !== oldAdminId
+    );
+    await group.save();
+    res.status(200).json({ success: true, data: group });
+  } catch (error) {
+    console.error("Lỗi khi xóa quản trị viên:", error);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+}
+
+export const kickMember = async (req, res) => {
+  try {
+    const userId = req.user.userId; 
+    const { groupId, userId: deletedId } = req.params;
+    const group = await Group.findById(groupId);
+    if (!group) {
+      res.status(404).json({ success: false, message: "Group not found" });
+    }
+    if (!group.admins.includes(userId)){
+        return res.status(403).json({ success: false, message: "Only admins can kick members" });
+    }
+    if(group.createdBy.toString() === deletedId){
+        return res.status(400).json({ success: false, message: "Can not kick the creator" });
+    }
+    if (!group.members.includes(deletedId)) {
+      res
+        .status(400)
+        .json({ success: false, message: "User is not a member of the group" });
+    }
+    group.members = group.members.filter(
+      (memberId) => memberId.toString() !== deletedId
+    );
+    group.admins = group.admins.filter(
+        (adminId) => adminId.toString() !== deletedId
+     );
+    await group.save();
+    res.status(200).json({ success: true, data: group });
+  } catch (error) {
+    console.error("Lỗi khi xóa thành viên khỏi nhóm:", error);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+}
