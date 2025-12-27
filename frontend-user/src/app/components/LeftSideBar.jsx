@@ -81,10 +81,10 @@ const LeftSideBar = () => {
           <Button
             variant="ghost"
             className="full justify-start"
-            onClick={() => handleNavigation("/video-feed")}
+            onClick={() => handleNavigation("/video-conferencing")}
           >
             <img src="/images/video_sidebar.png" alt="video" className="mr-2" />
-            Video
+            Cuộc họp
           </Button>
           <br></br>
           <Button
