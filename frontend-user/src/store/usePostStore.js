@@ -1,3 +1,4 @@
+import { createGroupPost } from '@/service/group.service';
 import { addCommentToPost, createPost, getAllPosts, getAllStories, getPostByUserId, reactPost, sharePost, createStory, reactStory, getAllUserPosts, addReplyToPost, deletePost, deleteComment, deleteReply, likeComment, editPost, deleteStory } from '@/service/post.service';
 import toast from 'react-hot-toast';
 import { create } from 'zustand';
@@ -63,6 +64,20 @@ export const usePostStore = create((set)=>({
             toast.error("Đã xảy ra lỗi khi đăng bài. Vui lòng thử lại.")
         }
     },
+    createGroupPost: async (groupId, formData) => {
+        set({loading:true})
+        try {
+            const newPost = await createGroupPost(groupId, formData)
+            set((state)=>({
+                posts : [newPost,...state.posts], 
+                loading: false,    
+            }))
+            toast.success("Tạo bài đăng thành công.")
+        } catch (error) {
+            set({error, loading:false})
+            toast.error("Đã xảy ra lỗi khi đăng bài. Vui lòng thử lại.")
+        }
+      },
 
     handleEditPost: async(postId, postData) =>{
         set({loading:true})

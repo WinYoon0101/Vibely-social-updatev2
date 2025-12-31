@@ -12,7 +12,7 @@ const RightSideBar = () => {
 
   // Đếm ngược ngày thi (26/06/2025)
   useEffect(() => {
-    const examDate = new Date("2025-06-26");
+    const examDate = new Date("2026-06-11");
     const today = new Date();
     const diffTime = Math.ceil((examDate - today) / (1000 * 60 * 60 * 24));
     setCountdown(diffTime);

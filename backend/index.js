@@ -31,7 +31,7 @@ const forgotPasswordRoute = require('./routes/forgotPassword');
 const quizRoute = require('./routes/quizRoute');
 const learningTreeRoute = require('./routes/learningTreeRoute');
 const learningGoalRoute = require('./routes/learningGoalRoute');
-
+const groupRoutes = require('./routes/groupRoute');
 
 const YAML = require('yamljs');
 
@@ -103,6 +103,7 @@ app.use('/admin/quiz', adminQuizRoute);
 app.use('/forgot-password', forgotPasswordRoute);
 app.use('/learning-trees', learningTreeRoute);
 app.use('/learning-goals', learningGoalRoute);
+app.use('/groups', groupRoutes);
 
 
 // API lấy danh ngôn ngẫu nhiên
