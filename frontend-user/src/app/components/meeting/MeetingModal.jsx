@@ -33,7 +33,7 @@ const MeetingModal = ({
 
           {/* BẮT BUỘC cho accessibility */}
           <DialogTitle
-            className={`text-3xl font-bold leading-[42px] ${className}`}
+            className={`text-3xl font-bold text-center leading-[42px] ${className}`}
           >
             {title}
           </DialogTitle>

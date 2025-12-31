@@ -37,7 +37,7 @@ const SidebarMeet = () => {
   const pathname = usePathname();
 
   return (
-    <section className="sticky left-0 top-0 flex h-screen w-fit flex-col bg-[#1C1F2E] p-6 pt-28 text-white max-sm:hidden lg:w-[264px]">
+    <section className="sticky left-0 top-0 flex h-screen w-fit flex-col bg-[#f0fcff] p-6 pt-28  max-sm:hidden lg:w-[264px]">
       <div className="flex flex-1 flex-col gap-6">
         {sidebarLinks.map((item) => {
           const isHome = item.route === '/video-conferencing';
@@ -47,23 +47,33 @@ const SidebarMeet = () => {
             : pathname.startsWith(item.route);
 
           return (
-            <Link
-              href={item.route}
-              key={item.label}
-              className={`flex items-center gap-4 rounded-lg p-4 transition ${
-                isActive ? 'bg-[#0E78F9]' : 'hover:bg-[#1f2433]'
-              }`}
-            >
-              <Image
-                src={item.imgURL}
-                alt={item.label}
-                width={24}
-                height={24}
-              />
-              <p className="text-lg font-semibold max-lg:hidden">
-                {item.label}
-              </p>
-            </Link>
+<Link
+  href={item.route}
+  key={item.label}
+  className={`flex items-center gap-4 rounded-xl p-4 transition-colors ${
+    isActive
+      ? 'bg-[#e3f6ff] text-[#1573ee] font-bold'
+      : 'text-gray-700 hover:bg-gray-100 font-semibold'
+  }`}
+>
+  <Image
+    src={item.imgURL}
+    alt={item.label}
+    width={24}
+    height={24}
+    className="transition"
+    style={{
+      filter: isActive
+        ? 'brightness(0) saturate(100%) invert(32%) sepia(83%) saturate(2100%) hue-rotate(200deg)'
+        : 'brightness(0)',
+    }}
+  />
+  <p className="text-lg max-lg:hidden">
+    {item.label}
+  </p>
+</Link>
+
+
           );
         })}
       </div>

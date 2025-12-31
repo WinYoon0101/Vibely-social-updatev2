@@ -28,14 +28,14 @@ const MeetingCard = ({
 
 
   return (
-    <section className="flex min-h-[258px] w-full flex-col justify-between rounded-[14px] bg-[#1C1F2E] px-5 py-8 xl:max-w-[568px]">
+    <section className="flex min-h-[258px] w-full flex-col justify-between rounded-[14px] bg-[#2C5784] px-5 py-8 xl:max-w-[568px]">
       {/* ===== Header ===== */}
       <article className="flex flex-col gap-5">
         <Image src={icon} alt="meeting-icon" width={28} height={28} />
 
         <div className="flex justify-between">
           <div className="flex flex-col gap-2">
-            <h1 className="text-2xl font-bold">{title}</h1>
+            <h1 className="text-2xl font-bold text-white">{title}</h1>
             <p className="text-base font-normal text-gray-300">
               {date}
             </p>
@@ -61,7 +61,7 @@ const MeetingCard = ({
             />
           ))}
 
-          <div className="flex-center absolute left-[136px] size-10 rounded-full border-[5px] border-[#252A41] bg-[#1E2757] text-sm font-semibold">
+          <div className="flex-center absolute left-[136px] size-10 rounded-full border-[5px] border-[#252A41] bg-[#1E2757] text-sm font-semibold text-gray-300">
             +5
           </div>
         </div>
@@ -71,7 +71,7 @@ const MeetingCard = ({
           <div className="flex gap-2">
             <Button
               onClick={handleClick}
-              className="flex items-center gap-2 rounded bg-[#0E78F9] px-6"
+              className="flex items-center gap-2 rounded bg-[#0E78F9] px-6 text-white"
             >
               {buttonIcon1 && (
                 <Image
@@ -89,7 +89,7 @@ const MeetingCard = ({
                 navigator.clipboard.writeText(link);
                 toast.success("Đã sao chép link cuộc họp!");
               }}
-              className="flex items-center gap-2 bg-dark-4 px-6"
+              className="flex items-center gap-2 bg-[#1E2757] px-6 text-white"
             >
               <Image
                 src="/icons/copy.svg"
