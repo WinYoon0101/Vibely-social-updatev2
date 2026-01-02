@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import Header from "./components/Header";
 import { io } from "socket.io-client";
+import { userNotificationStore } from "@/store/useNotificationsStore";
 
 export default function AuthWrapper({ children }) {
     const { setUser, clearUser, user } = userStore();
@@ -19,7 +20,7 @@ export default function AuthWrapper({ children }) {
     const publicPages = ["/user-login", "/forgot-password", "/reset-password"];
     // const isPublicPage = publicPages.includes(pathname);
     const isPublicPage = publicPages.some((publicPath) => pathname.startsWith(publicPath));
-
+    const { fetchNotifications, addNotification } = userNotificationStore()
     // Hàm kết nối socket
     const connectSocket = (userId) => {
         if (userId && !socketRef.current) {
@@ -32,6 +33,16 @@ export default function AuthWrapper({ children }) {
             // Lắng nghe sự kiện getUsers để cập nhật danh sách online users
             socketRef.current.on("getUsers", (users) => {
             });
+
+            socketRef.current.on("getNotification", (notification) => {
+                console.log("New notification:", notification);
+                addNotification(notification);
+            });
+
+            socketRef.current.on("refetchNotification", () => {
+                console.log("Please refetch notifications");
+                fetchNotifications();
+            });
         }
     };
 
@@ -43,13 +54,13 @@ export default function AuthWrapper({ children }) {
             window.socket = null;
         }
     };
-
     useEffect(() => {
         const checkAuth = async () => {
             try {
                 const result = await checkUserAuth();
                 if (result.isAuthenticated) {
                     setUser(result?.user);
+                    await fetchNotifications();
                     setIsAuthenticated(true);
 
                     // Kết nối socket khi đăng nhập thành công

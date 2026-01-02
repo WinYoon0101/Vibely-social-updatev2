@@ -32,8 +32,10 @@ const quizRoute = require('./routes/quizRoute');
 const learningTreeRoute = require('./routes/learningTreeRoute');
 const learningGoalRoute = require('./routes/learningGoalRoute');
 const groupRoutes = require('./routes/groupRoute');
+const notifRoutes = require('./routes/notifRoute');
 
 const YAML = require('yamljs');
+const { initSocket } = require('./socket');
 
 const swaggerDocument = YAML.load(path.join(__dirname, 'API/swagger.yaml'));
 
@@ -104,7 +106,7 @@ app.use('/forgot-password', forgotPasswordRoute);
 app.use('/learning-trees', learningTreeRoute);
 app.use('/learning-goals', learningGoalRoute);
 app.use('/groups', groupRoutes);
-
+app.use('/notif', notifRoutes);
 
 // API lấy danh ngôn ngẫu nhiên
 app.get('/quotations/random', async (req, res) => {
@@ -151,59 +153,9 @@ const io = new Server(server, {
     }
 });
 
+initSocket(io);
 // Lưu io vào app để có thể sử dụng ở các route khác
 app.set('io', io);
-
-// Socket.io logic
-let users = [];
-
-const addUser = (userId, socketId) => {
-    if (!users.some((user) => user.userId === userId)) {
-        users.push({ userId, socketId });
-    }
-};
-
-const removeUser = (socketId) => {
-    users = users.filter((user) => user.socketId !== socketId);
-};
-
-const getUser = (userId) => {
-    return users.find((user) => user.userId === userId);
-};
-
-io.on("connection", (socket) => {
-    socket.on("addUser", (userId) => {
-        // Xóa người dùng cũ nếu đã tồn tại
-        users = users.filter(user => user.userId !== userId);
-        // Thêm người dùng mới
-        addUser(userId, socket.id);
-        // Gửi danh sách người dùng online cho tất cả các client
-        io.emit("getUsers", users);
-    });
-
-    // Xử lý yêu cầu cập nhật danh sách online users
-    socket.on("requestOnlineUsers", () => {
-        // Gửi danh sách người dùng online cho client yêu cầu
-        socket.emit("getUsers", users);
-    });
-
-    socket.on("sendMessage", ({ senderId, receiverId, text, messageId, profilePicture }) => {
-        const user = getUser(receiverId);
-        if (user) {
-            io.to(user.socketId).emit("getMessage", {
-                sender:senderId,
-                text,
-                _id:messageId,
-                profilePicture
-            });
-        }
-    });
-
-    socket.on("disconnect", () => {
-        removeUser(socket.id);
-        io.emit("getUsers", users);
-    });
-});
 
 // Khởi động server
 server.listen(PORT, () => {

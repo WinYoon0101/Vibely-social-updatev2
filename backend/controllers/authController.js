@@ -9,8 +9,10 @@ const bcrypt = require('bcryptjs');
 const Post = require("../model/Post");
 const Story = require("../model/Story");
 const Inquiry = require("../model/Inquiry");
+const Group = require("../model/Group");
 
 const nodemailer = require('nodemailer');
+const Notification = require('../model/Notification');
 
 // Tạo transporter để gửi email
 const transporter = nodemailer.createTransport({
@@ -52,6 +54,14 @@ const registerUser = async (req, res) => {
             secure: process.env.NODE_ENV === "production",
             sameSite: "None"
         });
+        const notif = new Notification({
+            user: newUser._id,
+            type: "system",
+            content: `Chào mừng ${newUser.username} đến với Vibely! Bắt đầu kết nối với bạn bè và chia sẻ khoảnh khắc của bạn ngay hôm nay.`,
+            isRead: false,
+            thumbnailUrl: "https://tse3.mm.bing.net/th/id/OIP.F-JvlOPJN0M9wJq4PVuRJAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
+        })
+        await notif.save();
         return response(res, 201, 'Đăng ký thành công',
             {
                 username: newUser.username,
@@ -196,7 +206,34 @@ const deleteAccount = async (req, res) => {
             { $pull: { followings: userId }, $inc: { followingCount: -1 } }
         );
 
+        const groupsAsLastAdmin = await Group.find({
+            admins: { $size: 1 }, 
+            admins: userId        // là admin cuối cùng
+        });
+        for (const group of groupsAsLastAdmin) {
+            // Tìm thành viên khác trong nhóm
+            const nextAdmin = group.members.find(m => m.toString() !== userId.toString());
+            if (nextAdmin) {
+                await Group.updateOne(
+                    { _id: group._id },
+                    { $push: { admins: nextAdmin } }
+                );
+            } else {
+                await Group.deleteOne({ _id: group._id });
+            }
+        }
+        await Group.updateMany(
+            { members: userId },
+            { $pull: { members: userId } }
+        )
+        await Group.updateMany(
+            { admins: userId },
+            { $pull: { admins: userId } }
+        )
+                
         await Inquiry.deleteMany({ userId: userId });
+
+        await Notification.deleteMany({ user: userId });
 
         const deletedUser = await User.findByIdAndDelete(userId);
         if (!deletedUser) {

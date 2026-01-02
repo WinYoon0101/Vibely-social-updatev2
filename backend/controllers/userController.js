@@ -1,5 +1,7 @@
+const Notification = require("../model/Notification");
 const User = require("../model/User");
 const response = require("../utils/responseHandler");
+const { getUser } = require("../socket.js");
 
 // Theo dõi người dùng
 const followUser =  async(req,res) =>{
@@ -29,10 +31,56 @@ const followUser =  async(req,res) =>{
 
         await currentUser.save()
         await userToFollow.save()
-        
+
+        const existingNotif = await Notification.findOne({
+            type: "friends",
+            user: currentUser._id,      // notif gửi cho currentUser
+            targetId: userToFollow._id  // người gửi là userToFollow
+          });
+          const io = req.app.get('io');
+          if (!existingNotif) {
+            const opponent = getUser(userIdToFollow); 
+            const newNotif = new Notification({
+                user: userIdToFollow, // gửi cho userToFollow
+                type: "friends",
+                content: "đã gửi lời mời kết bạn.",
+                thumbnailUrl: currentUser.profilePicture,
+                targetId: currentUser._id,
+                lastSenderId: currentUser.username,
+                senderCount: 1,
+            })
+            await newNotif.save();
+            if (opponent) {
+                io.to(opponent.socketId).emit("getNotification", newNotif);
+            }
+        }else{
+            existingNotif.content = `Bạn và ${userToFollow.username} bây giờ là bạn bè.`;
+            existingNotif.senderCount = 0;
+            existingNotif.isRead = false; // cho nổi bật lại
+            await existingNotif.save();
+            const newNotif = new Notification({
+                user: userIdToFollow, // gửi cho userToFollow
+                type: "friends",
+                content: `Bạn và ${currentUser.username} bây giờ là bạn bè.`,
+                thumbnailUrl: currentUser.profilePicture,
+                targetId: currentUser._id,
+                lastSenderId: currentUser.username,
+                senderCount: 0,
+            })
+            await newNotif.save();
+            const opponent = getUser(userIdToFollow);
+            const me = getUser(currentUser._id);
+            if (opponent) {
+                io.to(opponent.socketId).emit("refetchNotification");
+            }
+            if (me) {
+                io.to(me.socketId).emit("refetchNotification");
+            }
+        }        
         return response(res,200,'Theo dõi người dùng thành công')
 
     } catch (error) {
+        console.log(error)
         return response(res, 500, 'Lỗi máy chủ nội bộ', error.message)
     }
 }
@@ -57,18 +105,28 @@ const unfollowUser =  async(req,res) =>{
             return response(res,404, 'Bạn chưa theo dõi người dùng này');
         }
 
-        currentUser.followers = currentUser.followers.filter(id => id.toString() !== userIdToUnfollow)
-        currentUser.followings = currentUser.followings.filter(id => id.toString() !== userIdToUnfollow)
-        userToUnfollow.followers = userToUnfollow.followers.filter(id => id.toString() !== userId)
-        userToUnfollow.followings = userToUnfollow.followings.filter(id => id.toString() !== userId)
+        await User.updateMany(
+            { _id: { $in: [userId, userIdToUnfollow] } },
+            {
+              $pull: {
+                followers: { $in: [userId, userIdToUnfollow] },
+                followings: { $in: [userId, userIdToUnfollow] }
+              }
+            }
+          );
 
-        currentUser.followerCount -=1;
-        currentUser.followingCount -=1;
-        userToUnfollow.followerCount -=1;
-        userToUnfollow.followingCount -=1;
+          currentUser.followingCount = Math.max(0, currentUser.followingCount - 1);
+          currentUser.followerCount = Math.max(0, currentUser.followerCount - 1);
+          userToUnfollow.followingCount = Math.max(0, userToUnfollow.followingCount - 1);
+          userToUnfollow.followerCount = Math.max(0, userToUnfollow.followerCount - 1);
 
         await currentUser.save()
         await userToUnfollow.save()
+
+        await Notification.deleteMany({
+            type: "friends",
+            targetId: { $in: [userId, userIdToUnfollow] }
+          });
         
         return response(res,200,'Bỏ theo dõi người dùng thành công')
 

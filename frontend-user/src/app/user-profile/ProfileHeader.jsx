@@ -10,11 +10,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { checkUserAuth } from "@/service/auth.service";
 import { createOrUpdateUserBio, fetchUserProfile, updateUserCoverPhoto, updateUserProfile } from "@/service/user.service";
 import { userFriendStore } from "@/store/userFriendsStore";
 import userStore from "@/store/userStore";
 import { AnimatePresence, motion } from "framer-motion";
-import { Camera, Check, Pencil, PenLine, Save, SquarePlus, Upload, X } from "lucide-react";
+import { Camera, Check, Pencil, PenLine, Save, SquarePlus, Upload, UserX, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -35,11 +36,20 @@ const ProfileHeader = ({
     education: profileData?.bio?.education,
   });
 
-  const { followUser, fetchMutualFriends, mutualFriends } = userFriendStore();
+  
+  const checkAuth = async() =>{
+    const result = await checkUserAuth()
+    if (result.isAuthenticated) {
+      setUser(result?.user);
+    }
+  }
+
+  const { followUser, fetchMutualFriends, mutualFriends, deleteUserFromRequest, UnfollowUser } = userFriendStore();
   useEffect(() => {
     if (id) {
       fetchMutualFriends(id);
     }
+    checkAuth()
   }, [id, fetchMutualFriends]);
 
   const [profilePictureFile, setProfilePictureFile] = useState(null);
@@ -51,7 +61,13 @@ const ProfileHeader = ({
   const { user, setUser } = userStore();
 
   const onAction = async(userId, action)=>{
-    await followUser(userId, action);
+    if (action === "makeFriend" || action === "confirm") {
+      await followUser(userId, action);
+    } else if (action === "remove") {
+      await deleteUserFromRequest(userId);
+    } else if (action === "delete") {
+      await UnfollowUser(userId);
+    }
     const newUserInfo = await fetchUserProfile(user._id)
     setUser(newUserInfo.profile)
   }
@@ -137,9 +153,6 @@ const ProfileHeader = ({
     }
   };
 
-
-
-
   const handleProfilePictureChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -215,7 +228,7 @@ const ProfileHeader = ({
                 .join("")}
             </AvatarFallback>
           </Avatar>
-          <div className="mt-4 mdLmt-0 text-center md:text-left flex-grow">
+          <div className="mt-4 mt-0 text-center md:text-left flex-grow">
             <h1 className="text-3xl font-bold">{profileData?.username}</h1>
             <p className="text-gray-400 font-semibold">
               {mutualFriends.length} người bạn
@@ -243,14 +256,32 @@ const ProfileHeader = ({
               </Button>
             </div>
           )}
+          {!isOwner && followers.includes(id) && followings.includes(id) && (
+            <div className="flex flex-col">
+              <Button
+                className="mt-4 md:mt-1 font-semibold cursor-pointer bg-red-500 hover:bg-red-500/70 text-white"
+                onClick={() => {onAction(id, "delete")}}
+              >
+                <UserX className="w-4 h-4 mr-2" />
+                Hủy kết bạn
+              </Button>
+            </div>
+          )}
           {!isOwner && followers.includes(id) && !followings.includes(id) && (
             <div className="flex flex-col">
               <Button
-                className="mt-4 md:mt-1 font-semibold cursor-pointer bg-[#086280] hover:bg-[#086280]/70 text-white"
+                className="mt-2 md:mt-1 font-semibold cursor-pointer bg-[#086280] hover:bg-[#086280]/70 text-white"
                 onClick={() => {onAction(id, "confirm")}}
               >
                 <PenLine className="w-4 h-4 mr-2" />
                 Chấp nhận kết bạn
+              </Button>
+              <Button
+                className="mt-2 md:mt-1 font-semibold cursor-pointer bg-red-500 hover:bg-red-500/70 text-white"
+                onClick={() => {onAction(id, "remove")}}
+              >
+                <PenLine className="w-4 h-4 mr-2" />
+                Xóa lời mời kết bạn
               </Button>
             </div>
           )}

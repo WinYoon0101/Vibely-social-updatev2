@@ -28,20 +28,16 @@ function GroupCard({ group, myGroup = false }) {
       <p className="text-sm mb-4 h-4 truncate">
         {group.description ? group.description : " "}
       </p>
-      <div className="flex flex-col justify-between">
+      <div className="flex flex-col justify-between w-full">
         {myGroup ? (
-          <Button
-            className="bg-blue-500 text-white hover:bg-blue-800"
-            size="lg"
-          >
-            <Link
-              href={`/groups/${group._id}`}
-              className="flex gap-2 items-center"
+          <Link href={`/groups/${group._id}`}>
+            <Button
+              className="w-full flex gap-2 items-center bg-blue-500 text-white hover:bg-blue-800"
+              size="lg"
             >
-              {" "}
               <Eye className="mr-2 h-4 w-4" /> Xem nhóm
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         ) : !group?.waitingRequests?.includes(user._id) ? (
           <JoinGroupDialog group={group} />
         ) : (

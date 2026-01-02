@@ -25,10 +25,10 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import NotificationIcon from "./Notification/NotificationIcon";
 import { SettingsMenu } from './SettingsMenu';
 import axios from "axios";
 import { getAllGroups } from "@/service/group.service";
+import NotificationPopover from "./Notification/NotificationPopover";
 
 const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -349,13 +349,7 @@ const Header = () => {
               <MessageCircle size={22} className="min-w-[22px] min-h-[22px]" />
             </Button>
           </Link>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="hidden md:block text-gray-600 cursor-pointer pl-1"
-          >
-            <NotificationIcon />
-          </Button>
+          <NotificationPopover/>
           <DropdownMenu onOpenChange={setIsDropdownOpen}>
             <DropdownMenuTrigger asChild>
               <Button
