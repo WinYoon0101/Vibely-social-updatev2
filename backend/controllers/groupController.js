@@ -27,6 +27,19 @@ export const getOtherGroups = async (req, res) => {
   }
 };
 
+export const getAllGroups = async (req, res) => {
+  try {
+    const groups = await Group.find().populate(
+      "createdBy",
+      "username profilePicture"
+    );
+    res.status(200).json({ success: true, data: groups ? groups : [] });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
+
 export const createGroup = async (req, res) => {
   try {
     const userId = req.user.userId;

@@ -1,11 +1,12 @@
 const express = require('express');
 const authMiddleware = require("../middleware/authMiddleware");
 const { multerMiddleware } = require('../config/cloudinary')
-const { getMyGroups, createGroup, getOtherGroups, joinGroup, getGroupById, leaveGroup, editGroup, createGroupPost, addAdmin, removeAdmin, kickMember } = require('../controllers/groupController');
+const { getMyGroups, createGroup, getOtherGroups, joinGroup, getGroupById, leaveGroup, editGroup, createGroupPost, addAdmin, removeAdmin, kickMember, getAllGroups } = require('../controllers/groupController');
 const router = express.Router();
 
 router.get('/', authMiddleware, getMyGroups);
 router.get('/other', authMiddleware, getOtherGroups);
+router.get('/all', authMiddleware, getAllGroups);
 
 router.post('/create', authMiddleware, multerMiddleware.single('media'), createGroup)
 router.post('/join/:groupId', authMiddleware, joinGroup)

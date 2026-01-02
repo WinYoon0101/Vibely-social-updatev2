@@ -42,6 +42,20 @@ export const getOtherGroups = async () => {
     }
 };
 
+// Lấy danh sách tất cả các nhóm
+export const getAllGroups = async () => {
+    try {
+        const token = localStorage.getItem("token");
+        const result = await axiosInstance.get("/groups/all", {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return result?.data?.data;
+    } catch (error) {
+        console.error("Lỗi khi lấy danh sách nhóm:", error);
+        throw error;
+    }
+};
+
 // Tham gia nhóm
 export const joinGroup = async (groupId) => {
     try {

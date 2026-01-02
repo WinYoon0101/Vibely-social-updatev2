@@ -28,13 +28,16 @@ import toast from "react-hot-toast";
 import NotificationIcon from "./Notification/NotificationIcon";
 import { SettingsMenu } from './SettingsMenu';
 import axios from "axios";
+import { getAllGroups } from "@/service/group.service";
 
 const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const pathname = usePathname();
   const [searchQuery, setSearchQuery] = useState("");
   const [userList, setUserList] = useState([]);
+  const [groupList, setGroupList] = useState([]);
   const [filterUsers, setFilterUsers] = useState([]);
+  const [filterGroups, setFilterGroups] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -62,8 +65,10 @@ const Header = () => {
     const fetchUsers = async () => {
       try {
         setLoading(true);
-        const result = await getAllUsers();
-        setUserList(result);
+        const users = await getAllUsers();
+        const groups = await getAllGroups()
+        setUserList(users);
+        setGroupList(groups);
       } catch (error) {
         console.log(error);
       } finally {
@@ -77,14 +82,19 @@ const Header = () => {
     if (searchQuery) {
       const filterUser = userList.filter((user) => {
         return user.username.toLowerCase().includes(searchQuery.toLowerCase());
-      });
+      })
+      const filterGroup = groupList.filter((group) => {
+        return group.name.toLowerCase().includes(searchQuery.toLowerCase());
+      })
+      setFilterGroups(filterGroup);
       setFilterUsers(filterUser);
       setIsSearchOpen(true);
     } else {
       setFilterUsers([]);
+      setFilterGroups([])
       setIsSearchOpen(false);
     }
-  }, [searchQuery, userList]);
+  }, [searchQuery, userList, groupList]);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -219,6 +229,7 @@ const Header = () => {
               {isSearchOpen && (
                 <div className="absolute top-full left-0 w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg mt-1 z-50">
                   <div className="p-2">
+                    <p className="font-semibold text-sm ml-2">Người dùng</p>
                     {filterUsers.length > 0 ? (
                       filterUsers.map((user) => (
                         <Link
@@ -254,6 +265,45 @@ const Header = () => {
                     ) : (
                       <div className="p-2 text-gray-500">
                         Không tìm thấy người dùng
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-2">
+                  <p className="font-semibold text-sm ml-2">Nhóm</p>
+                    {filterGroups.length > 0 ? (
+                      filterGroups.map((group) => (
+                        <Link
+                          href={`/groups/${group._id}`}
+                          className="flex items-center space-x-8 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md cursor-pointer"
+                          key={group._id}
+                          onClick={() => {
+                            setIsSearchOpen(false);
+                            setSearchQuery("");
+                          }}
+                        >
+                          <Search className="absolute text-sm text-gray-400" />
+                          <div className="flex items-center gap-2">
+                              {group?.coverPhotoUrl ? (
+                                <img
+                                  src={group?.coverPhotoUrl}
+                                  alt={group?.name}
+                                  className="h-8 w-8 rounded-md object-cover"
+                                />
+                              ) : (
+                                <div className="bg-gray-200 h-8 w-8 rounded-md object-cover">
+                                  {group?.name
+                                    ?.split(" ")
+                                    .map((name) => name[0])
+                                    .join("")}
+                                </div>
+                              )}
+                            <span>{group?.name}</span>
+                          </div>
+                        </Link>
+                      ))
+                    ) : (
+                      <div className="p-2 text-gray-500">
+                        Không tìm thấy nhóm
                       </div>
                     )}
                   </div>
