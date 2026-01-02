@@ -203,3 +203,29 @@ export const rejectRequest = async (groupId, userId) => {
         throw error;
     }
 }
+
+export const inviteFriend = async (groupId, friendId) => {
+    try {
+        const token = localStorage.getItem("token");
+        const result = await axiosInstance.post(`/groups/${groupId}/invite`, { friendId }, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return result?.data?.data;
+    } catch (error) {
+        console.error("Lỗi khi mời bạn bè vào nhóm:", error);
+        throw error;
+    }
+}
+
+export const acceptInvitation = async (groupId) => {
+    try {
+        const token = localStorage.getItem("token");
+        const result = await axiosInstance.put(`/groups/${groupId}/invite`, null, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return result?.data?.data;
+    } catch (error) {
+        console.error("Lỗi khi chấp nhận lời mời vào nhóm:", error);
+        throw error;
+    }
+}

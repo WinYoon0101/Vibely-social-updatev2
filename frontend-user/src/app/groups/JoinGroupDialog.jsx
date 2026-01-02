@@ -29,7 +29,7 @@ function JoinGroupDialog({ group }) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="w-full bg-blue-500 text-white hover:bg-blue-800" size="lg">
+        <Button className="w-full bg-[#086280] hover:bg-[#086280]/70 text-white" size="lg">
           <LogIn className="mr-2 h-4 w-4" /> Tham gia nhóm
         </Button>
       </DialogTrigger>
@@ -68,7 +68,7 @@ function JoinGroupDialog({ group }) {
         </DialogHeader>
         <DialogFooter>
           <Button
-            className="w-full bg-blue-500 text-white hover:bg-blue-800"
+            className="w-full bg-[#086280] hover:bg-[#086280]/70 text-white"
             size="lg"
             onClick={handleJoinGroup}
             disabled={loading}

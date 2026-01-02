@@ -11,6 +11,7 @@ const GroupSchema = new mongoose.Schema(
         posts:[{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
         invited:{ type: [mongoose.Schema.Types.ObjectId], ref: "User" },
         waitingRequests:[{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+        invitedUsers:[{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
         createdBy:{ type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     },
     { timestamps: true }

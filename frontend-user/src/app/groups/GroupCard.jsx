@@ -32,7 +32,7 @@ function GroupCard({ group, myGroup = false }) {
         {myGroup ? (
           <Link href={`/groups/${group._id}`}>
             <Button
-              className="w-full flex gap-2 items-center bg-blue-500 text-white hover:bg-blue-800"
+              className="w-full flex gap-2 items-center bg-[#086280] hover:bg-[#086280]/70 text-white"
               size="lg"
             >
               <Eye className="mr-2 h-4 w-4" /> Xem nhóm
@@ -41,7 +41,7 @@ function GroupCard({ group, myGroup = false }) {
         ) : !group?.waitingRequests?.includes(user._id) ? (
           <JoinGroupDialog group={group} />
         ) : (
-          <Button className="bg-blue-300 text-white" size="lg">
+          <Button className="bg-[#086280]/60 text-white" disabled={true} size="lg">
             <Clock className="mr-2 h-4 w-4" /> Đang chờ phê duyệt
           </Button>
         )}

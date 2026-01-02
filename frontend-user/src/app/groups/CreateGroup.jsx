@@ -89,7 +89,7 @@ function CreateGroup() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-blue-500 text-white hover:bg-blue-800">
+        <Button className="bg-[#086280] hover:bg-[#086280]/70 text-white">
           <Plus />
           Tạo nhóm
         </Button>

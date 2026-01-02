@@ -28,8 +28,8 @@ function GroupHeader({ info, refetch, isAdmin, isMember, isCreator }) {
           </div>
           <div className="flex gap-4">
             <div className="flex flex-col space-y-2">
-            {!isMember && <AcceptInvitation groupId={info?._id} refetch={refetch} />}
-            {isMember && <InviteFriends groupId={info?._id}/>}
+            {!isMember && <AcceptInvitation groupInfo={info} refetch={refetch} />}
+            {isMember && <InviteFriends info={info} refetch={refetch}/>}
             {!isCreator && isMember && <LeaveGroup groupId={info?._id} />}
             </div>
             

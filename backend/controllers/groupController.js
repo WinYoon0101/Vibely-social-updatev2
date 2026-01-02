@@ -1,6 +1,9 @@
 import { uploadFileToCloudinary } from "../config/cloudinary.js";
 import Group from "../model/Group.js";
+import Notification from "../model/Notification.js";
 import Post from "../model/Post.js";
+import User from "../model/User.js";
+import { getUser } from "../socket.js";
 
 export const getMyGroups = async (req, res) => {
   try {
@@ -403,6 +406,20 @@ export const approveRequest = async (req, res) => {
       (requestId) => requestId.toString() !== approvedId
     );
     group.members.push(approvedId);
+    const io = req.app.get('io');
+    const user = getUser(approvedId);
+    const newNotif = new Notification({
+      user: approvedId, // gửi cho người được thêm
+      type: "groups",
+      content: "Yêu cầu tham gia nhóm của bạn đã được chấp nhận.",
+      thumbnailUrl: group.coverPhotoUrl,
+      targetId: group._id,
+      senderCount: 0,
+    })
+    await newNotif.save();
+    if(user){
+      io.to(user.socketId).emit("getNotification", newNotif);
+    }
     await group.save();
     res.status(200).json({ success: true, data: group });
   } catch (error) {
@@ -437,6 +454,74 @@ export const rejectRequest = async (req, res) => {
     res.status(200).json({ success: true, data: group });
   } catch (error) {
     console.error("Lỗi khi từ chối yêu cầu:", error);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+}
+
+export const inviteFriend = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const groupId = req.params.groupId;
+    const { friendId } = req.body;
+    const group = await Group.findById(groupId);
+    if(!group){
+      return res.status(404).json({ success: false, message: "Group not found" });
+    }
+    if (!group.members.includes(userId)) {
+      return res
+        .status(403)
+        .json({ success: false, message: "Only members can invite friends" });
+    }
+    if (group.members.includes(friendId) || group.invitedUsers.includes(friendId)) {
+      return res
+        .status(409)
+        .json({ success: false, message: "User is already a member or has been invited" });
+    }
+    group.invitedUsers.push(friendId);
+    const io = req.app.get('io');
+    const user = getUser(friendId);
+    const invitePerson = await User.findById(userId);
+    const newNotif = new Notification({
+      user: friendId, // gửi cho người được thêm
+      type: "groups",
+      content: `${invitePerson.username} đã mời bạn tham gia nhóm "${group.name}".`,
+      thumbnailUrl: group.coverPhotoUrl,
+      targetId: group._id,
+      senderCount: 0,
+    })
+    await newNotif.save();
+    if(user){
+      io.to(user.socketId).emit("getNotification", newNotif);
+    }
+    await group.save();
+    res.status(200).json({ success: true, data: group });
+  } catch (error) {
+    console.error("Lỗi khi mời bạn bè vào nhóm:", error);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+}
+
+export const acceptInvitation = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const groupId = req.params.groupId;
+    const group = await Group.findById(groupId);
+    if(!group){
+      return res.status(404).json({ success: false, message: "Group not found" });
+    }
+    if (!group.invitedUsers.includes(userId)) {
+      return res
+        .status(400)
+        .json({ success: false, message: "No invitation found" });
+    }
+    group.invitedUsers = group.invitedUsers.filter(
+      (invitedId) => invitedId.toString() !== userId
+    );
+    group.members.push(userId);
+    await group.save();
+    res.status(200).json({ success: true, data: group });
+  } catch (error) {
+    console.error("Lỗi khi chấp nhận lời mời vào nhóm:", error);
     res.status(500).json({ success: false, message: "Server Error" });
   }
 }
