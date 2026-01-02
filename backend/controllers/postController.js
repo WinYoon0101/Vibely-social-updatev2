@@ -414,7 +414,14 @@ const deletePost = async (req, res) => {
   try {
     const post = await Post.findById(postId);
     if (!post) return response(res, 404, "Không tìm thấy bài viết");
-
+    if (post.group) {
+      // Nếu bài viết thuộc nhóm, cập nhật xóa mã bài viết trong nhóm
+      const group = await Group.findById(post.group);
+      if (group) {
+        group.posts = group.posts.filter((id) => id.toString() !== postId);
+        await group.save();
+      }
+    }
     await Post.findByIdAndDelete(postId);
     return response(res, 200, "Xóa bài viết thành công", post);
   } catch (error) {
