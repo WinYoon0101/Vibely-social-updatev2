@@ -25,7 +25,8 @@ const Messenger = () => {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const [onlineUsers, setOnlineUsers] = useState([]);
-    const scrollRef = useRef();
+    const scrollRef = useRef(null);       // desktop
+    const mobileScrollRef = useRef(null); // mobile
     const socket = useRef();
     const [showOptions, setShowOptions] = useState(false);
     const [showNicknameOptions, setShowNicknameOptions] = useState(false);
@@ -178,7 +179,14 @@ const Messenger = () => {
 
     // Cuộn xuống cuối cùng khi có tin nhắn mới
     useEffect(() => {
-        scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+        // Cuộn cho Desktop
+        if (scrollRef.current) {
+            scrollRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+        }
+        // Cuộn cho Mobile
+        if (mobileScrollRef.current) {
+            mobileScrollRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+        }
     }, [messages]);
 
     // Tìm kiếm bạn bè
@@ -471,7 +479,7 @@ const Messenger = () => {
                             <div className="chatBoxTop">
                                 {messages.length > 0 ? (
                                     messages.map((msg) => (
-                                        <div key={msg._id} ref={scrollRef} data-message-id={msg._id}>
+                                        <div key={msg._id} data-message-id={msg._id}>
                                             <Message message={msg} own={msg.sender === user._id} />
                                         </div>
                                     ))
@@ -480,11 +488,13 @@ const Messenger = () => {
                                         <p className="">Chưa có tin nhắn nào</p>
                                     </div>
                                 )}
+                                <div ref={scrollRef} />
                             </div>
                             {/* Gửi tin nhắn */}
                             <div className="chatBoxBottom">
                                 <textarea className="chatMessageInput"
                                     placeholder="Aa"
+                                    draggable={false}
                                     onChange={(e) => setNewMessage(e.target.value)}
                                     value={newMessage}
                                     onKeyDown={(e) => e.key === "Enter" && handleSubmit(e)}
@@ -571,7 +581,7 @@ const Messenger = () => {
                         <div className="chatBoxTop">
                             {messages.length > 0 ? (
                                 messages.map((msg) => (
-                                    <div key={msg._id} ref={scrollRef}>
+                                    <div key={msg._id}>
                                         <Message message={msg} own={msg.sender === user._id} />
                                     </div>
                                 ))
@@ -580,6 +590,7 @@ const Messenger = () => {
                                     <p className="">Chưa có tin nhắn nào</p>
                                 </div>
                             )}
+                        <div ref={mobileScrollRef} />
                         </div>
                         {/* Gửi tin nhắn */}
                         <div className="chatBoxBottom">

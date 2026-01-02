@@ -191,9 +191,9 @@ io.on("connection", (socket) => {
         const user = getUser(receiverId);
         if (user) {
             io.to(user.socketId).emit("getMessage", {
-                senderId,
+                sender:senderId,
                 text,
-                messageId,
+                _id:messageId,
                 profilePicture
             });
         }
