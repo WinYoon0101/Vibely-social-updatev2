@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import toast, { Toaster } from 'react-hot-toast';
 import { updateQuiz } from '@/service/quiz.service';
+import Link from 'next/link';
 
 function QuizStartQuestions({ quizData, onUpdateTime }) {
     const time = 30;
@@ -311,14 +312,12 @@ function ScoreComponent({ quizStartParentProps }) {
                         </span>
                     </div>
                 </div>
-                <span
-                    onClick={() => {
-                        router.push('/quiz');
-                    }}
+                <Link
+                    href="/quiz"
                     className="text-blue-700 select-none cursor-pointer text-sm mt-8 "
                 >
                     Chọn Quiz khác
-                </span>
+                </Link>
             </div>
         </div>
     );

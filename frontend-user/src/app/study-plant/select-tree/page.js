@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import Link from 'next/link';
 
 const Page = () => {
     const router = useRouter();
@@ -73,12 +74,12 @@ const Page = () => {
                         <p className="text-2xl font-bold text-center mb-4">Thông báo</p>
                         <p className="text-center mb-6">Bạn đã có cây học tập, vui lòng chuyển sang trang trồng cây!</p>
                         <div className="flex justify-center">
-                            <button
-                                onClick={() => router.push('/study-plant/goal-tree')}
-                                className="bg-gradient-to-r from-[#3498DB] to-[#2ECC71] text-white font-semibold py-2 px-6 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105 transform"
-                            >
+                            <Link href={'/study-plant/goal-tree'}>
+                            <button className="bg-gradient-to-r from-[#3498DB] to-[#2ECC71] text-white font-semibold py-2 px-6 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105 transform">
                                 Đến trang trồng cây
                             </button>
+                            </Link>
+                            
                         </div>
                     </div>
                 </div>

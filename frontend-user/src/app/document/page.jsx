@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { AiOutlineClose } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
 import LeftSideBar from "../components/LeftSideBar";
+import Link from "next/link";
 
 const DocumentPage = () => {
     const router = useRouter();
@@ -201,11 +202,11 @@ const DocumentPage = () => {
             <div className="flex-1 p-4">
                 <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 mt-4">
                     {documents.map((doc) => (
-                        <div
+                        <Link
+                            href={`/document/${doc._id}`}
                             key={doc._id}
                             className="border border-gray-300 p-4 rounded-lg shadow-md bg-white cursor-pointer 
                                 hover:shadow-xl transition-all duration-200 ease-in hover:bg-[#086280]/15"
-                            onClick={() => router.push(`/document/${doc._id}`)}
                         >
                             <div className="flex justify-center mb-3">
                                 <img
@@ -220,7 +221,7 @@ const DocumentPage = () => {
                                 <p className="text-[13px] text-gray-500 font-semibold italic">{doc.level.name}</p>
                                 <p className="text-[13px] text-gray-500 font-semibold italic">{doc.subject.name}</p>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>

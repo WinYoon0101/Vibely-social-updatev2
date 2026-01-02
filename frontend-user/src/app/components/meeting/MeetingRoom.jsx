@@ -70,7 +70,7 @@ const MeetingRoom = () => {
 
       {/* Thanh điều khiển */}
       <div className="fixed bottom-0 flex w-full items-center justify-center gap-5">
-        <CallControls onLeave={() => router.push('/video-conferencing')} />
+        <CallControls onLeave={() => router.replace('/video-conferencing')} />
 
         {/* Chọn layout */}
         <DropdownMenu>

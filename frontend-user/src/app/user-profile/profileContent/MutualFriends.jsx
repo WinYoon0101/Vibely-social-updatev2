@@ -13,14 +13,10 @@ import { Button } from "@/components/ui/button";
 import { MoreHorizontal, Search, UserX } from "lucide-react";
 import { userFriendStore } from "@/store/userFriendsStore";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export const MutualFriends = ({ id, isOwner }) => {
   const { fetchMutualFriends, mutualFriends, UnfollowUser } = userFriendStore();
-  const router = useRouter();
-  const handleNavigation = (path, item) => {
-    router.push(path);
-  };
   useEffect(() => {
     if (id) {
       fetchMutualFriends(id);
@@ -44,18 +40,18 @@ export const MutualFriends = ({ id, isOwner }) => {
   const Tabs = ({className}) =>{
     return(
       <div className={`flex flex-wrap gap-4 justify-end md:w-[260px] ${className}`}>
-          <p
+          <Link
             className="text-[#086280] font-semibold cursor-pointer"
-            onClick={() => handleNavigation("/friends-list")}
+            href="/friends-list"
           >
             Lời mời kết bạn
-          </p>
-          <p
+          </Link>
+          <Link
             className="text-[#086280] font-semibold cursor-pointer"
-            onClick={() => handleNavigation("/friends-list")}
+            href="/friends-list"
           >
             Tìm bạn bè
-          </p>
+          </Link>
       </div>
     )
   }

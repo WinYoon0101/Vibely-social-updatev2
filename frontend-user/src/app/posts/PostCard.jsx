@@ -34,6 +34,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import userStore from "@/store/userStore";
 import { Textarea } from "@/components/ui/textarea";
+import Link from "next/link";
 
 const PostCard = ({ post, onReact, onComment, onShare, onDelete, onEdit }) => {
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
@@ -83,18 +84,6 @@ const PostCard = ({ post, onReact, onComment, onShare, onDelete, onEdit }) => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-  //đi đến trang người đăng bài
-  const handleUserProfile = () => {
-    router.push(`/user-profile/${post?.user?._id}`);
-  };
-  //đi đến trang chi tiết bài viết
-  const handleSinglePost = () => {
-    router.push(`/posts/${post?._id}`);
-  };
-  //đi đến trang nhóm
-  const handleGroup = () => {
-    router.push(`/groups/${post?.group?._id}`);
-  };
   //mở xem cmt
   const handleCommentClick = () => {
     setShowComments(!showComments);
@@ -262,25 +251,25 @@ const PostCard = ({ post, onReact, onComment, onShare, onDelete, onEdit }) => {
               {/*Tên người đăng, thời gian đăng, khi nhấp vào sẽ chuyển đến trang tương ứng*/}
               <div>
                 <div className="flex gap-2">
-                  <p className="font-semibold hover:underline" onClick={handleUserProfile}>
+                  <Link className="font-semibold hover:underline" href={`/user-profile/${post?.user?._id}`}>
                     {post?.user?.username} {/*tên người đăng bài*/}
-                  </p>
+                  </Link>
                   {post?.group && (
                     <div className="flex gap-2 items-center">
                       <ChevronRight />
-                      <p className="font-semibold truncate hover:underline" onClick={handleGroup}>
+                      <Link className="font-semibold truncate hover:underline" href={`/groups/${post?.group?._id}`}>
                       {post.group.name}
-                    </p>
+                    </Link>
                     </div>
                    
                   )}
                 </div>
-                <p
+                <Link
                   className="font-sm text-gray-500 text-xs hover:underline"
-                  onClick={handleSinglePost}
+                  href={`/posts/${post?._id}`}
                 >
                   {formatedDate(post?.createdAt)} {/*thời gian đăng bài*/}
-                </p>
+                </Link>
               </div>
             </div>
             {/*Nút mở dropdown bài viết*/}

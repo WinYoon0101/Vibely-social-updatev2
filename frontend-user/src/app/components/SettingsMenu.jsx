@@ -4,7 +4,8 @@ import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { deleteAccount } from "@/service/auth.service";
 import userStore from "@/store/userStore";
 import { ChevronLeft } from "lucide-react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -22,13 +23,14 @@ export const SettingsMenu = ({ onBack }) => {
   }, []);
   const { clearUser } = userStore();
   const router = useRouter();
+  const pathname = usePathname()
   const handleDeleteAccount = async () => {
     try {
       const result = await deleteAccount();
       if (result?.status === "success") {
         clearUser();
-        if (router.pathname !== "/user-login") {
-          router.push("/user-login");
+        if (pathname !== "/user-login") {
+          router.replace("/user-login") // để người dùng không back được 
         }
         toast.success("Xóa tài khoản thành công");
       } else {
@@ -50,19 +52,17 @@ export const SettingsMenu = ({ onBack }) => {
       >
         <ChevronLeft className="mr-2 mt-2 text-[#54C8FD]" />
       </DropdownMenuItem>
-      <DropdownMenuItem
-        className="cursor-pointer mb-2"
-        onSelect={(event) => {
-          event.preventDefault();
-          router.push("/change_password");
-        }}
-      >
-        <img
-          src="/images/change_password_dropdown.png"
-          alt="help"
-          className="mr-0"
-        />
-        <span className="font-semibold ml-2">Đổi mật khẩu</span>
+      <DropdownMenuItem asChild className="cursor-pointer mb-2">
+        <Link href="/change_password">
+          <>
+            <img
+              src="/images/change_password_dropdown.png"
+              alt="help"
+              className="mr-0"
+            />
+            <span className="font-semibold ml-2">Đổi mật khẩu</span>
+          </>
+        </Link>
       </DropdownMenuItem>
       <DropdownMenuItem
         className="cursor-pointer mb-2"

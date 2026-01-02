@@ -10,6 +10,7 @@ import { PostsContent } from "./profileContent/PostsContent";
 import { SavedDocuments } from "./profileContent/SavedDocuments";
 import NewPostForm from "../posts/NewPostForm";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export const ProfileDetails = ({
   activeTab,
@@ -302,7 +303,7 @@ export const ProfileDetails = ({
                     (post) => post?.mediaType === "video" && post?.mediaUrl
                   )
                   .map((post) => (
-                    <div key={post?._id} onClick={() => router.push(`/posts/${post?._id}`)} className="w-[220px] h-[180px]">
+                    <Link key={post?._id} href={`/posts/${post?._id}`} className="w-[220px] h-[180px]">
                       <video
                         //controls
                         className="w-full h-full object-cover rounded-lg"
@@ -310,7 +311,7 @@ export const ProfileDetails = ({
                         <source src={post?.mediaUrl} type="video/mp4" />
                         Trình duyệt của bạn không hỗ trợ thẻ video.
                       </video>
-                    </div>
+                    </Link>
                   ))}
               </div>
             ) : (
@@ -364,13 +365,14 @@ export const ProfileDetails = ({
                     (post) => post?.mediaType === "image" && post?.mediaUrl
                   )
                   .map((post) => (
+                    <Link key={post?._id} href={`/posts/${post?._id}`}>
                     <img
-                      key={post?._id}
                       src={post?.mediaUrl}
                       alt="user_all_photos"
                       className="w-[200px] h-[150px] object-cover rounded-lg"
-                      onClick={() => router.push(`/posts/${post?._id}`)}
                     />
+                    </Link>
+                    
                   ))
               )}
             </div>

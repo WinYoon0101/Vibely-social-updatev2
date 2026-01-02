@@ -1,18 +1,13 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { useSavedDocumentsStore } from "@/store/useSavedDocumentsStore";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useEffect } from "react";
 // import { toast } from "react-hot-toast";
 import { GoBookmarkSlashFill } from "react-icons/go";
 
 export const SavedDocuments = () => {
     const { savedDocuments, fetchSavedDocuments, fetchSavedDocumentById, unsaveDocument } = useSavedDocumentsStore();
-    const router = useRouter();
-    const handleNavigation = (path) => {
-        router.push(path);
-    };
-
     useEffect(() => {
         fetchSavedDocuments();
     }, [fetchSavedDocuments]);
@@ -42,11 +37,11 @@ export const SavedDocuments = () => {
 
                     <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">
                         {savedDocuments.map((doc) => (
-                            <div
+                            <Link
                                 key={doc._id}
                                 className="relative flex flex-col p-4 border border-gray-200 rounded-lg shadow-md bg-white
                                     cursor-pointer hover:shadow-xl transition-all duration-200 ease-in hover:bg-[#086280]/15"
-                                onClick={() => handleNavigation(`/saved/${doc._id}`)}
+                                href={`/saved/${doc._id}`}
                             >
                                 {/* Icon File */}
                                 <div className="flex justify-center mb-3">
@@ -77,7 +72,7 @@ export const SavedDocuments = () => {
                                 >
                                     <GoBookmarkSlashFill/>
                                 </button>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 </CardContent>

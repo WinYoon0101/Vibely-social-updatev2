@@ -91,19 +91,6 @@ const Header = () => {
     setIsSearchOpen(false);
   };
 
-  const handleUserClick = async (userId) => {
-    try {
-      setLoading(true);
-      setIsSearchOpen(false);
-      setSearchQuery("");
-      await router.push(`/user-profile/${userId}`);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const handleSearchClose = (e) => {
     if (!searchRef.current?.contains(e.target)) {
       setIsSearchOpen(false);
@@ -127,10 +114,6 @@ const Header = () => {
     .map((name) => name[0])
     .join("");
 
-  const handleNavigation = (path, item) => {
-    router.push(path);
-  };
-
   const handleLogout = async () => {
     try {
       const result = await logout();
@@ -139,7 +122,7 @@ const Header = () => {
         clearUser();
 
         if (router.pathname !== "/user-login") {
-          await router.push("/user-login");
+          router.push("/user-login");
         }
 
         toast.success("Đăng xuất thành công");
@@ -207,14 +190,16 @@ const Header = () => {
       <div className="mx-auto flex justify-between items-center h-full px-4">
         {/* Logo và Tìm kiếm */}
         <div className="flex items-center gap-2">
-          <Image
-            src="/images/vibely_logo.png"
-            alt="logo"
-            width={60}
-            height={60}
-            className="-ml-2 cursor-pointer"
-            onClick={() => handleNavigation("/")}
-          />
+          <Link href="/">
+            <Image
+              src="/images/vibely_logo.png"
+              alt="logo"
+              width={60}
+              height={60}
+              className="-ml-2 cursor-pointer"
+              priority
+            />
+          </Link>
           <div className="relative -ml-2" ref={searchRef}>
             <form onSubmit={handleSearchSubmit}>
               <div className="relative">
@@ -236,10 +221,14 @@ const Header = () => {
                   <div className="p-2">
                     {filterUsers.length > 0 ? (
                       filterUsers.map((user) => (
-                        <div
+                        <Link
+                          href={`/user-profile/${user._id}`}
                           className="flex items-center space-x-8 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md cursor-pointer"
                           key={user._id}
-                          onClick={() => handleUserClick(user?._id)}
+                          onClick={() => {
+                            setIsSearchOpen(false);
+                            setSearchQuery("");
+                          }}
                         >
                           <Search className="absolute text-sm text-gray-400" />
                           <div className="flex items-center gap-2">
@@ -260,7 +249,7 @@ const Header = () => {
                             </Avatar>
                             <span>{user?.username}</span>
                           </div>
-                        </div>
+                        </Link>
                       ))
                     ) : (
                       <div className="p-2 text-gray-500">
@@ -301,14 +290,15 @@ const Header = () => {
             <Menu />
           </Button>
 
-          <Button
-            variant="ghost"
-            size="icon"
-            className="hidden md:block text-gray-600 cursor-pointer pl-1 relative"
-            onClick={() => handleNavigation("/messenger")}
-          >
-            <MessageCircle size={22} className="min-w-[22px] min-h-[22px]" />
-          </Button>
+          <Link href="/messenger" className="hidden md:block">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-gray-600 cursor-pointer pl-1 relative"
+            >
+              <MessageCircle size={22} className="min-w-[22px] min-h-[22px]" />
+            </Button>
+          </Link>
           <Button
             variant="ghost"
             size="icon"
@@ -350,29 +340,30 @@ const Header = () => {
                 <SettingsMenu onBack={handleBackToMainMenu} />
               ) : (
                 <>
-                  <DropdownMenuItem
+                  <DropdownMenuItem asChild
                     className="font-normal cursor-pointer"
-                    onClick={() => handleNavigation(`/user-profile/${user?._id}`)}
                   >
-                    <div className="flex flex-col space-y-1">
-                      <div className="flex items-center">
-                        <Avatar className="h-8 w-8 mr-2">
-                          {user?.profilePicture ? (
-                            <AvatarImage
-                              src={user?.profilePicture}
-                              alt={user?.username}
-                            />
-                          ) : (
-                            <AvatarFallback>{userPlaceholder}</AvatarFallback>
-                          )}
-                        </Avatar>
-                        <div className="ml-2">
-                          <p className="text-sm font-medium leading-none">
-                            {user?.username}
-                          </p>
+                    <Link href={`/user-profile/${user?._id}`}>
+                      <div className="flex flex-col space-y-1">
+                        <div className="flex items-center">
+                          <Avatar className="h-8 w-8 mr-2">
+                            {user?.profilePicture ? (
+                              <AvatarImage
+                                src={user?.profilePicture}
+                                alt={user?.username}
+                              />
+                            ) : (
+                              <AvatarFallback>{userPlaceholder}</AvatarFallback>
+                            )}
+                          </Avatar>
+                          <div className="ml-2">
+                            <p className="text-sm font-medium leading-none">
+                              {user?.username}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </Link>                    
                   </DropdownMenuItem>
                   <div className="bg-gray-200 h-px my-2"></div>
                   <DropdownMenuItem
@@ -390,40 +381,47 @@ const Header = () => {
                     <span className="ml-2 font-semibold">Cài đặt</span>
                     <ChevronRight className="absolute right-2 text-[#54C8FD]" />
                   </DropdownMenuItem>
-                  <DropdownMenuItem
-                    className="cursor-pointer mb-3"
-                    onClick={() => handleNavigation(`/help-center`)}
-                  >
-                    <img
-                      src="/images/help_dropdown.png"
-                      alt="help"
-                      className="mr-0"
-                    />
-                    <span className="ml-2 font-semibold help-center-dropdown">
-                      Trung tâm trợ giúp
-                    </span>
+                  <DropdownMenuItem asChild className="cursor-pointer mb-3">
+                    <Link href="/help-center">
+                      <>
+                        <img
+                          src="/images/help_dropdown.png"
+                          alt="help"
+                          className="mr-0"
+                        />
+                        <span className="ml-2 font-semibold help-center-dropdown">
+                          Trung tâm trợ giúp
+                        </span>
+                      </>
+                    </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem
-                    className="cursor-pointer mb-3"
-                    onClick={() => handleNavigation(`/support`)}
-                  >
-                    <img
-                      src="/images/faqs_dropdown.png"
-                      alt="support"
-                      className="mr-0"
-                    />
-                    <span className="ml-2 font-semibold">Hộp thư hỗ trợ</span>
+                  <DropdownMenuItem asChild className="cursor-pointer mb-3">
+                    <Link href="/support">
+                      <>
+                        <img
+                          src="/images/faqs_dropdown.png"
+                          alt="support"
+                          className="mr-0"
+                        />
+                        <span className="ml-2 font-semibold">
+                          Hộp thư hỗ trợ
+                        </span>
+                      </>
+                    </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem
-                    className="cursor-pointer mb-3"
-                    onClick={() => handleNavigation(`/about-us`)}
-                  >
-                    <img
-                      src="/images/about_dropdown.png"
-                      alt="faqs"
-                      className="mr-0"
-                    />
-                    <span className="ml-1 font-semibold">Về chúng tôi</span>
+                  <DropdownMenuItem asChild className="cursor-pointer mb-3">
+                    <Link href="/about-us">
+                      <>
+                        <img
+                          src="/images/about_dropdown.png"
+                          alt="faqs"
+                          className="mr-0"
+                        />
+                        <span className="ml-1 font-semibold">
+                          Về chúng tôi
+                        </span>
+                      </>
+                    </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     className="cursor-pointer mb-3"

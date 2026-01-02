@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { createOrUpdateUserBio, updateUserCoverPhoto, updateUserProfile } from "@/service/user.service";
+import { createOrUpdateUserBio, fetchUserProfile, updateUserCoverPhoto, updateUserProfile } from "@/service/user.service";
 import { userFriendStore } from "@/store/userFriendsStore";
 import userStore from "@/store/userStore";
 import { AnimatePresence, motion } from "framer-motion";
@@ -35,7 +35,7 @@ const ProfileHeader = ({
     education: profileData?.bio?.education,
   });
 
-  const { fetchMutualFriends, mutualFriends } = userFriendStore();
+  const { followUser, fetchMutualFriends, mutualFriends } = userFriendStore();
   useEffect(() => {
     if (id) {
       fetchMutualFriends(id);
@@ -48,7 +48,16 @@ const ProfileHeader = ({
   const [coverPhotoPreview, setCoverPhotoPreview] = useState(null);
   const [profilePicturePreview, setProfilePicturePreview] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { setUser } = userStore();
+  const { user, setUser } = userStore();
+
+  const onAction = async(userId, action)=>{
+    await followUser(userId, action);
+    const newUserInfo = await fetchUserProfile(user._id)
+    setUser(newUserInfo.profile)
+  }
+
+  const followers = Array.isArray(user?.followers) ? user.followers : [];
+  const followings = Array.isArray(user?.followings) ? user.followings : [];
 
   const { register, handleSubmit, setValue } = useForm({
     defaultValues: {
@@ -220,6 +229,39 @@ const ProfileHeader = ({
               >
                 <PenLine className="w-4 h-4 mr-2" />
                 Chỉnh sửa trang cá nhân
+              </Button>
+            </div>
+          )}
+          {!isOwner && !followers.includes(id) && !followings.includes(id) && (
+            <div className="flex flex-col">
+              <Button
+                className="mt-4 md:mt-1 font-semibold cursor-pointer bg-[#086280] hover:bg-[#086280]/70 text-white"
+                onClick={() => {onAction(id, "makeFriend")}}
+              >
+                <PenLine className="w-4 h-4 mr-2" />
+                Kết bạn
+              </Button>
+            </div>
+          )}
+          {!isOwner && followers.includes(id) && !followings.includes(id) && (
+            <div className="flex flex-col">
+              <Button
+                className="mt-4 md:mt-1 font-semibold cursor-pointer bg-[#086280] hover:bg-[#086280]/70 text-white"
+                onClick={() => {onAction(id, "confirm")}}
+              >
+                <PenLine className="w-4 h-4 mr-2" />
+                Chấp nhận kết bạn
+              </Button>
+            </div>
+          )}
+          {!isOwner && !followers.includes(id) && followings.includes(id) && (
+            <div className="flex flex-col">
+              <Button
+                className="mt-4 md:mt-1 font-semibold cursor-pointer bg-[#086280]/70 text-white"
+                disabled
+              >
+                <PenLine className="w-4 h-4 mr-2" />
+                Đã gửi lời mời kết bạn
               </Button>
             </div>
           )}

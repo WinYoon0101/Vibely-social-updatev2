@@ -19,6 +19,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import userStore from '@/store/userStore'
 import PostComments from '@/app/posts/PostComments'
+import Link from 'next/link'
 
 export const PostsContent = ({ post, onReact, onComment, onShare, onDelete }) => {
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false)
@@ -75,16 +76,6 @@ export const PostsContent = ({ post, onReact, onComment, onShare, onDelete }) =>
       fetchPosts();
     }
   }, [post?.user?._id]);
-
-  const handleUserProfile = () => {
-    router.push(`/user-profile/${post?.user?._id}`)
-  }
-  const handleGroup = () => {
-    router.push(`/groups/${post?.group?._id}`);
-  };
-  const handleSinglePost = () => {
-    router.push(`/posts/${post?._id}`)
-  }
 
   const handleCommentClick = () => {
     setShowComments(!showComments)
@@ -186,25 +177,25 @@ export const PostsContent = ({ post, onReact, onComment, onShare, onDelete }) =>
               </Avatar>
               <div>
                 <div className="flex gap-2">
-                  <p className="font-semibold hover:underline" onClick={handleUserProfile}>
+                  <Link className="font-semibold hover:underline" href={`/user-profile/${post?.user?._id}`}>
                     {post?.user?.username} {/*tên người đăng bài*/}
-                  </p>
+                  </Link>
                   {post?.group && (
                     <div className="flex gap-2 items-center">
                       <ChevronRight />
-                      <p className="font-semibold truncate hover:underline" onClick={handleGroup}>
+                      <Link className="font-semibold truncate hover:underline" href={`/groups/${post?.group?._id}`}>
                       {post.group.name}
-                    </p>
+                    </Link>
                     </div>
                    
                   )}
                 </div>
-                <p
+                <Link
                   className="font-sm text-gray-500 text-xs hover:underline"
-                  onClick={handleSinglePost}
+                  href={`/posts/${post?._id}`}
                 >
                   {formatedDate(post?.createdAt)} {/*thời gian đăng bài*/}
-                </p>
+                </Link>
               </div>
             </div>
             <Button onClick={() => setDropdownOpen(!dropdownOpen)} variant="ghost"
