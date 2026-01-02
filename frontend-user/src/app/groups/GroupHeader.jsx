@@ -1,8 +1,9 @@
 import React from "react";
 import EditGroupDialog from "./EditGroupDialog";
 import LeaveGroup from "./LeaveGroup";
+import ApproveDialog from "./ApproveDialog";
 
-function GroupHeader({ info, refetch, isAdmin, isCreator }) {
+function GroupHeader({ info, refetch, isAdmin, isMember, isCreator }) {
   return (
     <div className="relative">
       <div className="h-64 md:h-80 bg-gray-300 overflow-hidden ">
@@ -21,8 +22,11 @@ function GroupHeader({ info, refetch, isAdmin, isCreator }) {
             </p>
           </div>
           <div className="flex flex-col">
-          {isAdmin && <EditGroupDialog groupInfo={info} refetch={refetch}/>}
-          {!isCreator && <LeaveGroup groupId={info?._id} />}
+          {isAdmin && <div className="flex flex-col space-y-2">
+            <EditGroupDialog groupInfo={info} refetch={refetch}/>
+            <ApproveDialog groupInfo={info} refetch={refetch}/>
+            </div>}
+          {!isCreator && isMember && <LeaveGroup groupId={info?._id} />}
           </div>
         </div>
       </div>

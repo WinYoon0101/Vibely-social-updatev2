@@ -63,7 +63,7 @@ export const joinGroup = async (groupId) => {
         const result = await axiosInstance.post(`/groups/join/${groupId}`, null, {
             headers: { Authorization: `Bearer ${token}` }
         });
-        return result?.data?.data;
+        return result?.data;
     } catch (error) {
         console.error("Lỗi khi tham gia nhóm:", error);
         throw error;
@@ -164,3 +164,42 @@ export const kickMember = async (groupId, userId) => {
         throw error;
     }
  }
+
+export const getRequests = async (groupId) => {
+    try {
+        const token = localStorage.getItem("token");
+        const result = await axiosInstance.get(`/groups/${groupId}/requests`, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return result?.data?.data;
+    } catch (error) {
+        console.error("Lỗi khi lấy danh sách yêu cầu tham gia nhóm:", error);
+        throw error;
+    }
+}
+
+export const approveRequest = async (groupId, userId) => {
+    try {
+        const token = localStorage.getItem("token");
+        const result = await axiosInstance.post(`/groups/${groupId}/requests`, { userId }, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return result?.data?.data;
+    } catch (error) {
+        console.error("Lỗi khi phê duyệt yêu cầu tham gia nhóm:", error);
+        throw error;
+    }
+}
+
+export const rejectRequest = async (groupId, userId) => {
+    try {
+        const token = localStorage.getItem("token");
+        const result = await axiosInstance.put(`/groups/${groupId}/requests`, { userId }, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return result?.data?.data;
+    } catch (error) {
+        console.error("Lỗi khi từ chối yêu cầu tham gia nhóm:", error);
+        throw error;
+    }
+}

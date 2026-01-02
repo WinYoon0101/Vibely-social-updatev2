@@ -79,19 +79,26 @@ export const joinGroup = async (req, res) => {
     const groupId = req.params.groupId;
     const group = await Group.findById(groupId);
     if (!group) {
-      res.status(404).json({ success: false, message: "Group not found" });
+      return res.status(404).json({ success: false, message: "Group not found" });
     }
     if (group.members.includes(userId)) {
-      res
+      return res
         .status(400)
         .json({
           success: false,
           message: "User already a member of the group",
         });
     }
+    if (group.privacySetting === "private") {
+      if (!group.waitingRequests.includes(userId)) {
+        group.waitingRequests.push(userId);
+        await group.save();
+      }
+      return res.status(200).json({ success: true, data: group, message: "Waiting for admin approvement" });
+    }
     group.members.push(userId);
     await group.save();
-    res.status(200).json({ success: true, data: group });
+    return res.status(200).json({ success: true, data: group, message: "Joined group successfully" });
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: "Server Error" });
@@ -346,6 +353,90 @@ export const kickMember = async (req, res) => {
     res.status(200).json({ success: true, data: group });
   } catch (error) {
     console.error("Lỗi khi xóa thành viên khỏi nhóm:", error);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+}
+
+export const getRequests = async (req, res) => {
+  try {
+    const groupId = req.params.groupId;
+    const userId = req.user.userId;
+    const group = await Group.findById(groupId).populate(
+      "waitingRequests",
+      "username profilePicture"
+    );
+    if(!group){
+        return res.status(404).json({ success: false, message: "Group not found" });
+    }
+    if (!group.admins.includes(userId)) {
+      return res
+        .status(403)
+        .json({ success: false, message: "Only admins can view requests" });
+    }
+    res.status(200).json({ success: true, data: group.waitingRequests });
+  } catch (error) {
+    console.error("Lỗi khi lấy danh sách yêu cầu tham gia nhóm:", error);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+}
+
+export const approveRequest = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const groupId = req.params.groupId;
+    const { userId: approvedId } = req.body;
+    const group = await Group.findById(groupId);
+    if(!group){
+      return res.status(404).json({ success: false, message: "Group not found" });
+  }
+  if (!group.admins.includes(userId)) {
+    return res
+      .status(403)
+      .json({ success: false, message: "Only admins can approve request" });
+  }
+  if(!group.waitingRequests.includes(approvedId)){
+    return res
+      .status(400)
+      .json({ success: false, message: "No such request found" });
+    }
+    group.waitingRequests = group.waitingRequests.filter(
+      (requestId) => requestId.toString() !== approvedId
+    );
+    group.members.push(approvedId);
+    await group.save();
+    res.status(200).json({ success: true, data: group });
+  } catch (error) {
+    console.error("Lỗi khi chấp nhận yêu cầu:", error);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+}
+
+export const rejectRequest = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const groupId = req.params.groupId;
+    const { userId: approvedId } = req.body;
+    const group = await Group.findById(groupId);
+    if(!group){
+      return res.status(404).json({ success: false, message: "Group not found" });
+  }
+  if (!group.admins.includes(userId)) {
+    return res
+      .status(403)
+      .json({ success: false, message: "Only admins can reject request" });
+  }
+  if(!group.waitingRequests.includes(approvedId)){
+    return res
+      .status(400)
+      .json({ success: false, message: "No such request found" });
+    }
+    group.waitingRequests = group.waitingRequests.filter(
+      (requestId) => requestId.toString() !== approvedId
+    );
+    await group.save();
+    res.status(200).json({ success: true, data: group });
+  } catch (error) {
+    console.error("Lỗi khi từ chối yêu cầu:", error);
     res.status(500).json({ success: false, message: "Server Error" });
   }
 }

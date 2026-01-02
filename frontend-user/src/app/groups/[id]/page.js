@@ -24,6 +24,7 @@ function Group() {
     }
   };
   const isAdmin = groupInfo?.admins.find((admin) => admin._id === user._id);
+  const isMember = groupInfo?.members.find((member) => member._id === user._id);
   const isCreator = groupInfo?.createdBy._id === user._id;
   useEffect(() => {
     fetchGroupInfo();
@@ -35,7 +36,7 @@ function Group() {
       <div className="md:hidden">
         <LeftSideBar/>
       </div>
-      <GroupHeader info={groupInfo} refetch={fetchGroupInfo} isAdmin={isAdmin} isCreator={isCreator}/>
+      <GroupHeader info={groupInfo} refetch={fetchGroupInfo} isAdmin={isAdmin} isMember={isMember} isCreator={isCreator}/>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 border-t border-gray-200 dark:border-gray-700 pt-1">
       <Tabs
         defaultValue="posts"

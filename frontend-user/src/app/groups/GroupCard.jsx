@@ -1,12 +1,12 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Eye, LogIn } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { Eye, Clock } from "lucide-react";
 import Link from "next/link";
 import JoinGroupDialog from "./JoinGroupDialog";
+import userStore from "@/store/userStore";
 
 function GroupCard({ group, myGroup = false }) {
-  const router = useRouter();
+  const { user } = userStore();
   return (
     <div
       initial={{ opacity: 0, x: 50 }}
@@ -42,8 +42,12 @@ function GroupCard({ group, myGroup = false }) {
               <Eye className="mr-2 h-4 w-4" /> Xem nhóm
             </Link>
           </Button>
-        ) : (
+        ) : !group?.waitingRequests?.includes(user._id) ? (
           <JoinGroupDialog group={group} />
+        ) : (
+          <Button className="bg-blue-300 text-white" size="lg">
+            <Clock className="mr-2 h-4 w-4" /> Đang chờ phê duyệt
+          </Button>
         )}
       </div>
     </div>

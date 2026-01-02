@@ -1,7 +1,7 @@
 const express = require('express');
 const authMiddleware = require("../middleware/authMiddleware");
 const { multerMiddleware } = require('../config/cloudinary')
-const { getMyGroups, createGroup, getOtherGroups, joinGroup, getGroupById, leaveGroup, editGroup, createGroupPost, addAdmin, removeAdmin, kickMember, getAllGroups } = require('../controllers/groupController');
+const { getMyGroups, createGroup, getOtherGroups, joinGroup, getGroupById, leaveGroup, editGroup, createGroupPost, addAdmin, removeAdmin, kickMember, getAllGroups, getRequests, approveRequest, rejectRequest } = require('../controllers/groupController');
 const router = express.Router();
 
 router.get('/', authMiddleware, getMyGroups);
@@ -19,5 +19,9 @@ router.post('/:groupId/admins/:userId', authMiddleware, addAdmin)
 router.put('/:groupId/admins/:userId', authMiddleware, removeAdmin)
 
 router.post('/:groupId/kick/:userId', authMiddleware, kickMember)
+
+router.get('/:groupId/requests', authMiddleware, getRequests)
+router.post('/:groupId/requests', authMiddleware, approveRequest)
+router.put('/:groupId/requests', authMiddleware, rejectRequest)
 
 module.exports = router;

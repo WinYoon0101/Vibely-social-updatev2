@@ -1,4 +1,4 @@
-import { addAdmin, createGroup, editGroup, getMyGroups, getOtherGroups, joinGroup, kickMember, leaveGroup, removeAdmin } from "@/service/group.service";
+import { addAdmin, approveRequest, createGroup, editGroup, getMyGroups, getOtherGroups, joinGroup, kickMember, leaveGroup, rejectRequest, removeAdmin } from "@/service/group.service";
 import toast from "react-hot-toast";
 import { create } from "zustand";
 
@@ -50,12 +50,22 @@ export const useUserGroupsStore = create((set, get) => ({
   joinGroup: async(groupId) =>{
     set({ loading: true });
     try {
-      const data = await joinGroup(groupId);
-      set((state) => ({
-        userGroups: [...state.userGroups, data],
-        otherGroups: state.otherGroups.filter((group) => group._id !== groupId),
-      }));
-      toast.success("Tham gia nhóm thành công");
+      const res = await joinGroup(groupId);
+      const data = res.data; 
+      if(res.message === "Joined group successfully"){
+        set((state) => ({
+          userGroups: [...state.userGroups, data],
+          otherGroups: state.otherGroups.filter((group) => group._id !== groupId),
+        }));
+        toast.success("Tham gia nhóm thành công");
+      }else if (res.message === "Waiting for admin approvement"){
+        set((state) => ({
+          otherGroups: state.otherGroups.map((group) =>
+            group._id === groupId ? data : group
+          ),
+        }));
+        toast.success("Vui lòng chờ quản trị viên phê duyệt");
+      }
     } catch (error) {
       toast.error("Đã có lỗi xảy ra khi tham gia nhóm");
       console.log(error.message);
@@ -141,6 +151,38 @@ export const useUserGroupsStore = create((set, get) => ({
       }));
     } catch (error) {
       toast.error("Không thể kick thành viên")
+      console.log(error.message);
+    }finally {
+      set({ loading: false });
+    }
+  },
+  approveRequest: async(groupId, userId)=>{
+    set({ loading: true });
+    try {
+      const data = await approveRequest(groupId, userId);
+      set((state) => ({
+        userGroups: state.userGroups.map((group) =>
+          group._id === data._id ? data : group
+        ),
+      }));
+    } catch (error) {
+      toast.error("Không thể chấp nhận yêu cầu")
+      console.log(error.message);
+    }finally {
+      set({ loading: false });
+    }
+  },
+  rejectRequest: async(groupId, userId)=>{
+    set({ loading: true });
+    try {
+      const data = await rejectRequest(groupId, userId);
+      set((state) => ({
+        userGroups: state.userGroups.map((group) =>
+          group._id === data._id ? data : group
+        ),
+      }));
+    } catch (error) {
+      toast.error("Không thể chấp nhận yêu cầu")
       console.log(error.message);
     }finally {
       set({ loading: false });

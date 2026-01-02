@@ -13,14 +13,15 @@ import {
 import { LogOut } from "lucide-react";
 import { useUserGroupsStore } from "@/store/userGroupsStore";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 function LeaveGroup({ group }) {
     const {leaveGroup} = useUserGroupsStore()
     const router = useRouter()
+    const groupId = group?._id || useParams().id;
   const handleLeave = async () => {
     try {
-        await leaveGroup(group._id);
+        await leaveGroup(groupId);
         toast.success("Bạn đã rời khỏi nhóm thành công");
         router.push('/groups')
     } catch (error) {
