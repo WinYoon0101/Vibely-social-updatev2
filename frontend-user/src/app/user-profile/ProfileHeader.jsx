@@ -203,7 +203,7 @@ const ProfileHeader = ({
 
         {isOwner && (
           <Button
-            className="absolute bottom-4 right-4 flex items-center"
+            className="absolute bottom-4 right-4 flex items-center bg-gray-300/90 hover:bg-gray-100"
             variant="secondary"
             size="sm"
             onClick={() => setIsEditCoverModel(true)}
@@ -237,7 +237,7 @@ const ProfileHeader = ({
           {isOwner && (
             <div className="flex flex-col">
               <Button
-                className="mt-4 md:mt-1 font-semibold cursor-pointer edit-profile"
+                className="mt-4 md:mt-1 font-semibold cursor-pointer edit-profile bg-[#086280] hover:bg-[#086280]/70 text-white"
                 onClick={() => setIsEditProfileModel(true)}
               >
                 <PenLine className="w-4 h-4 mr-2" />

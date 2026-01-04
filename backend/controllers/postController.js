@@ -1,7 +1,10 @@
 const { uploadFileToCloudinary } = require("../config/cloudinary");
 const Group = require("../model/Group");
+const Notification = require("../model/Notification");
 const Post = require("../model/Post");
 const Story = require("../model/Story");
+const User = require("../model/User");
+const { getUser } = require("../socket");
 const response = require("../utils/responseHandler");
 
 //Tạo bài viết
@@ -269,16 +272,44 @@ const reactPost = async (req, res) => {
       (r) => r.user.toString() === userId
     );
     let action = "";
+    const io = req.app.get("io");
+    const author = getUser(post.user.toString());
+    const reactNotif = await Notification.findOne({
+      user: post.user,
+      type: "posts",
+      targetId: post._id,
+      content: { $regex: "đã bày tỏ cảm xúc về bài viết của bạn." },
+    });
 
     if (existingReactionIndex !== -1) {
       // Nếu đã react, kiểm tra loại reaction
       const existingReaction = post.reactions[existingReactionIndex];
-
       if (existingReaction.type === type) {
         // Nếu reaction giống nhau => bỏ reaction
         post.reactions.splice(existingReactionIndex, 1);
         post.reactionStats[type] = Math.max(0, post.reactionStats[type] - 1);
         action = "Bỏ reaction thành công";
+        if (userId !== post.user.toString() && reactNotif) {
+          const remainingReactions = post.reactions.filter(
+            r => r.user.toString() !== userId && r.user.toString() !== post.user.toString()
+          );
+        
+          if (remainingReactions.length === 0) {
+            await Notification.findByIdAndDelete(reactNotif._id);
+          } else {
+            const lastReaction = remainingReactions[remainingReactions.length - 1];
+            const lastUser = await User.findById(lastReaction.user);
+        
+            reactNotif.lastSenderId = lastUser.username;
+            reactNotif.thumbnailUrl = lastUser.profilePicture;
+            reactNotif.senderCount = remainingReactions.length;
+            await reactNotif.save();
+          }
+        
+          if (author) {
+            io.to(author.socketId).emit("refetchNotification");
+          }
+        }
       } else {
         // Nếu khác => đổi sang loại mới
         post.reactionStats[existingReaction.type] = Math.max(
@@ -294,6 +325,35 @@ const reactPost = async (req, res) => {
       post.reactions.push({ user: userId, type });
       post.reactionStats[type] = (post.reactionStats[type] || 0) + 1;
       action = "Thêm reaction thành công";
+      if (userId !== post.user.toString()) {
+        const currentUser = await User.findById(userId);
+        if (!currentUser) {
+          return response(res, 404, "Không tìm thấy người dùng hiện tại");
+        }
+        if (reactNotif) {
+          reactNotif.lastSenderId = currentUser.username;
+          reactNotif.thumbnailUrl = currentUser.profilePicture;
+          reactNotif.senderCount += 1;
+          await reactNotif.save();
+          if (author) {
+            io.to(author.socketId).emit("refetchNotification");
+          }
+        } else {
+          const newNotif = new Notification({
+            user: post.user,
+            type: "posts",
+            content: "đã bày tỏ cảm xúc về bài viết của bạn.",
+            thumbnailUrl: currentUser.profilePicture,
+            targetId: post._id,
+            lastSenderId: currentUser.username,
+            senderCount: 1,
+          });
+          await newNotif.save();
+          if (author) {
+            io.to(author.socketId).emit("getNotification", newNotif);
+          }
+        }
+      }
     }
     /*
             const updatedPost = await post.save();
@@ -356,6 +416,43 @@ const addCommentToPost = async (req, res) => {
     post.comments.push({ user: userId, text });
     post.commentCount += 1;
 
+    const io = req.app.get("io");
+    const author = getUser(post.user.toString());
+    const commentNotif = await Notification.findOne({
+      user: post.user,
+      type: "posts",
+      targetId: post._id,
+      content: { $regex: "đã bình luận về bài viết của bạn." },
+    });
+    if (userId !== post.user.toString()) {
+      const currentUser = await User.findById(userId);
+      if (!currentUser) {
+        return response(res, 404, "Không tìm thấy người dùng hiện tại");
+      }
+      if (commentNotif) {
+        commentNotif.lastSenderId = currentUser.username;
+        commentNotif.thumbnailUrl = currentUser.profilePicture;
+        commentNotif.senderCount += 1;
+        await commentNotif.save();
+        if (author) {
+          io.to(author.socketId).emit("refetchNotification");
+        }
+      } else {
+        const newNotif = new Notification({
+          user: post.user,
+          type: "posts",
+          content: "đã bình luận về bài viết của bạn.",
+          thumbnailUrl: currentUser.profilePicture,
+          targetId: post._id,
+          lastSenderId: currentUser.username,
+          senderCount: 1,
+        });
+        await newNotif.save();
+        if (author) {
+          io.to(author.socketId).emit("getNotification", newNotif);
+        }
+      }
+    }
     await post.save();
     return response(res, 201, "Bình luận bài viết thành công", post);
   } catch (error) {
@@ -422,6 +519,15 @@ const deletePost = async (req, res) => {
         await group.save();
       }
     }
+    const io = req.app.get("io");
+    const author = getUser(post.user.toString());
+    const notifs = await Notification.find({ targetId: post._id });
+    for (const notif of notifs) {
+      await Notification.findByIdAndDelete(notif._id);
+    }
+    if (author) {
+      io.to(author.socketId).emit("refetchNotification");
+    }
     await Post.findByIdAndDelete(postId);
     return response(res, 200, "Xóa bài viết thành công", post);
   } catch (error) {
@@ -456,6 +562,35 @@ const deleteComment = async (req, res) => {
     if (commentIndex === -1)
       return response(res, 404, "Không tìm thấy bình luận");
 
+    const io = req.app.get("io");
+    const author = getUser(post.user.toString());
+    const commentUserId = post.comments[commentIndex]?.user.toString();
+    const commentNotif = await Notification.findOne({
+      user: post.user,
+      type: "posts",
+      targetId: post._id,
+      content: { $regex: "đã bình luận về bài viết của bạn." },
+    });
+    if (commentUserId !== post.user.toString()) {
+      const remainingComments = post.comments.filter(
+        r => r.user.toString() !== commentUserId && r.user.toString() !== post.user.toString()
+      );
+    
+      if (remainingComments.length === 0) {
+        await Notification.findByIdAndDelete(commentNotif ._id);
+      } else {
+        const lastReaction = remainingComments[remainingComments.length - 1];
+        const lastUser = await User.findById(lastReaction.user);
+    
+        commentNotif.lastSenderId = lastUser.username;
+        commentNotif.thumbnailUrl = lastUser.profilePicture;
+        commentNotif.senderCount = remainingComments.length;
+        await commentNotif.save();
+      }    
+      if (author) {
+        io.to(author.socketId).emit("refetchNotification");
+      }
+    }
     post.commentCount -= 1;
     post.comments.splice(commentIndex, 1);
     await post.save();

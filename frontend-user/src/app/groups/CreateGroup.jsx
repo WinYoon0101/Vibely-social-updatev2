@@ -201,7 +201,7 @@ function CreateGroup() {
             </Button>
           </DialogClose>
           <Button
-            className="flex gap-2 bg-blue-500 text-white hover:bg-blue-800"
+            className="flex gap-2 bg-[#086280] hover:bg-[#086280]/70 text-white"
             onClick={handleCreateGroup}
             disabled={loading}
             type="button"

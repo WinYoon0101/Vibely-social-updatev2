@@ -33,7 +33,7 @@ const FriendRequest = ({ friend, onAction }) => {
 
         <div className="flex flex-col justify-between">
           <Button
-            className="bg-blue-500 text-white"
+            className="bg-[#086280] hover:bg-[#086280]/70 text-white"
             size="lg"
             onClick={() => onAction("confirm",friend?._id)}
           >
