@@ -8,7 +8,7 @@ import { ChevronDown, ChevronUp, Send } from "lucide-react";
 import { useEffect, useState } from "react";
 import PostComment from "./PostComment";
 import { usePostStore } from "@/store/usePostStore";
-const PostComments = ({ post, onComment, commentInputRef }) => {
+const PostComments = ({ post, onComment, commentInputRef, fetchSinglePost }) => {
     const [showAllComments, setShowAllComments] = useState(false);
     const [commentText, setCommentText] = useState("")
     const { user } = userStore();
@@ -33,18 +33,22 @@ const PostComments = ({ post, onComment, commentInputRef }) => {
                     onReply={async(replyText)=>{
                         await handleReplyComment(post?._id,comment?._id,replyText)
                         await fetchPosts()
+                        await fetchSinglePost()
                     }}
                     onDeleteComment={async()=>{
                         await handleDeleteComment(post?._id,comment?._id)
                         await fetchPosts()
+                        await fetchSinglePost()
                     }}
                     onDeleteReply={async(replyId)=>{
                         await handleDeleteReply(post?._id,comment?._id,replyId)
                         await fetchPosts()
+                        await fetchSinglePost()
                     }}
                     likeComment={async()=>{
                         await handleLikeComment(post?._id,comment?._id)
                         await fetchPosts()
+                        await fetchSinglePost()
                     }}
                     />
                 ))}

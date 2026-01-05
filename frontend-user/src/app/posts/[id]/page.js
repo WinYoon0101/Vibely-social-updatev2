@@ -12,7 +12,7 @@ function Page() {
     const [post, setPost] = useState(null)
     const [loading, setLoading] = useState(false);
     const [forbidden, setForbidden] = useState(false);
-    const { handleReactPost, handleCommentPost, handleSharePost, handleDeletePost } = usePostStore();
+    const { handleReactPost, handleCommentPost, handleSharePost, handleDeletePost, handleEditPost } = usePostStore();
     const fetchPost = async () => {
         setLoading(true);
         try {
@@ -54,6 +54,11 @@ function Page() {
             await handleDeletePost(post?._id)
             await fetchPost()
           }}
+          onEdit={async (postData) => {
+            await handleEditPost(post?._id, postData)
+            await fetchPost()
+          }}
+          fetchSinglePost={fetchPost}
         />
       }
     </div>

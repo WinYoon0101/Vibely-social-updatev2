@@ -36,7 +36,7 @@ import userStore from "@/store/userStore";
 import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
 
-const PostCard = ({ post, onReact, onComment, onShare, onDelete, onEdit }) => {
+const PostCard = ({ post, onReact, onComment, onShare, onDelete, onEdit, fetchSinglePost }) => {
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [editPost, setEditPost] = useState(false); // đang edit bài viết hay bài viết hoàn chỉnh
@@ -992,6 +992,7 @@ const PostCard = ({ post, onReact, onComment, onShare, onDelete, onEdit }) => {
                 transition={{ duration: 0.3 }}
               >
                 <PostComments
+                  fetchSinglePost={fetchSinglePost}
                   post={post}
                   onComment={onComment}
                   commentInputRef={commentInputRef}
