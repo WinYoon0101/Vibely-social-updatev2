@@ -22,7 +22,7 @@ const learningTreeSchema = new mongoose.Schema(
             type: Number,
             default: 0,  // Bắt đầu là Tân Binh
             min: 0,
-            max: 4,
+            max: 5,
         },
         completed_goals_count: {
             type: Number,

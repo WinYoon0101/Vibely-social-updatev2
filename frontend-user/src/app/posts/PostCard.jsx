@@ -52,7 +52,7 @@ const PostCard = ({ post, onReact, onComment, onShare, onDelete, onEdit, fetchSi
     post?.reactionStats?.angry;
   const totalComment =
     (post.comments?.length || 0) +
-    post.comments.reduce((total, cmt) => total + (cmt.replies?.length || 0), 0);
+    post.comments?.reduce((total, cmt) => total + (cmt.replies?.length || 0), 0);
   const commentInputRef = useRef(null);
   const router = useRouter();
 

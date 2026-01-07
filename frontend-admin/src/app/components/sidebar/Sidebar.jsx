@@ -29,7 +29,7 @@ const SidebarItem = ({ path, icon, label, onClick }) => {
     return (
         <Button
             variant="ghost"
-            className={`w-full justify-start mb-3 cursor-pointer flex items-center text-[15px] ${isActive ? "text-[#086280]" : "text-[#A3AED0]"}`
+            className={`w-full justify-start mb-3 cursor-pointer flex items-center text-[15px] ${isActive ? "font-semibold text-[#0BB5FF]" : "text-[#A3AED0]"}`
             }
             onClick={handleClick}
         >
@@ -78,7 +78,7 @@ const Sidebar = () => {
                 <Menu className="w-16 h-16" />
             </Button>
             <aside
-                className={`fixed left-0 h-full w-52 p-4 transform transition-transform duration-200 ease-in-out md:translate-x-0 flex flex-col z-50 md:z-0 ${isSidebarOpen ? "translate-x-0 bg-white shadow-lg " : "-translate-x-full"
+                className={`fixed left-0 h-full w-52 p-4 transform border-r-1 border-[#0BB5FF] transition-transform duration-200 ease-in-out md:translate-x-0 flex flex-col z-50 md:z-0 ${isSidebarOpen ? "translate-x-0 bg-white shadow-lg " : "-translate-x-full"
                     } ${isSidebarOpen ? "md:hidden" : ""} md:bg-white md:shadow-none`}
             >
                 <div className="flex flex-col h-full overflow-y-auto">
@@ -94,11 +94,6 @@ const Sidebar = () => {
                             <SidebarItem key={item.path} {...item} />
                         ))}
                     </nav>
-
-                    {/* Footer Image */}
-                    <div className="mt-auto flex flex-col items-center pb-4">
-                        <img src="/images/end_sidebar.png" alt="Vibely Logo" className="w-42" />
-                    </div>
                 </div>
             </aside>
         </div>

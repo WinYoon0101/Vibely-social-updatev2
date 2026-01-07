@@ -1,6 +1,6 @@
 const express = require('express');
 const adminAuthMiddleware = require('../middleware/adminAuthMiddleware');
-const { getAllPosts, getPostByUserId, deletePost, deleteComment, deleteReply, getSinglePost } = require('../controllers/postController');
+const { getAllPosts, getPostByUserId, deletePost, deleteComment, deleteReply, getSinglePost } = require('../controllers/adminPostController');
 const router = express.Router();
 
 // Route lấy tất cả các bài viết

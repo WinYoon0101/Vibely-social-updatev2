@@ -44,10 +44,11 @@ const createPost = async (req, res) => {
         sad: 0,
         angry: 0,
       },
+      createdAt: new Date(),
     });
 
     await newPost.save();
-    return response(res, 201, "Tạo bài viết thành công", newPost);
+    return response(res, 201, "Tạo bài viết thành công", newPost.populate("user", "_id username profilePicture email"));
   } catch (error) {
     console.error("Lỗi khi tạo bài viết:", error);
     return response(res, 500, "Tạo bài viết thất bại", error.message);
@@ -131,21 +132,26 @@ const editPost = async (req, res) => {
 const getAllPosts = async (req, res) => {
   const userId = req.user.userId;
   try {
+    const userGroupIds = await Group.find({
+      $or: [
+        { members: userId },
+        { admins: userId },
+        { createdBy: userId },
+      ],
+    }).distinct("_id");
+    const publicGroupIds = await Group.find({
+      privacySetting: "public",
+    }).distinct("_id");
     const posts = await Post.find({
       $or: [
+        // Post không thuộc group nào
         { group: null },
-
-        {
-          group: {
-            $in: await Group.find({
-              $or: [
-                { members: userId },
-                { admins: userId },
-                { createdBy: userId },
-              ],
-            }).distinct("_id"),
-          },
-        },
+    
+        // Post thuộc group user là thành viên
+        { group: { $in: userGroupIds } },
+    
+        // Post thuộc group công khai
+        { group: { $in: publicGroupIds } },
       ],
     })
       .sort({ createdAt: -1 })

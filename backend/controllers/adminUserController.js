@@ -1,5 +1,9 @@
 const User = require("../model/User");
 const Post = require("../model/Post");
+const Story = require("../model/Story");
+const Group = require("../model/Group");
+const Inquiry = require("../model/Inquiry");
+const Notification = require("../model/Notification");
 
 // Lấy danh sách tất cả users
 exports.getAllUsers = async (req, res) => {
@@ -37,8 +41,113 @@ exports.deleteUser = async (req, res) => {
             });
         }
 
-        // Xóa tất cả bài viết của user
-        await Post.deleteMany({ author: userId });
+        //Tìm tất cả bài viết mà user này đã comment, reply hoặc react
+        const posts = await Post.find({
+            $or: [
+                { user: userId },
+                { "comments.user": userId },
+                { "comments.replies.user": userId },
+                { "reactions.user._id": userId },
+                { "comments.reactions.user": userId }
+            ]
+        });
+
+        for (const post of posts) {
+
+            if (post.user._id.toString() === userId) {
+                await Post.findByIdAndDelete(post._id);
+                continue;
+            }
+
+            // Xóa tất cả comments của user
+            post.comments = post.comments.filter(comment => comment.user._id.toString() !== userId);
+            post.commentCount = post.comments.length;
+
+            // Xóa tất cả replies của user trong comments
+            post.comments.forEach(comment => {
+                comment.replies = comment.replies.filter(reply => reply.user._id.toString() !== userId);
+            });
+
+            // Xóa tất cả reactions của user trên bài viết
+            post.reactions = post.reactions.filter(reaction => reaction.user._id.toString() !== userId);
+            // Cập nhật lại reactionStats
+            post.reactionStats = {
+                like: post.reactions.filter(r => r.type === "like").length,
+                love: post.reactions.filter(r => r.type === "love").length,
+                haha: post.reactions.filter(r => r.type === "haha").length,
+                wow: post.reactions.filter(r => r.type === "wow").length,
+                sad: post.reactions.filter(r => r.type === "sad").length,
+                angry: post.reactions.filter(r => r.type === "angry").length
+            };
+
+            // Xóa tất cả reactions của user trên comments
+            post.comments.forEach(comment => {
+                comment.reactions = comment.reactions.filter(reaction => reaction.user.toString() !== userId);
+            });
+
+            await post.save();
+        }
+
+        const stories = await Story.find({
+            $or: [
+                { "user": userId },
+                { "reactions.user": userId },
+            ]
+        });
+        for (const story of stories) {
+            if (story.user._id.toString() === userId) {
+                await Story.findByIdAndDelete(story._id);
+                continue;
+            }
+            // Xóa tất cả reactions của user trên bài viết
+            story.reactions = story.reactions.filter(reaction => reaction.user.toString() !== userId);
+
+            // Cập nhật lại reactionStats
+            story.reactionStats = {
+                "tym": story.reactions.length,
+            }
+            await story.save();
+        }
+        // Xóa user khỏi danh sách follower của những người khác
+        await User.updateMany(
+            { followers: userId },
+            { $pull: { followers: userId }, $inc: { followerCount: -1 } }
+        );
+
+        // Xóa user khỏi danh sách following của những người khác
+        await User.updateMany(
+            { followings: userId },
+            { $pull: { followings: userId }, $inc: { followingCount: -1 } }
+        );
+
+        const groupsAsLastAdmin = await Group.find({
+            admins: { $size: 1 }, 
+            admins: userId        // là admin cuối cùng
+        });
+        for (const group of groupsAsLastAdmin) {
+            // Tìm thành viên khác trong nhóm
+            const nextAdmin = group.members.find(m => m.toString() !== userId.toString());
+            if (nextAdmin) {
+                await Group.updateOne(
+                    { _id: group._id },
+                    { $push: { admins: nextAdmin } }
+                );
+            } else {
+                await Group.deleteOne({ _id: group._id });
+            }
+        }
+        await Group.updateMany(
+            { members: userId },
+            { $pull: { members: userId } }
+        )
+        await Group.updateMany(
+            { admins: userId },
+            { $pull: { admins: userId } }
+        )
+                
+        await Inquiry.deleteMany({ userId: userId });
+
+        await Notification.deleteMany({ user: userId });
 
         // Xóa user
         await User.findByIdAndDelete(userId);

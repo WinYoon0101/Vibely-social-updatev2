@@ -20,6 +20,7 @@ import { useRouter } from 'next/navigation'
 import userStore from '@/store/userStore'
 import PostComments from '@/app/posts/PostComments'
 import Link from 'next/link'
+import { Textarea } from '@/components/ui/textarea'
 
 export const PostsContent = ({ post, onReact, onComment, onShare, onDelete }) => {
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false)
@@ -243,7 +244,27 @@ export const PostsContent = ({ post, onReact, onComment, onShare, onDelete }) =>
               </div>
             </div>
           )}
-          <p className="mb-4">{post?.content}</p>
+          <Textarea
+            value={post?.content}
+            readOnly
+            rows={1}
+            className="
+              mb-4
+              resize-none
+              overflow-hidden
+              border-0
+              bg-transparent
+              p-0
+              focus:ring-0
+              focus:outline-none
+            "
+            ref={(el) => {
+              if (el) {
+                el.style.height = "auto";
+                el.style.height = el.scrollHeight + "px";
+              }
+            }}
+          />
           {post?.mediaUrl && post.mediaType === "image" && (
             <img
               src={post?.mediaUrl}

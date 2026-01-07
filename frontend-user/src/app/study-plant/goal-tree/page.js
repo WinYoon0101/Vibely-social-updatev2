@@ -4,11 +4,13 @@ import AchievementPopup from '@/app/components/plant-tree/AchievementPopup';
 import NewPostForm from '@/app/posts/NewPostForm';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import axios from 'axios';
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from "react-hot-toast";
+import { FaQuestionCircle } from 'react-icons/fa';
 
 const Cloud = ({ delay, position }) => {
     return (
@@ -205,11 +207,12 @@ const GoalTreePage = () => {
 
             // Lấy thông tin cây
             const treeResponse = await axios.get(`${API_URL}/learning-trees`, config);
-            if (!treeResponse.data) {
+            if (!treeResponse.data.hasTree) {
                 router.push('/study-plant/select-tree');
                 return;
             }
-            setTree(treeResponse.data);
+            setTree(treeResponse.data.tree);
+
 
             // Lấy danh sách mục tiêu
             const goalsResponse = await axios.get(`${API_URL}/learning-goals`, config);
@@ -399,8 +402,21 @@ const GoalTreePage = () => {
         return <div>Loading...</div>;
     }
 
-    const completedGoalsCount = goals.filter(goal => goal.is_completed).length;
-    const progressPercentage = (tree?.growth_stage || 0) * 20; //Mỗi cấp độ là 20% (5 cấp độ tổng cộng)
+    const completed = goals.filter(goal => goal.is_completed).length;
+    const stage = tree ? tree.growth_stage : 0;
+    const LEVEL_THRESHOLDS = {
+        0: 1,
+        1: 5,
+        2: 10,
+        3: 20,
+        4: 50,
+        5: 100,
+      };
+    // Tính toán phần trăm tiến độ dựa trên số mục tiêu đã hoàn thành và cấp độ hiện tại
+    const currentMax = LEVEL_THRESHOLDS[stage+1];
+    const prevMax = stage === 0 ? 0 : LEVEL_THRESHOLDS[stage];
+    const progress =
+          (completed - prevMax) / (currentMax - prevMax);
 
     // Lấy tên và icon của cấp độ dựa trên cấp độ tăng trưởng
     const getGrowthStageInfo = (stage) => {
@@ -446,7 +462,24 @@ const GoalTreePage = () => {
                 <div className="w-[420px] bg-white shadow-lg p-6 overflow-y-auto">
                     <div className="space-y-6">
                         <div>
+                            <div className='flex gap-2 items-center justify-start'>
                             <p className="text-xl font-bold mb-4">Mục tiêu học tập</p>
+                            <Popover>
+                                <PopoverTrigger asChild>
+                                    <FaQuestionCircle className='w-4 h-4 text-blue-500 hover:text-blue-700 mb-3'/>
+                                </PopoverTrigger>
+                                <PopoverContent className="bg-white border-blue-500 max-w-md">
+                                <p className="text-gray-600 text-[14px]">
+                                    Mẹo: Hoàn thành mục tiêu để cây của bạn phát triển! 🌿<br />
+                                    - Tập Sự: 5 mục tiêu<br />
+                                    - Chiến Binh: 10 mục tiêu<br />
+                                    - Tinh Anh: 20 mục tiêu<br />
+                                    - Cao Thủ: 50 mục tiêu<br />
+                                    - Thần Vương: 100 mục tiêu
+                                </p>
+                                </PopoverContent>
+                            </Popover>
+                            </div>                            
                             <p className="text-gray-600 mb-6 text-[14px]">
                                 Hoàn thành các mục tiêu bạn đề ra để tưới nước cho cây của bạn và ngắm nhìn nó lớn lên!
                                 Mỗi mục tiêu hoàn thành sẽ giúp cây của bạn tiến gần hơn đến độ trưởng thành 🌱
@@ -454,7 +487,7 @@ const GoalTreePage = () => {
 
                             <div className="flex justify-between items-center mb-2">
                                 <span className="text-[16px] font-medium">Mức độ tăng trưởng của cây</span>
-                                <span className="text-[16px] font-medium">{tree?.growth_stage || 0}/5</span>
+                                <span className="text-[16px] font-medium">Cấp độ {tree?.growth_stage || 0}/5</span>
                             </div>
                             <div className="text-[14px] text-gray-600 mb-2 text-center">
                                 <span>Cấp độ hiện tại: </span>
@@ -465,8 +498,9 @@ const GoalTreePage = () => {
                             <div className="w-full h-2 bg-gray-200 rounded-full mb-8">
                                 <div
                                     className="h-full bg-gradient-to-r from-[#4ACFEF] to-[#476EFF] rounded-full"
-                                    style={{ width: `${progressPercentage}%` }}
+                                    style={{ width: `${Math.min(Math.max(progress, 0), 1) * 100}%` }}
                                 ></div>
+                                <p className='text-xs text-center text-gray-500'>{completed - prevMax} / {currentMax - prevMax}</p>
                             </div>
 
                             <div className="flex space-x-4 mb-8">
@@ -486,7 +520,7 @@ const GoalTreePage = () => {
                             </div>
                         </div>
 
-                        <div className="space-y-3">
+                        <div className="space-y-3 flex-1 overflow-y-auto">
                             {visibleGoals.map((goal) => (
                                 <div key={goal._id} className="flex items-center text-[15px] justify-between p-2 bg-[#F8FDFF] border border-gray-300 rounded-lg">
                                     <div className="flex items-center space-x-3">
@@ -516,15 +550,6 @@ const GoalTreePage = () => {
                                 </div>
                             ))}
                         </div>
-
-                        <p className="text-gray-600 mt-8 text-[14px]">
-                            Mẹo: Hoàn thành mục tiêu để cây của bạn phát triển! 🌿<br />
-                            - Tập Sự: 5 mục tiêu<br />
-                            - Chiến Binh: 10 mục tiêu<br />
-                            - Tinh Anh: 20 mục tiêu<br />
-                            - Cao Thủ: 50 mục tiêu<br />
-                            - Thần Vương: 100 mục tiêu
-                        </p>
                     </div>
                 </div>
 

@@ -30,8 +30,11 @@ const Page = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            if (response.data) {
+            if (response.data.hasTree) {
                 setShowPopup(true);
+            }
+            else{
+                // người dùng chưa có cây học tập, nhưng đừng có hiện đỏ màn hình t :))))
             }
         } catch (error) {
             console.error('Error checking tree:', error);

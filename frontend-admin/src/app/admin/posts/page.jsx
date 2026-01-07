@@ -11,6 +11,7 @@ import { formatedDate } from "@/lib/utils";
 import Image from 'next/image'
 import toast from "react-hot-toast";
 import { ArrowDownWideNarrow } from "lucide-react";
+import DeleteDialog from "@/app/components/posts/DeleteDialog";
 
 function Posts() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -213,15 +214,7 @@ function Posts() {
             <p className="font-bold font-['Roboto_Condensed'] text-sm md:text-xl">{post?.shareCount}</p>
           </div>
           <div className="flex justify-end">
-            <Button
-              className="w-30 md:w-40 text-sm md:text-[20px] h-8 md:h-10 cursor-pointer hover:bg-gray-700 text-white bg-[#DF0000] font-['Roboto_Condensed'] rounded-[25px] overflow-hidden"
-              onClick={() => {
-                handleDelete(post?._id)
-              }}
-            >
-              <MdDelete className="w-10 h-10" />
-              Xóa bài viết
-            </Button>
+            <DeleteDialog handleDelete={()=>handleDelete(post?._id)} />
           </div>
         </div>
       </div>

@@ -40,8 +40,8 @@ const Homepage = () => {
             </div>
 
             <div className='mt-6 space-y-6'>
-              {posts.map(post => (
-                <PostCard key={post._id}
+              {posts.map((post, index) => (
+                <PostCard key={index}
                   post={post}
                   onReact={async (reactType) => {
                     await handleReactPost(post?._id, reactType)

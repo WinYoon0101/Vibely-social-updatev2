@@ -34,10 +34,17 @@ const getTree = async (req, res) => {
         const tree = await LearningTree.findOne({ user_id: req.user.user_id });
 
         if (!tree) {
-            return res.status(404).json({ message: 'Bạn chưa có cây học tập' });
-        }
+            return res.status(200).json({
+              hasTree: false,
+              tree: null,
+              message: "Bạn chưa có cây học tập",
+            });
+          }
 
-        res.json(tree);
+          res.status(200).json({
+            hasTree: true,
+            tree,
+          });
     } catch (error) {
         res.status(500).json({ message: 'Lỗi khi lấy thông tin cây', error: error.message });
     }

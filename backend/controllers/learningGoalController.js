@@ -208,6 +208,7 @@ const toggleGoalCompletion = async (req, res) => {
 
     } catch (error) {
         res.status(400).json({ message: error.message });
+        console.error('Error toggling goal completion:', error);
     }
 };
 
