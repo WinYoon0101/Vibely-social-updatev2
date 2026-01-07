@@ -1,40 +1,48 @@
 "use client";
 import AddEventDialog from "@/app/components/calendar/AddEventDialog";
+import EventDetail from "@/app/components/calendar/EventDetail";
 import PickMonth from "@/app/components/calendar/PickMonth";
 import { Button } from "@/components/ui/button";
-import { generateCalendar } from "@/lib/calendar";
+import {
+  generateCalendar,
+  isSameDay,
+  isDateInRange,
+  formatLocalTime,
+} from "@/lib/calendar";
 import { StepBack, StepForward } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const Calendar = () => {
-    const [events, setEvents] = useState([]);
-    useEffect(() => {
-        const fetchSchedules = async () => {
-            try {
-                const token = localStorage.getItem("token");
-                if (!token) {
-                    console.error("❌ Không tìm thấy token");
-                    return;
-                }
+  const [events, setEvents] = useState([]);
+  const API_URL =
+    process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8081";
+  useEffect(() => {
+    const fetchSchedules = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          console.error("❌ Không tìm thấy token");
+          return;
+        }
 
-                const response = await fetch(`${API_URL}/schedules`, {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
+        const response = await fetch(`${API_URL}/schedules`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
-                if (!response.ok) throw new Error("Lỗi lấy dữ liệu");
+        if (!response.ok) throw new Error("Lỗi lấy dữ liệu");
 
-                const result = await response.json();
+        const result = await response.json();
 
-                const data = Array.isArray(result.data) ? result.data : [];
-                setEvents(data);
-            } catch (error) {
-                console.error("Lỗi khi lấy lịch trình:", error);
-            }
-        };
-        fetchSchedules();
-    }, []);
+        const data = Array.isArray(result.data) ? result.data : [];
+        setEvents(data);
+      } catch (error) {
+        console.error("Lỗi khi lấy lịch trình:", error);
+      }
+    };
+    fetchSchedules();
+  }, []);
   const [mode, setMode] = useState("month"); // "day", "week", "month"
   const [date, setDate] = useState(new Date());
   const today = new Date();
@@ -134,18 +142,23 @@ const Calendar = () => {
           {/*Ngày*/}
           <div className="grid grid-cols-7 gap-1 bg-gray-100">
             {calendar.map((item, index) => {
-                return(
-              <div
-                key={index}
-                className={`relative p-2 text-left cursor-pointer rounded col-span-1 aspect-video border border-1 border-gray-300 hover:border-blue-500 hover:border-2
+              const dayEvents = events.filter((event) => {
+                const start = event.startTime?.$date || event.startTime;
+                const end = event.endTime?.$date || event.endTime;
+                return isDateInRange(item.date, start, end);
+              });
+              return (
+                <div
+                  key={index}
+                  className={`relative p-2 text-left cursor-pointer rounded col-span-1 aspect-video border border-1 border-gray-300 hover:border-blue-500 hover:border-2
                   ${
                     item.currentMonth ? "bg-white" : "bg-gray-100 text-gray-400"
                   }
                 
                 `}
-              >
-                <span
-                  className={`
+                >
+                  <span
+                    className={`
                         rounded-full w-7 h-7 inline-flex items-center justify-center ${
                           item.date.getDate() === today.getDate() &&
                           item.date.getMonth() === today.getMonth() &&
@@ -153,14 +166,59 @@ const Calendar = () => {
                             ? "font-bold text-white bg-[#086280]"
                             : "bg-transparent"
                         }`}
-                >
-                  {item.date.getDate()}
-                </span>
-                <div className="absolute top-1 right-1">
-                  <AddEventDialog setEvents={setEvents} date={item.date}/>
+                  >
+                    {item.date.getDate()}
+                  </span>
+                  {/* Danh sách sự kiện của ngày */}
+                  <div className="mt-1 flex flex-col gap-1 overflow-y-auto max-h-[60px] scrollbar-hide">
+                    {dayEvents.map((event, i) => {
+                      // Kiểm tra xem đây có phải là ngày bắt đầu của sự kiện không
+                      const isStartDay = isSameDay(
+                        event.startTime?.$date || event.startTime,
+                        item.date
+                      );
+                      const isEndDay = isSameDay(
+                        event.endTime?.$date || event.endTime,
+                        item.date
+                      );
+
+                      return (
+                        <EventDetail
+                          key={event._id}
+                          event={event}
+                          trigger={
+                            <div
+                              className={`text-[10px] px-1.5 py-1 truncate text-white font-medium ${
+                                isStartDay ? "rounded-l-md" : "" // Làm bo góc trái nếu là ngày bắt đầu
+                              } ${isEndDay ? "rounded-r-md" : ""}`}
+                              style={{
+                                backgroundColor:
+                                  event.categoryColor || "#086280",
+                                opacity: item.currentMonth ? 1 : 0.5, // Làm mờ sự kiện nếu ở tháng khác
+                              }}
+                            >
+                              {isStartDay || item.date.getDay() === 0 ? (
+                                <p>
+                                  {formatLocalTime(event.startTime) + " "}
+                                  <span className="font-semibold">
+                                    {event.subject}
+                                  </span>
+                                </p>
+                              ) : (
+                                <p>&nbsp;</p>
+                              )}
+                            </div>
+                          }
+                        />
+                      );
+                    })}
+                  </div>
+                  <div className="absolute top-1 right-1">
+                    <AddEventDialog setEvents={setEvents} date={item.date} />
+                  </div>
                 </div>
-              </div>
-            )})}
+              );
+            })}
           </div>
         </>
       )}
