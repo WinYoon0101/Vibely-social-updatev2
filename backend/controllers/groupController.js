@@ -525,3 +525,41 @@ export const acceptInvitation = async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error" });
   }
 }
+
+////// HÀM CỦA ADMIN
+export const deleteGroup = async (req, res) => {
+  try {
+    const groupId = req.params.groupId;
+    const group = await Group.findById(groupId)
+    if(!group) {
+      return res.status(404).json({ success: false, message: "Group not found" });
+    }
+    const creator = await User.findById(group.createdBy);
+    if (!creator) {
+      return res.status(404).json({ success: false, message: "Group creator not found" });
+    }
+    const posts = group.posts;
+    for (const post of posts){
+        await Post.findByIdAndDelete(post);
+    }
+    const newNotif = new Notification({
+      user: creator._id,
+      type: "system",
+      content: `Nhóm "${group.name}" của bạn đã bị xóa bởi quản trị viên hệ thống. Chúng tôi rất tiếc về điều này.`,
+      thumbnailUrl: group.coverPhotoUrl || "https://tse3.mm.bing.net/th/id/OIP.F-JvlOPJN0M9wJq4PVuRJAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
+      targetId: null,
+      senderCount: 0,
+    })
+    await newNotif.save();
+    const io = req.app.get('io');
+    const user = getUser(creator._id);
+    if(user){
+      io.to(user.socketId).emit("getNotification", newNotif);
+    }
+    await Group.findByIdAndDelete(groupId);
+    return res.status(200).json({success: true, message: "Group deleted successfully"});
+  } catch (error) {
+    console.error("Lỗi khi xóa nhóm:", error);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+}

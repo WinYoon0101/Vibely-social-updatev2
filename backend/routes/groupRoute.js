@@ -1,7 +1,8 @@
 const express = require('express');
 const authMiddleware = require("../middleware/authMiddleware");
+const adminAuthMiddleware = require("../middleware/adminAuthMiddleware");
 const { multerMiddleware } = require('../config/cloudinary')
-const { getMyGroups, createGroup, getOtherGroups, joinGroup, getGroupById, leaveGroup, editGroup, createGroupPost, addAdmin, removeAdmin, kickMember, getAllGroups, getRequests, approveRequest, rejectRequest, inviteFriend, acceptInvitation } = require('../controllers/groupController');
+const { getMyGroups, createGroup, getOtherGroups, joinGroup, getGroupById, leaveGroup, editGroup, createGroupPost, addAdmin, removeAdmin, kickMember, getAllGroups, getRequests, approveRequest, rejectRequest, inviteFriend, acceptInvitation, deleteGroup } = require('../controllers/groupController');
 const router = express.Router();
 
 router.get('/', authMiddleware, getMyGroups);
@@ -14,6 +15,7 @@ router.put('/join/:groupId', authMiddleware, leaveGroup)
 router.get('/:groupId', authMiddleware, getGroupById)
 router.put('/:groupId', authMiddleware, multerMiddleware.single('media'), editGroup)
 router.post('/:groupId', authMiddleware, multerMiddleware.single('media'), createGroupPost)
+router.delete('/:groupId', adminAuthMiddleware, deleteGroup)
 
 router.post('/:groupId/admins/:userId', authMiddleware, addAdmin)
 router.put('/:groupId/admins/:userId', authMiddleware, removeAdmin)

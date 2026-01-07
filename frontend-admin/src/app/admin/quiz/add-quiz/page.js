@@ -201,12 +201,12 @@ const CreateQuizPage = () => {
                             >
                                 Hủy
                             </button>
-                            <buttons
+                            <button
                                 onClick={handleSave}
                                 className="px-6 py-3 bg-[#086280] text-white rounded-lg hover:bg-[#32515a] cursor-pointer transition-colors duration-200 flex items-center space-x-2"
                             >
                                 <span>Lưu</span>
-                            </buttons>
+                            </button>
                         </div>
                     </div>
                 </div>

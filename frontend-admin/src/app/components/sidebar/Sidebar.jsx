@@ -36,7 +36,7 @@ const SidebarItem = ({ path, icon, label, onClick }) => {
             <img
                 src={icon}
                 alt={label}
-                className={`mr-3 w-5 h-6 ${isActive ? "filter brightness-0 invert-[30%]" : ""}`}
+                className={`mr-3 w-5 h-6 ${isActive ? "filter brightness invert saturate-[1900%] hue-rotate-[150deg]" : ""}`}
             />
             <span>{label}</span>
         </Button>
@@ -64,6 +64,7 @@ const Sidebar = () => {
         { path: "/admin/dashboard", icon: "/svg/dashboard_admin.svg", label: "Dashboard" },
         { path: "/admin/users", icon: "/svg/user_admin.svg", label: "Người dùng" },
         { path: "/admin/posts", icon: "/svg/post_admin.svg", label: "Bài viết" },
+        { path: "/admin/groups", icon: "/svg/groups_admin.svg", label: "Nhóm" },
         { path: "/admin/documents", icon: "/svg/document_admin.svg", label: "Tài liệu" },
         { path: "/admin/inquiry", icon: "/svg/support_admin.svg", label: "Hỗ trợ" },
         { path: "/admin/settings", icon: "/svg/settings_admin.svg", label: "Cài đặt" },
