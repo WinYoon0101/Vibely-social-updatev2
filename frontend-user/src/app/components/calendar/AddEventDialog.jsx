@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import React, { useEffect, useState } from "react";
 import PickColorCombobox from "./PickColorCombobox";
 import { Button } from "@/components/ui/button";
-import { CalendarIcon, Clock, PenLine, Plus } from "lucide-react";
+import { CalendarIcon } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import toast from "react-hot-toast";
 import {
@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { formatDateOnly, formatDateTime, getTime } from "@/lib/calendar";
+import { formatDateOnly, formatDateTime, getTime, isAllDayEvent } from "@/lib/calendar";
 import { createEvent, editEvent } from "@/service/calendar.service";
 
 function AddEventDialog({
@@ -30,9 +30,10 @@ function AddEventDialog({
   setEvents,
   isEdit = false,
   event = null,
+  trigger,
+  isWeek = false,
 }) {
   const date = item?.date;
-  const today = new Date();
   const [open, setOpen] = useState(false);
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
@@ -47,12 +48,12 @@ function AddEventDialog({
     return d;
   });
   useEffect(() => {
+    const d = new Date(date);
+    if (!isWeek) d.setHours(9, 0, 0, 0);
     setStartTime(() => {
       if (isEdit) {
         return new Date(event.startTime);
       } else {
-        const d = new Date(date);
-        d.setHours(9, 0, 0, 0); // Set default start time to 9 AM
         return d;
       }
     });
@@ -60,29 +61,13 @@ function AddEventDialog({
       if (isEdit) {
         return new Date(event.endTime);
       } else {
-        const d = new Date(startTime);
-        d.setMinutes(d.getMinutes() + 30);
-        return d;
+        const e = new Date(d);
+        e.setMinutes(d.getMinutes() + 30);
+        return e;
       }
     });
   }, [date]);
-  const isAllDay = (() => {
-    const start = new Date(
-      event?.startTime?.$date || event?.startTime
-    );
-    const end = new Date(event?.endTime?.$date || event?.endTime);
-
-    const isStartOfHeader =
-      start.getHours() === 0 && start.getMinutes() === 0;
-    const isEndOfDay =
-      (end.getHours() === 23 && end.getMinutes() === 59) ||
-      (end.getHours() === 0 &&
-        end.getMinutes() === 0 &&
-        end.getTime() > start.getTime());
-
-    return isStartOfHeader && isEndOfDay;
-  })();
-  const [allDay, setAllDay] = useState(isEdit? isAllDay : false);
+  const [allDay, setAllDay] = useState(isEdit? isAllDayEvent(event) : false);
   const handleAddEvent = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -167,31 +152,7 @@ function AddEventDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        {isEdit ? (
-          <Button className="shadow-none text-white hover:bg-gray-200/40">
-            <PenLine />
-          </Button>
-        ) : (
-          <div
-            className={`p-2 h-full text-left cursor-pointer h-full col-span-1 border border-1 border-gray-300 hover:border-blue-500 hover:border-2
-                  ${
-                    item.currentMonth ? "bg-white" : "bg-gray-100 text-gray-400"
-                  }`}
-          >
-            <span
-              className={`
-                        rounded-full w-7 h-7 inline-flex items-center justify-center ${
-                          item.date.getDate() === today.getDate() &&
-                          item.date.getMonth() === today.getMonth() &&
-                          item.date.getFullYear() === today.getFullYear()
-                            ? "font-bold text-white bg-[#086280]"
-                            : "bg-transparent"
-                        }`}
-            >
-              {item.date.getDate()}
-            </span>
-          </div>
-        )}
+        {trigger}
       </DialogTrigger>
       <DialogContent
         aria-describedby={undefined}

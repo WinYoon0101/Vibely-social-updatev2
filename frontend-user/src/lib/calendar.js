@@ -93,3 +93,45 @@ export const calculateWeekLayout = (event, weekDays) => {
     span: endCol - startCol + 1
   };
 };
+
+export function getStartOfWeek(date) {
+  const d = new Date(date);
+  const day = d.getDay(); // 0 = Sun
+  d.setDate(d.getDate() - day);
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
+
+export function addWeeks(date, amount) {
+  const d = new Date(date);
+  d.setDate(d.getDate() + amount * 7);
+  return d;
+}
+
+export function getWeekDates(date) {
+  const start = getStartOfWeek(date);
+  return Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(start);
+    d.setDate(start.getDate() + i);
+    return d;
+  });
+}
+
+export function minutesFromStartOfDay(date) {
+  return date.getHours() * 60 + date.getMinutes();
+}
+
+export function isAllDayEvent(event) {
+  const start = new Date(event.startTime);
+  const end = new Date(event.endTime);
+
+  const isStartAtMidnight =
+    start.getHours() === 0 && start.getMinutes() === 0;
+
+  const isEndAtEndOfDay =
+    (end.getHours() === 23 && end.getMinutes() === 59) ||
+    (end.getHours() === 0 && end.getMinutes() === 0 &&
+      end.getTime() > start.getTime());
+
+  return isStartAtMidnight && isEndAtEndOfDay;
+}

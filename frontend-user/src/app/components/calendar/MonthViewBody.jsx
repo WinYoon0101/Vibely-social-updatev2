@@ -4,6 +4,7 @@ import EventDetail from "./EventDetail";
 import {
   calculateWeekLayout,
   formatLocalTime,
+  generateCalendar,
 } from "@/lib/calendar";
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -27,7 +28,7 @@ function CalendarRow({ week, events, setEvents, calculateWeekLayout }) {
     const e = new Date(event.endTime?.$date || event.endTime);
     return s <= week[6].date && e >= week[0].date;
   });
-
+  const today = new Date();
   return (
     <div
       className="relative grid grid-cols-7 transition-[height] duration-200"
@@ -35,7 +36,27 @@ function CalendarRow({ week, events, setEvents, calculateWeekLayout }) {
     >
       {week.map((item, index) => (
         <div key={index} className="h-full relative">
-          <AddEventDialog item={item} setEvents={setEvents} />
+          <AddEventDialog item={item} setEvents={setEvents} trigger={
+            <div
+            className={`p-2 h-full text-left cursor-pointer h-full col-span-1 border border-1 border-gray-300 hover:border-blue-500 hover:border-2
+                  ${
+                    item.currentMonth ? "bg-white" : "bg-gray-100 text-gray-400"
+                  }`}
+          >
+            <span
+              className={`
+                        rounded-full w-7 h-7 inline-flex items-center justify-center ${
+                          item.date.getDate() === today.getDate() &&
+                          item.date.getMonth() === today.getMonth() &&
+                          item.date.getFullYear() === today.getFullYear()
+                            ? "font-bold text-white bg-[#086280]"
+                            : "bg-transparent"
+                        }`}
+            >
+              {item.date.getDate()}
+            </span>
+          </div>
+          }/>
         </div>
       ))}
       <div 
@@ -98,11 +119,12 @@ function CalendarRow({ week, events, setEvents, calculateWeekLayout }) {
 
 
 
-function MonthViewBody({ calendar, events, setEvents }) {
+function MonthViewBody({ date, events, setEvents }) {
   const rows = [];
+  const calendar = generateCalendar(date.getFullYear(), date.getMonth());
   for (let i = 0; i < calendar.length; i += 7) {
     rows.push(calendar.slice(i, i + 7));
-  }
+  }  
   return (
     <div className="px-2 pb-5 relative w-full h-full flex flex-col">
       <div className="grid grid-cols-7 text-center font-medium shrink-0">

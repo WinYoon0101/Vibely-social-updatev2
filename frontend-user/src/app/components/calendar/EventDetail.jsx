@@ -8,13 +8,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { CalendarClock, Trash } from "lucide-react";
+import { CalendarClock, PenLine, Trash } from "lucide-react";
 import React, { useState } from "react";
 import AddEventDialog from "./AddEventDialog";
 import { deleteEvent } from "@/service/calendar.service";
 import toast from "react-hot-toast";
 import {
   Popover,
+  PopoverAnchor,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
@@ -43,6 +44,11 @@ function EventDetail({ trigger, event, setEvents }) {
     <Popover>
       <PopoverTrigger asChild>{trigger}</PopoverTrigger>
       <PopoverContent
+        side="left"
+        align="center"
+        sideOffset={8}
+        avoidCollisions={true}
+        collisionPadding={8}
         aria-describedby={undefined}
         className="text-white !p-0 [&>button]:hidden"
         style={{
@@ -51,7 +57,16 @@ function EventDetail({ trigger, event, setEvents }) {
       >
         <div>
           <div className="justify-end flex items-center">
-            <AddEventDialog isEdit={true} event={event} setEvents={setEvents} />
+            <AddEventDialog
+              isEdit={true}
+              event={event}
+              setEvents={setEvents}
+              trigger={
+                <Button className="shadow-none text-white hover:bg-gray-200/40">
+                  <PenLine />
+                </Button>
+              }
+            />
             <Dialog>
               <DialogTrigger asChild>
                 <Button className="shadow-none text-white hover:bg-gray-200/40">

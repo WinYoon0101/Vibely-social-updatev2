@@ -2,9 +2,8 @@
 import ModePicker from "@/app/components/calendar/ModePicker";
 import MonthViewBody from "@/app/components/calendar/MonthViewBody";
 import MonthViewHeader from "@/app/components/calendar/MonthViewHeader";
-import {
-  generateCalendar,
-} from "@/lib/calendar";
+import WeekViewBody from "@/app/components/calendar/WeekViewBody";
+import WeekViewHeader from "@/app/components/calendar/WeekViewHeader";
 import { getEvents } from "@/service/calendar.service";
 import { useEffect, useState } from "react";
 
@@ -27,13 +26,8 @@ const Calendar = () => {
     };
     fetchSchedules();
   }, []);
-  const [mode, setMode] = useState("month"); // "day", "week", "month"
+  const [mode, setMode] = useState("week"); // "day", "week", "month"
   const [date, setDate] = useState(new Date());
-
-  const year = date.getFullYear();
-  const month = date.getMonth();
-
-  const calendar = generateCalendar(year, month);
 
   return (
     <main className="pt-14">
@@ -45,11 +39,17 @@ const Calendar = () => {
             setDate={setDate}
           />
         )}
+        {mode === "week" && (
+          <WeekViewHeader date={date} setDate={setDate} />
+        )}
         {/*Chọn chế độ xem lịch (ngày, tuần, tháng) */}
        <ModePicker mode={mode} setMode={setMode} goToToday={()=>setDate(new Date())}/>
       </div>
       {mode === "month" && (
-        <MonthViewBody calendar={calendar} events={events} setEvents={setEvents} />
+        <MonthViewBody date={date} events={events} setEvents={setEvents} />
+      )}
+      {mode === "week" && (
+        <WeekViewBody date={date} events={events} setEvents={setEvents} />
       )}
     </main>
   );

@@ -11,7 +11,7 @@ import {
   StepBack,
   StepForward,
 } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const months = [
   "Jan.",
@@ -30,7 +30,6 @@ const months = [
 
 function PickMonth({ date, onSelect, year, setYear }) {
   const [open, setOpen] = useState(false);
-  useEffect(() => {}, [date]);
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
