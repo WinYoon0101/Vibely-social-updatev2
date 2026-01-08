@@ -4,8 +4,14 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import React, { useState } from "react";
+import {
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  StepBack,
+  StepForward,
+} from "lucide-react";
+import React, { useEffect, useState } from "react";
 
 const months = [
   "Jan.",
@@ -24,6 +30,7 @@ const months = [
 
 function PickMonth({ date, onSelect, year, setYear }) {
   const [open, setOpen] = useState(false);
+  useEffect(() => {}, [date]);
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -67,4 +74,38 @@ function PickMonth({ date, onSelect, year, setYear }) {
   );
 }
 
-export default PickMonth;
+function MonthViewHeader({ date, setDate}) {
+  const [pickedYear, setPickedYear] = useState(date.getFullYear());
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const handlePrev = () => {
+    setDate(new Date(year, month - 1, 1));
+  };
+  const handleNext = () => {
+    setDate(new Date(year, month + 1, 1));
+  };
+  return (
+    <div className="flex justify-center gap-4 items-center py-2 px-4">
+      <Button
+        onClick={handlePrev}
+        className="bg-[#086280] hover:bg-[#086280]/70 text-white"
+      >
+        <StepBack />
+      </Button>
+      <PickMonth
+        date={date}
+        year={pickedYear}
+        setYear={setPickedYear}
+        onSelect={(month) => setDate(new Date(pickedYear, month, 1))}
+      />
+      <Button
+        onClick={handleNext}
+        className="bg-[#086280] hover:bg-[#086280]/70 text-white"
+      >
+        <StepForward />
+      </Button>
+    </div>
+  );
+}
+
+export default MonthViewHeader;

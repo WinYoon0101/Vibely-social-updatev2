@@ -77,6 +77,7 @@ const updateSchedule = async (req, res) => {
 
         return response(res, 200, "Cập nhật lịch trình thành công", updatedSchedule);
     } catch (error) {
+        console.log(error);
         return response(res, 500, "Lỗi máy chủ nội bộ", error.message);
     }
 };

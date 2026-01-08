@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import React, { useEffect, useState } from "react";
 import PickColorCombobox from "./PickColorCombobox";
 import { Button } from "@/components/ui/button";
-import { CalendarIcon, Clock, Plus } from "lucide-react";
+import { CalendarIcon, Clock, PenLine, Plus } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import toast from "react-hot-toast";
 import {
@@ -22,30 +22,67 @@ import {
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { formatDateOnly, formatDateTime, getTime } from "@/lib/calendar";
+import { createEvent, editEvent } from "@/service/calendar.service";
 
-function AddEventDialog({ setEvents, date }) {
+function AddEventDialog({
+  item = null,
+  setEvents,
+  isEdit = false,
+  event = null,
+}) {
+  const date = item?.date;
+  const today = new Date();
   const [open, setOpen] = useState(false);
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
-  const API_URL =
-    process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8081";
-  const [title, setTitle] = useState("");
-  const [color, setColor] = useState("#2563EB");
-  const [startTime, setStartTime] = useState(new Date(date));
+  const [title, setTitle] = useState(event?.subject || "");
+  const [color, setColor] = useState(event?.categoryColor || "#2563EB");
+  const [startTime, setStartTime] = useState(
+    isEdit ? new Date(event.startTime) : new Date(date)
+  );
   const [endTime, setEndTime] = useState(() => {
-    const d = new Date(date);
+    const d = new Date(startTime);
     d.setMinutes(d.getMinutes() + 30);
     return d;
   });
   useEffect(() => {
-    setStartTime(new Date(date));
+    setStartTime(() => {
+      if (isEdit) {
+        return new Date(event.startTime);
+      } else {
+        const d = new Date(date);
+        d.setHours(9, 0, 0, 0); // Set default start time to 9 AM
+        return d;
+      }
+    });
     setEndTime(() => {
-      const d = new Date(date);
-      d.setMinutes(d.getMinutes() + 30);
-      return d;
+      if (isEdit) {
+        return new Date(event.endTime);
+      } else {
+        const d = new Date(startTime);
+        d.setMinutes(d.getMinutes() + 30);
+        return d;
+      }
     });
   }, [date]);
-  const [allDay, setAllDay] = useState(false);
+  const isAllDay = (() => {
+    const start = new Date(
+      event?.startTime?.$date || event?.startTime
+    );
+    const end = new Date(event?.endTime?.$date || event?.endTime);
+
+    const isStartOfHeader =
+      start.getHours() === 0 && start.getMinutes() === 0;
+    const isEndOfDay =
+      (end.getHours() === 23 && end.getMinutes() === 59) ||
+      (end.getHours() === 0 &&
+        end.getMinutes() === 0 &&
+        end.getTime() > start.getTime());
+
+    return isStartOfHeader && isEndOfDay;
+  })();
+  const [allDay, setAllDay] = useState(isEdit? isAllDay : false);
   const handleAddEvent = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -61,25 +98,47 @@ function AddEventDialog({ setEvents, date }) {
         toast.error("Thời gian kết thúc phải sau thời gian bắt đầu");
         return;
       }
-      const response = await fetch(`${API_URL}/schedules`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          subject: title,
-          startTime: startTime,
-          endTime: endTime,
-          categoryColor: color || "#2563EB",
-        }),
+      const newEvent = await createEvent({
+        subject: title,
+        startTime: startTime,
+        endTime: endTime,
+        categoryColor: color || "#2563EB",
       });
-      const result = await response.json();
-      if (!response.ok) throw new Error(result.message);
-      setEvents((prev) => [...prev, { ...prev, Id: result.data._id }]);
+      setEvents((prev) => [...prev, newEvent]);
+      toast.success("Thêm sự kiện thành công");
       setOpen(false);
     } catch (error) {
       console.log(error);
+    }
+  };
+  const handleEditEvent = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        console.error("Không tìm thấy token");
+        return;
+      }
+      if (!title) {
+        toast.error("Vui lòng nhập tiêu đề sự kiện");
+        return;
+      }
+      if (endTime <= startTime) {
+        toast.error("Thời gian kết thúc phải sau thời gian bắt đầu");
+        return;
+      }
+      const editedEvent = await editEvent(event._id,{
+        subject: title,
+        startTime: startTime,
+        endTime: endTime,
+        categoryColor: color || "#2563EB",
+      });
+      setEvents((prev) =>
+        prev.map((e) => (e._id === editedEvent._id ? editedEvent : e))
+      );
+      toast.success("Cập nhật sự kiện thành công");
+      setOpen(false);
+    } catch (error) {
+      console.log("Lỗi khi cập nhật sự kiện: ", error);
     }
   };
   useEffect(() => {
@@ -96,23 +155,6 @@ function AddEventDialog({ setEvents, date }) {
       setEndTime(end);
     }
   }, [allDay]);
-  const formatDateTime = (date) => {
-    return date.toLocaleString("vi-vn", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "2-digit",
-      hour: "numeric",
-      minute: "2-digit",
-      hour24: true,
-    });
-  };
-  const formatDateOnly = (date) => {
-    return date.toLocaleString("vi-vn", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "2-digit",
-    });
-  };
   const timeSlots = Array.from({ length: 48 }, (_, i) => {
     const totalMinutes = i * 30;
     const hour = Math.floor(totalMinutes / 60);
@@ -122,23 +164,34 @@ function AddEventDialog({ setEvents, date }) {
       .toString()
       .padStart(2, "0")}`;
   });
-  const selectedStartTime = `${startTime
-    .getHours()
-    .toString()
-    .padStart(2, "0")}:${startTime.getMinutes().toString().padStart(2, "0")}`;
-  const selectedEndTime = `${endTime
-    .getHours()
-    .toString()
-    .padStart(2, "0")}:${endTime.getMinutes().toString().padStart(2, "0")}`;
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button
-          className="p-2 shadow-none hover:bg-gray-200"
-          title="Thêm sự kiện mới"
-        >
-          <Plus />
-        </Button>
+        {isEdit ? (
+          <Button className="shadow-none text-white hover:bg-gray-200/40">
+            <PenLine />
+          </Button>
+        ) : (
+          <div
+            className={`p-2 h-full text-left cursor-pointer h-full col-span-1 border border-1 border-gray-300 hover:border-blue-500 hover:border-2
+                  ${
+                    item.currentMonth ? "bg-white" : "bg-gray-100 text-gray-400"
+                  }`}
+          >
+            <span
+              className={`
+                        rounded-full w-7 h-7 inline-flex items-center justify-center ${
+                          item.date.getDate() === today.getDate() &&
+                          item.date.getMonth() === today.getMonth() &&
+                          item.date.getFullYear() === today.getFullYear()
+                            ? "font-bold text-white bg-[#086280]"
+                            : "bg-transparent"
+                        }`}
+            >
+              {item.date.getDate()}
+            </span>
+          </div>
+        )}
       </DialogTrigger>
       <DialogContent
         aria-describedby={undefined}
@@ -148,7 +201,7 @@ function AddEventDialog({ setEvents, date }) {
         onEscapeKeyDown={(e) => e.preventDefault()}
       >
         <DialogHeader className={"flex flex-col gap-2"}>
-          <DialogTitle>Sự kiện mới</DialogTitle>
+          <DialogTitle>{isEdit ? "Cập nhật sự kiện" : "Sự kiện mới"}</DialogTitle>
           <div className="grid grid-cols-1 md:grid-cols-2 w-full items-center gap-4">
             <div className="col-span-1 flex flex-col">
               <Label htmlFor={"title"} className="gap-1">
@@ -228,7 +281,7 @@ function AddEventDialog({ setEvents, date }) {
                       >
                         <div className="flex flex-col items-center gap-2 py-2 px-2">
                           {timeSlots.map((time) => {
-                            const isSelected = time === selectedStartTime;
+                            const isSelected = time === getTime(startTime);
                             return (
                               <Button
                                 key={time}
@@ -304,7 +357,7 @@ function AddEventDialog({ setEvents, date }) {
                       >
                         <div className="flex flex-col items-center gap-2 py-2 px-2">
                           {timeSlots.map((time) => {
-                            const isSelected = time === selectedEndTime;
+                            const isSelected = time === getTime(endTime);
                             return (
                               <Button
                                 key={time}
@@ -346,12 +399,21 @@ function AddEventDialog({ setEvents, date }) {
               Hủy
             </Button>
           </DialogClose>
-          <Button
+          {isEdit?(
+            <Button
+            className="bg-[#086280] hover:bg-[#065a70] text-white"
+            onClick={handleEditEvent}
+          >
+            Cập nhật
+          </Button>
+          ):(
+            <Button
             className="bg-[#086280] hover:bg-[#065a70] text-white"
             onClick={handleAddEvent}
           >
             Thêm sự kiện
           </Button>
+          )}
         </DialogFooter>
       </DialogContent>
     </Dialog>

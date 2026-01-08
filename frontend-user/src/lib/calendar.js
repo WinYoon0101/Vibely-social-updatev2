@@ -1,12 +1,3 @@
-export function getDaysInMonth(year, month) {
-  return new Date(year, month + 1, 0).getDate();
-}
-
-export function getStartDayOfMonth(year, month) {
-  // 0 = CN, 1 = T2 ...
-  return new Date(year, month, 1).getDay();
-}
-
 export const isSameDay = (date1, date2) => {
   const d1 = new Date(date1);
   const d2 = new Date(date2);
@@ -17,27 +8,13 @@ export const isSameDay = (date1, date2) => {
   );
 };
 
-export const isDateInRange = (currentDate, startDate, endDate) => {
-  // Đưa tất cả về 00:00:00 để so sánh chính xác theo ngày
-  const start = new Date(startDate);
-  start.setHours(0, 0, 0, 0);
-
-  const end = new Date(endDate);
-  end.setHours(23, 59, 59, 999); // Kết thúc vào cuối ngày
-
-  const current = new Date(currentDate);
-  current.setHours(0, 0, 0, 0);
-
-  return current >= start && current <= end;
-};
-
 export const formatLocalTime = (isoString) => {
   const date = new Date(isoString);
-  
+
   // Lấy giờ và phút, đảm bảo có số 0 đứng trước (ví dụ: 09:05)
-  const hours = date.getHours().toString().padStart(2, '0');
-  const minutes = date.getMinutes().toString().padStart(2, '0');
-  
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+
   return `${hours}:${minutes}`;
 };
 
@@ -65,3 +42,54 @@ export function generateCalendar(year, month) {
 
   return calendar;
 }
+
+export const formatDateTime = (date) => {
+  return date.toLocaleString("vi-vn", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+    hour: "numeric",
+    minute: "2-digit",
+    hour24: true,
+  });
+};
+export const formatDateOnly = (date) => {
+  return date.toLocaleString("vi-vn", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+  });
+};
+
+export const getTime = (date)=>{
+  return `${date
+  .getHours()
+  .toString()
+  .padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}`
+}
+
+export const calculateWeekLayout = (event, weekDays) => {
+  const start = new Date(event.startTime?.$date || event.startTime);
+  const end = new Date(event.endTime?.$date || event.endTime);
+  
+  // Tìm ngày đầu tiên và cuối cùng của tuần này
+  const weekStart = weekDays[0].date;
+  const weekEnd = weekDays[6].date;
+
+  // Vị trí cột bắt đầu (0-6)
+  let startCol = 0;
+  if (start > weekStart) {
+    startCol = weekDays.findIndex(d => isSameDay(d.date, start));
+  }
+
+  // Vị trí cột kết thúc (0-6)
+  let endCol = 6;
+  if (end < weekEnd) {
+    endCol = weekDays.findIndex(d => isSameDay(d.date, end));
+  }
+
+  return {
+    startCol: startCol + 1, // Grid CSS bắt đầu từ 1
+    span: endCol - startCol + 1
+  };
+};
