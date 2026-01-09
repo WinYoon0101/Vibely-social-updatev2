@@ -24,13 +24,13 @@ function PickDate({ date, setDate }) {
     const sameMonth = start.getMonth() === end.getMonth();
     const sameYear = start.getFullYear() === end.getFullYear();
 
-    const startStr = start.toLocaleDateString("en-US", {
+    const startStr = start.toLocaleDateString("vi-VN", {
       month: "short",
       day: "numeric",
     });
 
-    const endStr = end.toLocaleDateString("en-US", {
-      month: sameMonth ? undefined : "short",
+    const endStr = end.toLocaleDateString("vi-VN", {
+      month: "short",
       day: "numeric",
     });
 

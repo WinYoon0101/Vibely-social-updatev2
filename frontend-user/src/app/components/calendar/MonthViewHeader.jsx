@@ -14,18 +14,18 @@ import {
 import React, { useState } from "react";
 
 const months = [
-  "Jan.",
-  "Feb.",
-  "Mar.",
-  "Apr.",
-  "May",
-  "Jun.",
-  "Jul.",
-  "Aug.",
-  "Sep.",
-  "Oct.",
-  "Nov.",
-  "Dec.",
+  "Tháng 1",
+  "Tháng 2",
+  "Tháng 3",
+  "Tháng 4",
+  "Tháng 5",
+  "Tháng 6",
+  "Tháng 7",
+  "Tháng 8",
+  "Tháng 9",
+  "Tháng 10",
+  "Tháng 11",
+  "Tháng 12",
 ];
 
 function PickMonth({ date, onSelect, year, setYear }) {
@@ -58,7 +58,7 @@ function PickMonth({ date, onSelect, year, setYear }) {
                 onSelect(i);
                 setOpen(false);
               }}
-              className={`p-2 rounded border border-1 border-transparent hover:border-[#086280] ${
+              className={`p-2 rounded border text-[0.9rem] border-1 border-transparent hover:border-[#086280] ${
                 date.getMonth() === i && year === date.getFullYear()
                   ? "bg-[#086280] text-white"
                   : ""

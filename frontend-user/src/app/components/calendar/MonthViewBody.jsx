@@ -6,7 +6,7 @@ import {
   formatLocalTime,
   generateCalendar,
 } from "@/lib/calendar";
-const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const days = ["Chủ nhật", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7"];
 
 function CalendarRow({ week, events, setEvents, calculateWeekLayout }) {
   const [rowHeight, setRowHeight] = useState(120); // Chiều cao mặc định
@@ -61,7 +61,7 @@ function CalendarRow({ week, events, setEvents, calculateWeekLayout }) {
       ))}
       <div 
         ref={overlayRef}
-        className="absolute top-8 left-0 w-full grid grid-cols-7 gap-y-1 pointer-events-none"
+        className="absolute top-10 left-0 w-full grid grid-cols-7 gap-y-1 pointer-events-none"
       >
         {weekEvents.map((event) => {
           const { startCol, span } = calculateWeekLayout(event, week); // cột bắt đầu, số ô kéo dài

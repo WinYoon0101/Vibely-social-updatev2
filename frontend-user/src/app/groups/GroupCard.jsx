@@ -15,7 +15,7 @@ function GroupCard({ group, myGroup = false }) {
       className="bg-white mb-4 p-4 shadow rounded-lg border border-gray-200 cursor-pointer hover:shadow-lg"
     >
       <img
-        src={group?.coverPhotoUrl}
+        src={group?.coverPhotoUrl || "/about/vibely_logo_1000.png"}
         alt={group.name}
         className="w-full h-48 object-cover rounded mb-4"
       />
