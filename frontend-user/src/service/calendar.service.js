@@ -58,3 +58,16 @@ export const deleteEvent = async (scheduleId) => {
         throw error;
     }
 }
+
+export const getNextEvent = async()=>{
+    try {
+        const token = localStorage.getItem("token")
+        const result = await axiosInstance.get(`/schedules/next`,{
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return result?.data?.data;
+    } catch (error) {
+        console.error("Lỗi khi lấy sự kiện tiếp theo:", error);
+        throw error;
+    }
+}

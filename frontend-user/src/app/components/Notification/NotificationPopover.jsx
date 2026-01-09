@@ -9,6 +9,7 @@ import { userNotificationStore } from "@/store/useNotificationsStore";
 import { Bell } from "lucide-react";
 import React, { useState } from "react";
 import NotificationItem from "./NotificationItem";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 function NotificationPopover() {
   const [open, setOpen] = useState(false);
@@ -41,7 +42,7 @@ function NotificationPopover() {
           </div>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="max-h-[min(400px,50vh)] w-[400px] bg-white shadow-lg rounded-lg p-4 border-gray-200 shadow-lg">
+      <PopoverContent className="max-h-[min(400px,50vh)] h-full w-[400px] bg-white shadow-lg rounded-lg p-4 border-gray-200 shadow-lg">
         <div className="flex justify-between items-center border-b pb-2">
           <span className="text-gray-800 font-bold">
             {`Thông báo (${unreadCount})`}
@@ -57,6 +58,7 @@ function NotificationPopover() {
           </div>
         </div>
         <Separator />
+        <ScrollArea className="max-h-[min(300px,45vh)] overflow-y-auto">
         {notifications.length > 0 ? (
           <div className="mt-2 space-y-3">
             {notifications.map((item) => (
@@ -68,6 +70,7 @@ function NotificationPopover() {
             <span className="text-gray-400">Không có thông báo mới</span>
           </div>
         )}
+        </ScrollArea>
       </PopoverContent>
     </Popover>
   );
