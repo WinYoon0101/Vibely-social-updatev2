@@ -6,7 +6,12 @@ const __dirname = path.dirname(__filename);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  turbopack: false,           
   outputFileTracingRoot: __dirname,
+
+  webpack(config) {
+    return config;
+  },
 };
 
 export default nextConfig;
