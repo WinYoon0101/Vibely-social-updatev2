@@ -52,7 +52,7 @@
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.475.0",
     "motion-dom": "^12.6.3",
-    "next": "15.1.7",
+    "next": "15.1.11",
     "next-theme": "^0.1.5",
     "qrcode.react": "^4.2.0",
     "react": "^19.0.0",
