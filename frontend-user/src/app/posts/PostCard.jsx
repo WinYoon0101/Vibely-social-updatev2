@@ -446,20 +446,20 @@ const PostCard = ({ post, onReact, onComment, onShare, onDelete, onEdit, fetchSi
                 </p>
                 <div className="flex justify-end space-x-4">
                   <button
-                    onClick={() => setPopupOpen(false)}
-                    className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
-                  >
-                    Hủy
-                  </button>
-                  <button
                     onClick={() => {
                       setPopupOpen(false);
                       handleDeletePost();
                     }}
-                    className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                    className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-700"
                   >
                     Xác nhận
                   </button>
+                  <button
+                    onClick={() => setPopupOpen(false)}
+                    className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
+                  >
+                    Hủy
+                  </button>                  
                 </div>
               </div>
             </div>

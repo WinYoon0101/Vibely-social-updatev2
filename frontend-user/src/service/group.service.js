@@ -114,7 +114,6 @@ export const editGroup = async (groupId, formData) => {
 
 export const createGroupPost = async (groupId, formData) => {
     try {
-        console.log(formData)
         const token = localStorage.getItem("token");
         const result = await axiosInstance.post(`/groups/${groupId}`, formData, {
             headers: { Authorization: `Bearer ${token}` }

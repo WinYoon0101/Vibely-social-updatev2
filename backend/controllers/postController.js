@@ -48,7 +48,7 @@ const createPost = async (req, res) => {
     });
 
     await newPost.save();
-    return response(res, 201, "Tạo bài viết thành công", newPost.populate("user", "_id username profilePicture email"));
+    return response(res, 201, "Tạo bài viết thành công", await newPost.populate("user", "_id username profilePicture email"));
   } catch (error) {
     console.error("Lỗi khi tạo bài viết:", error);
     return response(res, 500, "Tạo bài viết thất bại", error.message);

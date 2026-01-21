@@ -4,7 +4,10 @@ import axiosInstance from "./url.service"
 //Phương thức tạo bài viết
 export const createPost = async (postData) => {
     try {
-        const result = await axiosInstance.post('/users/posts', postData)
+        const token = localStorage.getItem("token");
+        const result = await axiosInstance.post('/users/posts', postData, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
         return result?.data?.data
     } catch (error) {
         //console.error(error)
