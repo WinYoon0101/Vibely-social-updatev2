@@ -63,7 +63,10 @@ const corsOptions = {
             "https://vibely-study-social-web-admin.vercel.app",
             "https://vibelyadmin.netlify.app",
             "https://vibelyuser.netlify.app",
-            "https://vibely-study-social-web-user.vercel.app"
+            "https://vibely-study-social-web-user.vercel.app",
+            "https://vibely-backend-v379.onrender.com",
+            "https://vibely-frontend-user.vercel.app",
+            "https://vibely-frontend-admin.vercel.app"
         ];
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
@@ -146,7 +149,10 @@ const io = new Server(server, {
             "https://vibely-study-social-web-user.vercel.app",
             "https://vibelyadmin.netlify.app",
             "https://vibelyuser.netlify.app",
-            "https://vibely-study-social-web-admin.vercel.app"
+            "https://vibely-study-social-web-admin.vercel.app",
+            "https://vibely-backend-v379.onrender.com",
+            "https://vibely-frontend-user.vercel.app",
+            "https://vibely-frontend-admin.vercel.app"
         ],
         methods: ["GET", "POST"],
         credentials: true

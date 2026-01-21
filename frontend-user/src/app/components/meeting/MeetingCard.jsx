@@ -28,15 +28,15 @@ const MeetingCard = ({
 
 
   return (
-    <section className="flex min-h-[258px] w-full flex-col justify-between rounded-[14px] bg-[#2C5784] px-5 py-8 xl:max-w-[568px]">
+    <section className="flex min-h-[258px] w-full flex-col justify-between rounded-[14px] bg-[#3d70a6] px-5 py-8 xl:max-w-[568px]">
       {/* ===== Header ===== */}
       <article className="flex flex-col gap-5">
-        <Image src={icon} alt="meeting-icon" width={28} height={28} />
+        <Image src={icon} alt="meeting-icon" width={30} height={30} />
 
         <div className="flex justify-between">
           <div className="flex flex-col gap-2">
             <h1 className="text-2xl font-bold text-white">{title}</h1>
-            <p className="text-base font-normal text-gray-300">
+            <p className="text-lg font-normal text-gray-300">
               {date}
             </p>
           </div>
@@ -46,7 +46,7 @@ const MeetingCard = ({
       {/* ===== Footer ===== */}
       <article className="relative flex justify-center">
         {/* Avatars */}
-        <div className="relative flex w-full max-sm:hidden">
+        {/* <div className="relative flex w-full max-sm:hidden">
           {avatarImages.map((img, index) => (
             <Image
               key={index}
@@ -64,7 +64,7 @@ const MeetingCard = ({
           <div className="flex-center absolute left-[136px] size-10 rounded-full border-[5px] border-[#252A41] bg-[#1E2757] text-sm font-semibold text-gray-300">
             +5
           </div>
-        </div>
+        </div> */}
 
         {/* Actions */}
         {!isPreviousMeeting && (
