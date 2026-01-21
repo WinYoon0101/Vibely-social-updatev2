@@ -125,7 +125,7 @@ const MeetingTypeList = () => {
           <div className="flex flex-col gap-2.5">
             <label className="text-base text-[#ECF0FF]">Thêm mô tả</label>
             <Textarea
-              placeholder="Nhập mô tả cuộc họp..."
+              placeholder="Nhập mô tả cuộc họp"
               className="border-none bg-[#252A41] focus-visible:ring-0"
               onChange={(e) =>
                 setValues({ ...values, description: e.target.value })
