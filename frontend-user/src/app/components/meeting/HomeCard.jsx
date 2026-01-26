@@ -13,8 +13,8 @@ const HomeCard = ({ className = '', img, title, description, handleClick }) => {
       </div>
 
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold">{title}</h1>
-        <p className="text-lg font-normal">{description}</p>
+        <h1 className="text-2xl font-bold text-white">{title}</h1>
+        <p className="text-lg font-normal text-white">{description}</p>
       </div>
     </section>
   );

@@ -72,6 +72,9 @@
 }
 
 /* ======== stream css overrides ======== */
+
+
+
 .str-video__call-stats {
   max-width: 500px;
   position: relative;
@@ -103,7 +106,618 @@
 
 .str-video__call-controls__button {
   height: 40px;
+  width: 40px;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: #3c4043 !important;
+  transition: all 0.2s ease !important;
 }
+
+/* Fix CallControls - inline flex cho layout Zoom style */
+.str-video__call-controls {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-wrap: nowrap !important;
+  gap: 8px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  backdrop-filter: none !important;
+  margin: 0 !important;
+}
+
+/* Fix icon color khi button ở trạng thái active/muted (đỏ) */
+.str-video__call-controls__button--active,
+.str-video__call-controls__button[data-active="true"] {
+  background-color: #ea4335 !important;
+}
+
+.str-video__call-controls__button--active svg,
+.str-video__call-controls__button[data-active="true"] svg,
+.str-video__call-controls__button--active svg path,
+.str-video__call-controls__button[data-active="true"] svg path {
+  color: white !important;
+  fill: white !important;
+  stroke: white !important;
+}
+
+/* Đảm bảo tất cả icon trong controls đều có màu trắng */
+.str-video__call-controls__button svg {
+  color: white !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.str-video__call-controls__button svg path {
+  fill: currentColor !important;
+}
+
+/* Hover effect cho buttons */
+.str-video__call-controls__button:hover {
+  background-color: #5f6368 !important;
+  transform: scale(1.08);
+  transition: all 0.15s ease;
+}
+
+.str-video__call-controls__button--active:hover,
+.str-video__call-controls__button[data-active="true"]:hover {
+  background-color: #d93025 !important;
+}
+
+/* Fix cho composite button (mic với dropdown) */
+.str-video__composite-button {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+  background: #3c4043 !important;
+  border-radius: 24px !important;
+  padding: 0 0 0 0 !important;
+}
+
+.str-video__composite-button--active {
+  background: #ea4335 !important;
+}
+
+.str-video__composite-button .str-video__call-controls__button {
+  border-radius: 50% 0 0 50% !important;
+}
+
+.str-video__composite-button__button-group {
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Fix dropdown arrow */
+.str-video__composite-button__button-group button {
+  background: transparent !important;
+  height: 40px !important;
+  width: 24px !important;
+  border-radius: 0 24px 24px 0 !important;
+  padding: 0 !important;
+}
+
+.str-video__composite-button__button-group button svg,
+.str-video__composite-button__button-group button svg path {
+  color: white !important;
+  fill: white !important;
+}
+
+/* Leave call button - màu đỏ */
+.str-video__call-controls__button[title*="Leave"],
+.str-video__call-controls__button[title*="leave"],
+.str-video__call-controls__button[aria-label*="Leave"],
+.str-video__call-controls__button[aria-label*="leave"] {
+  background-color: #ea4335 !important;
+}
+
+.str-video__call-controls__button[title*="Leave"]:hover,
+.str-video__call-controls__button[title*="leave"]:hover,
+.str-video__call-controls__button[aria-label*="Leave"]:hover,
+.str-video__call-controls__button[aria-label*="leave"]:hover {
+  background-color: #d93025 !important;
+}
+
+/* ScreenShareButton và RecordCallButton custom styles */
+.str-video__screen-share-button,
+.str-video__record-call-button {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  height: auto !important;
+  width: auto !important;
+}
+
+.str-video__screen-share-button button,
+.str-video__record-call-button button {
+  height: 40px !important;
+  width: 40px !important;
+  border-radius: 50% !important;
+  background-color: #3c4043 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s ease !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+.str-video__screen-share-button button:hover,
+.str-video__record-call-button button:hover {
+  background-color: #5f6368 !important;
+  transform: scale(1.08);
+}
+
+.str-video__screen-share-button button svg,
+.str-video__record-call-button button svg {
+  color: white !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.str-video__screen-share-button button svg path,
+.str-video__record-call-button button svg path {
+  fill: white !important;
+  stroke: white !important;
+}
+
+/* Ẩn labels mặc định của ScreenShare và Record */
+.str-video__screen-share-button span,
+.str-video__record-call-button span {
+  display: none !important;
+}
+
+/* Active state cho screen share */
+.str-video__screen-share-button button[data-active="true"],
+.str-video__screen-share-button button.active {
+  background-color: #ea4335 !important;
+}
+
+.str-video__screen-share-button button[data-active="true"]:hover,
+.str-video__screen-share-button button.active:hover {
+  background-color: #d93025 !important;
+}
+
+/* Active state cho recording */
+.str-video__record-call-button button[data-active="true"],
+.str-video__record-call-button button.recording {
+  background-color: #ea4335 !important;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* ======== Stream Chat CSS Overrides - Zoom Dark Theme ======== */
+
+/* Main containers - force dark theme */
+.meeting-chat-panel .str-chat,
+.meeting-chat-panel .str-chat__container,
+.meeting-chat-panel .str-chat__channel,
+.meeting-chat-panel .str-chat__main-panel {
+  background: #1a1a1a !important;
+  color: #ffffff !important;
+  height: 100%;
+  padding: 0 !important;
+}
+
+/* Hide native header - we have custom one */
+.meeting-chat-panel .str-chat__channel-header,
+.meeting-chat-panel .str-chat__header-hamburger {
+  display: none !important;
+}
+
+/* ============ MESSAGE LIST ============ */
+.meeting-chat-panel .str-chat__list {
+  background: #1a1a1a !important;
+  padding: 16px !important;
+}
+
+.meeting-chat-panel .str-chat__li {
+  margin-bottom: 16px !important;
+}
+
+.meeting-chat-panel .str-chat__message {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.meeting-chat-panel .str-chat__message-simple,
+.meeting-chat-panel .str-chat__message-simple__actions {
+  background: transparent !important;
+}
+
+/* Message text bubble */
+.meeting-chat-panel .str-chat__message-text,
+.meeting-chat-panel .str-chat__message-text-inner,
+.meeting-chat-panel .str-chat__message-simple-text-inner {
+  background: #2d2d2d !important;
+  color: #ffffff !important;
+  border-radius: 12px !important;
+  padding: 10px 14px !important;
+  max-width: 260px !important;
+  border: none !important;
+}
+
+.meeting-chat-panel .str-chat__message-text p,
+.meeting-chat-panel .str-chat__message-text span {
+  color: #ffffff !important;
+  margin: 0 !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+}
+
+/* Sender name */
+.meeting-chat-panel .str-chat__message-simple-name,
+.meeting-chat-panel .str-chat__message-sender-name {
+  color: #b0b0b0 !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  margin-bottom: 4px !important;
+}
+
+/* Timestamp */
+.meeting-chat-panel .str-chat__message-simple-timestamp,
+.meeting-chat-panel .str-chat__message-timestamp {
+  color: #707070 !important;
+  font-size: 11px !important;
+  margin-top: 4px !important;
+}
+
+/* Avatar */
+.meeting-chat-panel .str-chat__avatar {
+  width: 32px !important;
+  height: 32px !important;
+  margin-right: 10px !important;
+}
+
+.meeting-chat-panel .str-chat__avatar-image,
+.meeting-chat-panel .str-chat__avatar img {
+  border-radius: 50% !important;
+  width: 32px !important;
+  height: 32px !important;
+}
+
+/* ============ MESSAGE INPUT ============ */
+
+/* Input container */
+.meeting-chat-panel .str-chat__input-flat,
+.meeting-chat-panel .str-chat__input-flat-wrapper,
+.meeting-chat-panel .str-chat__message-input {
+  background: #2d2d2d !important;
+  border: 1px solid #3c4043 !important;
+  border-radius: 10px !important;
+  padding: 10px 14px !important;
+  margin: 0 16px 16px 16px !important;
+}
+
+.meeting-chat-panel .str-chat__input-flat:focus-within {
+  border-color: #5f9eff !important;
+  box-shadow: 0 0 0 1px #5f9eff !important;
+}
+
+/* Text area - CRITICAL FIX */
+.meeting-chat-panel .str-chat__textarea,
+.meeting-chat-panel .str-chat__textarea textarea,
+.meeting-chat-panel textarea[name="message"],
+.meeting-chat-panel .str-chat__input-flat textarea {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #ffffff !important;
+  font-size: 14px !important;
+  min-height: 40px !important;
+  max-height: 120px !important;
+  border: none !important;
+  outline: none !important;
+  resize: none !important;
+  padding: 0 !important;
+  line-height: 1.5 !important;
+}
+
+/* Placeholder */
+.meeting-chat-panel .str-chat__textarea textarea::placeholder,
+.meeting-chat-panel textarea[name="message"]::placeholder {
+  color: #888888 !important;
+  opacity: 1 !important;
+}
+
+/* Send button */
+.meeting-chat-panel .str-chat__send-button,
+.meeting-chat-panel button[aria-label*="Send"],
+.meeting-chat-panel button[type="submit"] {
+  background: #5f9eff !important;
+  color: #ffffff !important;
+  padding: 8px 16px !important;
+  border-radius: 8px !important;
+  border: none !important;
+  height: auto !important;
+  min-width: auto !important;
+  transition: all 0.2s ease !important;
+}
+
+.meeting-chat-panel .str-chat__send-button:hover {
+  background: #4a8ae8 !important;
+  transform: scale(1.02);
+}
+
+.meeting-chat-panel .str-chat__send-button:disabled {
+  background: #4c4c4c !important;
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+
+/* Send button icon */
+.meeting-chat-panel .str-chat__send-button svg,
+.meeting-chat-panel .str-chat__send-button svg path {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Other input buttons (emoji, attachments) */
+.meeting-chat-panel .str-chat__input-flat-emojiselect,
+.meeting-chat-panel .str-chat__fileupload-wrapper button {
+  background: transparent !important;
+  color: #888888 !important;
+  padding: 4px !important;
+  margin-right: 4px !important;
+}
+
+.meeting-chat-panel .str-chat__input-flat-emojiselect:hover {
+  color: #ffffff !important;
+}
+
+/* ============ SCROLLBAR ============ */
+
+
+.meeting-chat-panel .str-chat__list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.meeting-chat-panel .str-chat__list::-webkit-scrollbar-thumb {
+  background: #4c4c4c;
+  border-radius: 3px;
+}
+
+.meeting-chat-panel .str-chat__list::-webkit-scrollbar-thumb:hover {
+  background: #666666;
+}
+
+/* ============ LOADING & EMPTY STATES ============ */
+.meeting-chat-panel .str-chat__loading-indicator,
+.meeting-chat-panel .str-chat__loading-indicator-icon {
+  background: transparent !important;
+  color: #ffffff !important;
+}
+
+.meeting-chat-panel .str-chat__empty-channel {
+  color: #888888 !important;
+  background: transparent !important;
+}
+
+/* ============ THREAD & EXTRAS ============ */
+.meeting-chat-panel .str-chat__thread {
+  display: none !important;
+}
+
+.meeting-chat-panel .str-chat__message-replies-count-button {
+  display: none !important;
+}
+
+/* Date separator */
+.meeting-chat-panel .str-chat__date-separator {
+  color: #888888 !important;
+  font-size: 12px !important;
+}
+
+.meeting-chat-panel .str-chat__date-separator-line {
+  background: #3c4043 !important;
+}
+
+/* System messages */
+.meeting-chat-panel .str-chat__system-message {
+  color: #888888 !important;
+  font-size: 12px !important;
+  text-align: center !important;
+  background: transparent !important;
+}
+
+/* Typing indicator */
+.meeting-chat-panel .str-chat__typing-indicator {
+  color: #888888 !important;
+  font-size: 12px !important;
+  padding: 0 16px !important;
+}
+
+/* Make sure all text is visible */
+.meeting-chat-panel * {
+  color: inherit !important;
+}
+
+.meeting-chat-panel input,
+.meeting-chat-panel textarea,
+.meeting-chat-panel button {
+  font-family: inherit !important;
+}
+
+
+
+/* ============ DELETED MESSAGES ============ */
+
+.meeting-chat-panel .str-chat__message--deleted,
+.meeting-chat-panel .str-chat__message-deleted {
+  background: transparent !important;
+}
+
+.meeting-chat-panel .str-chat__message--deleted .str-chat__message-text,
+.meeting-chat-panel .str-chat__message-deleted-inner {
+  background: #3c4043 !important;
+  color: #888888 !important;
+  font-style: italic !important;
+  border: 1px dashed #5c5c5c !important;
+}
+
+.meeting-chat-panel .str-chat__message--deleted p,
+.meeting-chat-panel .str-chat__message-deleted-inner p {
+  color: #888888 !important;
+}
+
+/* ============ MODALS & POPUPS ============ */
+
+.meeting-chat-panel .str-chat__modal,
+.meeting-chat-panel .str-chat__modal__wrapper {
+  background: rgba(0, 0, 0, 0.75) !important;
+}
+
+.meeting-chat-panel .str-chat__modal__inner {
+  background: #2d2d2d !important;
+  border: 1px solid #3c4043 !important;
+  border-radius: 12px !important;
+  color: #ffffff !important;
+}
+
+.meeting-chat-panel .str-chat__modal__header {
+  background: #2d2d2d !important;
+  border-bottom: 1px solid #3c4043 !important;
+  color: #ffffff !important;
+}
+
+.meeting-chat-panel .str-chat__modal__close-button {
+  color: #ffffff !important;
+  background: transparent !important;
+}
+
+.meeting-chat-panel .str-chat__modal__close-button:hover {
+  background: #3c4043 !important;
+}
+
+/* ============ TOOLTIPS ============ */
+
+.meeting-chat-panel .str-chat__tooltip {
+  background: #2d2d2d !important;
+  color: #ffffff !important;
+  border: 1px solid #3c4043 !important;
+  border-radius: 6px !important;
+  padding: 6px 10px !important;
+  font-size: 12px !important;
+}
+
+/* ============ IMAGE/FILE ATTACHMENTS ============ */
+
+.meeting-chat-panel .str-chat__message-attachment {
+  background: #2d2d2d !important;
+  border: 1px solid #3c4043 !important;
+  border-radius: 8px !important;
+}
+
+.meeting-chat-panel .str-chat__message-attachment-card {
+  background: #2d2d2d !important;
+  color: #ffffff !important;
+}
+
+.meeting-chat-panel .str-chat__message-attachment-card--title,
+.meeting-chat-panel .str-chat__message-attachment-card--text {
+  color: #ffffff !important;
+}
+
+.meeting-chat-panel .str-chat__message-attachment-card--url {
+  color: #888888 !important;
+}
+
+/* ============ GIPHY PICKER ============ */
+
+.meeting-chat-panel .str-chat__giphy-picker {
+  background: #2d2d2d !important;
+  border: 1px solid #3c4043 !important;
+  border-radius: 8px !important;
+}
+
+.meeting-chat-panel .str-chat__giphy-picker input {
+  background: #1a1a1a !important;
+  color: #ffffff !important;
+  border: 1px solid #3c4043 !important;
+}
+
+/* ============ QUOTED/REPLY MESSAGES ============ */
+
+.meeting-chat-panel .str-chat__quoted-message-preview {
+  background: #3c4043 !important;
+  border-left: 3px solid #5f9eff !important;
+  padding: 8px 12px !important;
+  border-radius: 6px !important;
+  margin-bottom: 8px !important;
+}
+
+.meeting-chat-panel .str-chat__quoted-message-preview p,
+.meeting-chat-panel .str-chat__quoted-message-preview span {
+  color: #b0b0b0 !important;
+  font-size: 12px !important;
+}
+
+.meeting-chat-panel .str-chat__quoted-message-preview-header {
+  color: #5f9eff !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  margin-bottom: 4px !important;
+}
+
+/* Cancel reply button */
+.meeting-chat-panel .str-chat__quoted-message-preview button {
+  background: transparent !important;
+  color: #888888 !important;
+}
+
+.meeting-chat-panel .str-chat__quoted-message-preview button:hover {
+  color: #ffffff !important;
+}
+
+/* ============ LINK PREVIEWS ============ */
+
+.meeting-chat-panel .str-chat__message-url-preview {
+  background: #2d2d2d !important;
+  border: 1px solid #3c4043 !important;
+  border-radius: 8px !important;
+}
+
+.meeting-chat-panel .str-chat__message-url-preview-title {
+  color: #ffffff !important;
+}
+
+.meeting-chat-panel .str-chat__message-url-preview-description {
+  color: #b0b0b0 !important;
+}
+
+/* ============ GLOBAL OVERRIDES ============ */
+
+/* Force all text elements to be visible */
+.meeting-chat-panel button,
+.meeting-chat-panel span,
+.meeting-chat-panel p,
+.meeting-chat-panel a,
+.meeting-chat-panel div,
+.meeting-chat-panel li {
+  color: inherit !important;
+}
+
+/* Ensure no white backgrounds anywhere */
+.meeting-chat-panel [style*="background: white"],
+.meeting-chat-panel [style*="background-color: white"],
+.meeting-chat-panel [style*="background: #fff"],
+.meeting-chat-panel [style*="background-color: #fff"] {
+  background: #2d2d2d !important;
+  background-color: #2d2d2d !important;
+}
+
+
+
 
 .glassmorphism {
   background: rgba(255, 255, 255, 0.25);
@@ -136,3 +750,288 @@
     width: 100%;
   }
 }
+
+/* ============================================ */
+/* GLOBAL STREAM CHAT CSS - FOR PORTALS/MODALS */
+/* ============================================ */
+/* These elements render OUTSIDE of .meeting-chat-panel so need global styling */
+
+/* All Stream Chat modals and overlays */
+.str-chat__modal,
+.str-chat__modal-wrapper,
+.str-chat__modal__wrapper {
+  background: rgba(0, 0, 0, 0.8) !important;
+  z-index: 9999 !important;
+}
+
+.str-chat__modal__inner,
+.str-chat__modal-inner {
+  background: #2d2d2d !important;
+  border: 1px solid #3c4043 !important;
+  border-radius: 12px !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
+}
+
+.str-chat__modal__header {
+  background: #2d2d2d !important;
+  border-bottom: 1px solid #3c4043 !important;
+  color: #ffffff !important;
+}
+
+.str-chat__modal__close-button {
+  color: #ffffff !important;
+  background: transparent !important;
+}
+
+.str-chat__modal__close-button:hover {
+  background: #3c4043 !important;
+}
+
+/* Modal body and content */
+.str-chat__modal__body,
+.str-chat__modal-body {
+  background: #2d2d2d !important;
+  color: #ffffff !important;
+}
+
+.str-chat__modal__content {
+  color: #ffffff !important;
+}
+
+/* All text in modals */
+.str-chat__modal h1,
+.str-chat__modal h2,
+.str-chat__modal h3,
+.str-chat__modal p,
+.str-chat__modal span,
+.str-chat__modal div {
+  color: #ffffff !important;
+}
+
+
+
+/* ============ MESSAGE ACTIONS MENU (GLOBAL) ============ */
+
+.str-chat__message-actions-list,
+.str-chat__message-actions-box {
+  background: #2d2d2d !important;
+  border: 1px solid #3c4043 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+  padding: 4px !important;
+}
+
+.str-chat__message-actions-list-item {
+  background: #2d2d2d !important;
+  color: #ffffff !important;
+  padding: 10px 16px !important;
+  border: none !important;
+  border-radius: 6px !important;
+  margin: 2px 0 !important;
+}
+
+.str-chat__message-actions-list-item:hover {
+  background: #3c4043 !important;
+}
+
+.str-chat__message-actions-list-item span {
+  color: #ffffff !important;
+}
+
+.str-chat__message-actions-list-item svg,
+.str-chat__message-actions-list-item svg path {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* ============ EMOJI PICKER (GLOBAL) ============ */
+
+.str-chat__message-reactions-list str-chat__message-reactions-options {
+  background: #3a3e41 !important;
+  box-shadow: none !important;
+}
+
+/* Emoji mart picker that renders as portal */
+.emoji-mart {
+  background: #2d2d2d !important;
+  border: 1px solid #3c4043 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+}
+
+.emoji-mart-bar {
+  background: #2d2d2d !important;
+  border-color: #3c4043 !important;
+}
+
+.emoji-mart-search {
+  background: #2d2d2d !important;
+}
+
+.emoji-mart-search input {
+  background: #1a1a1a !important;
+  color: #ffffff !important;
+  border: 1px solid #3c4043 !important;
+}
+
+.emoji-mart-search input::placeholder {
+  color: #888888 !important;
+}
+
+.emoji-mart-category-label {
+  background: #2d2d2d !important;
+}
+
+.emoji-mart-category-label span {
+  background: #2d2d2d !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+.emoji-mart-scroll {
+  background: #2d2d2d !important;
+}
+
+.emoji-mart-anchor-selected,
+.emoji-mart-anchor:hover {
+  color: #5f9eff !important;
+}
+
+.emoji-mart-anchor {
+  color: #888888 !important;
+}
+
+/* ============ TOOLTIPS (GLOBAL) ============ */
+
+.str-chat__tooltip {
+  background: #2d2d2d !important;
+  color: #ffffff !important;
+  border: 1px solid #3c4043 !important;
+  border-radius: 6px !important;
+  padding: 6px 10px !important;
+  font-size: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ============ REACTION DETAILS MODAL (GLOBAL) ============ */
+
+.str-chat__modal--reaction-details .str-chat__modal__inner {
+  min-width: 400px !important;
+  max-width: 500px !important;
+}
+
+
+
+.str-chat__reaction-details-list {
+  background: #2d2d2d !important;
+}
+
+.str-chat__reaction-details-item {
+  background: transparent !important;
+  color: #ffffff !important;
+  border-bottom: 1px solid #3c4043 !important;
+  padding: 12px !important;
+}
+
+.str-chat__reaction-details-item:hover {
+  background: #3c4043 !important;
+}
+
+.str-chat__reaction-details-item span,
+.str-chat__reaction-details-item p {
+  color: #ffffff !important;
+}
+
+/* ============ IMAGE GALLERY/LIGHTBOX (GLOBAL) ============ */
+
+.str-chat__gallery,
+.str-chat__image-gallery {
+  background: rgba(0, 0, 0, 0.95) !important;
+}
+
+.str-chat__gallery-image {
+  border: 2px solid #3c4043 !important;
+}
+
+/* ============ GIPHY PICKER (GLOBAL) ============ */
+
+.str-chat__giphy-picker {
+  background: #2d2d2d !important;
+  border: 1px solid #3c4043 !important;
+  border-radius: 8px !important;
+}
+
+.str-chat__giphy-picker input {
+  background: #1a1a1a !important;
+  color: #ffffff !important;
+  border: 1px solid #3c4043 !important;
+}
+
+/* ============ CONTEXT MENU (GLOBAL) ============ */
+
+.str-chat__context-menu {
+  background: #2d2d2d !important;
+  border: 1px solid #3c4043 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+}
+
+.str-chat__context-menu-item {
+  color: #ffffff !important;
+  background: transparent !important;
+}
+
+.str-chat__context-menu-item:hover {
+  background: #3c4043 !important;
+}
+
+/* ============ GLOBAL FORCE OVERRIDES ============ */
+
+/* Force any white background in Stream Chat to be dark */
+[class*="str-chat"] [style*="background: white"],
+[class*="str-chat"] [style*="background-color: white"],
+[class*="str-chat"] [style*="background: #fff"],
+[class*="str-chat"] [style*="background-color: #fff"],
+[class*="str-chat"] [style*="background: rgb(255, 255, 255)"] {
+  background: #2d2d2d !important;
+  background-color: #2d2d2d !important;
+}
+
+/* Ensure all text in Stream Chat components is readable */
+[class*="str-chat"] * {
+  color: inherit;
+}
+
+[class*="str-chat"] button {
+  color: inherit;
+}
+
+/* ============================================ */
+/* REACTION ANIMATIONS - Zoom/Meet Style */
+/* ============================================ */
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0) scale(0);
+    opacity: 0;
+  }
+  10% {
+    transform: translateY(-20px) scale(1.2);
+    opacity: 1;
+  }
+  20% {
+    transform: translateY(-40px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-600px) scale(0.8);
+    opacity: 0;
+  }
+}
+
+.animate-float-up {
+  animation: float-up 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  will-change: transform, opacity;
+}
+

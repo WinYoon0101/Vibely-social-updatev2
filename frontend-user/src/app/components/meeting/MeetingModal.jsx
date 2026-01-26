@@ -2,11 +2,7 @@
 
 import Image from "next/image";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
 const MeetingModal = ({
@@ -31,7 +27,6 @@ const MeetingModal = ({
             </div>
           )}
 
-          {/* BẮT BUỘC cho accessibility */}
           <DialogTitle
             className={`text-3xl font-bold text-center leading-[42px] ${className}`}
           >
