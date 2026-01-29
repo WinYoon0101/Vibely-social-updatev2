@@ -28,7 +28,7 @@ const MeetingModal = ({
           )}
 
           <DialogTitle
-            className={`text-3xl font-bold text-center leading-[42px] ${className}`}
+            className={`text-3xl font-bold text-center leading-[42px]`}
           >
             {title}
           </DialogTitle>
