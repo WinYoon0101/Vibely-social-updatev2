@@ -1,25 +1,3 @@
-<p align="center">
-  <a href="https://www.uit.edu.vn/" title="University of Information Technology" style="border: none;">
-    <img src="https://i.imgur.com/WmMnSRt.png" alt="University of Information Technology">
-  </a>
-</p>
-
-<h1 align="center"><b>IE213.P21 - Web Systems Development Techniques</b></h1>
-
-## Project Group:
-| **No.** | **Student ID** | **Full Name**            | **Role**        | **Email**                  |
-| ------- | -------------- | ------------------------ | --------------- | -------------------------- |
-| 1       | 22521172       | Võ Nhất Phương           | Group Leader    | 22521172@gm.uit.edu.vn     |
-| 2       | 22521641       | Nguyễn Đăng Hương Uyên   | Member          | 22521641@gm.uit.edu.vn     |
-| 3       | 22520298       | Lê Nguyễn Thùy Dương     | Member          | 22520298@gm.uit.edu.vn     |
-| 4       | 22520861       | Hoàng Gia Minh           | Member          | 22520861@gm.uit.edu.vn     |
-
-## Course Introduction:
-* **Course Title:** Web Systems Development Techniques  
-* **Course Code:** IE213.P21  
-* **Academic Year:** Semester 2 (2024 - 2025)  
-* **Instructor:** MSc. Võ Tấn Khoa
-
 Vibely Educational Social Web
 ============
 
