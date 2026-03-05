@@ -142,7 +142,7 @@ const PostCard = ({ post, onReact, onComment, onShare, onDelete, onEdit, fetchSi
 
   //Các biến và hàm cho Chia Sẻ Bài Viết
   const generateSharedLink = () => {
-    return `https://vibely-study-social-web-user.vercel.app/posts/${post?._id}`; //deploy sao thì đổi lại vậy
+    return `https://https://vibely-frontend-user.vercel.app/posts/${post?._id}`; //deploy sao thì đổi lại vậy
   };
   const handleShare = (platform) => {
     const url = generateSharedLink();
@@ -290,7 +290,7 @@ const PostCard = ({ post, onReact, onComment, onShare, onDelete, onEdit, fetchSi
               >
                 {/*Nút chỉnh sửa bài viết*/}
                 <button
-                  className="block w-full px-4 py-2 text-left hover:bg-gray-200 flex items-center gap-2"
+                  className="w-full px-4 py-2 text-left hover:bg-gray-200 flex items-center gap-2"
                   onClick={() => {
                     setDropdownOpen(false);
                     setEditPost(true);
@@ -304,7 +304,7 @@ const PostCard = ({ post, onReact, onComment, onShare, onDelete, onEdit, fetchSi
                 </button>
                 {/*Nút xóa bài viết*/}
                 <button
-                  className="block w-full px-4 py-2 text-left text-red-600 hover:bg-gray-200 flex items-center gap-2"
+                  className="w-full px-4 py-2 text-left text-red-600 hover:bg-gray-200 flex items-center gap-2"
                   onClick={() => {
                     setDropdownOpen(false);
                     setPopupOpen(true);
