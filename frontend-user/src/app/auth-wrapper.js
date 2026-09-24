@@ -56,6 +56,17 @@ export default function AuthWrapper({ children }) {
     };
     useEffect(() => {
         const checkAuth = async () => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                clearUser();
+                setIsAuthenticated(false);
+                if (!isPublicPage) {
+                    router.push("/user-login");
+                }
+                setLoading(false);
+                return;
+            }
+
             try {
                 const result = await checkUserAuth();
                 if (result.isAuthenticated) {
@@ -79,6 +90,7 @@ export default function AuthWrapper({ children }) {
         const handleLogout = async () => {
             clearUser();
             setIsAuthenticated(false);
+            localStorage.removeItem('isGuest');
 
             // Ngắt kết nối socket khi đăng xuất
             disconnectSocket();

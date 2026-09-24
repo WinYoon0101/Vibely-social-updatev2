@@ -20,8 +20,18 @@ const Homepage = () => {
     window.open(path, "_blank")
   }
   useEffect(() => {
-    fetchPosts()  //tải các bài viết
-  }, [fetchPosts])
+    // 1. Lấy token từ localStorage 
+    const token = localStorage.getItem("token");
+
+    // 2. Nếu không có token -> về trang đăng nhập
+    if (!token) {
+      router.push("/user-login"); 
+      return; 
+    }
+
+    // 3. Nếu có token thì mới tải bài viết
+    fetchPosts();
+  }, [fetchPosts, router]);
 
   return (
     <div className="flex flex-col min-h-screen text-foreground">

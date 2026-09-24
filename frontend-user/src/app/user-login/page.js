@@ -147,6 +147,20 @@ const Page = () => {
     window.location.href = `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/google`
   }
 
+  const handleGuestLogin = async () => {
+    try {
+      const result = await loginUser({ email: 'duong14104@gmail.com', password: 'duongle123' })
+      if (result.status === 'success') {
+        localStorage.setItem('token', result.data.token);
+        router.push('/')
+      }
+      toast.success('Đăng nhập Demo thành công')
+    } catch (error) {
+      console.error(error);
+      toast.error('Đăng nhập Demo thất bại')
+    }
+  }
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-[#F9FDFF] flex items-center justify-center">
@@ -296,6 +310,15 @@ const Page = () => {
                         <path d="M1 1h22v22H1z" fill="none" />
                       </svg>
                       Google
+                    </Button>
+                  </motion.div>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="mt-4"
+                  >
+                    <Button variant="outline" className="w-full bg-slate-200" onClick={handleGuestLogin}>
+                      Khách viếng thăm
                     </Button>
                   </motion.div>
                 </div>

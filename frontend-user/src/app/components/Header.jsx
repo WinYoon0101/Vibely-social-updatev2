@@ -126,19 +126,17 @@ const Header = () => {
 
   const handleLogout = async () => {
     try {
-      const result = await logout();
+      await logout();
 
-      if (result?.status === "success") {
-        clearUser();
+      clearUser();
+      localStorage.removeItem("isGuest");
+      localStorage.removeItem("token");
 
-        if (router.pathname !== "/user-login") {
-          router.push("/user-login");
-        }
-
-        toast.success("Đăng xuất thành công");
-      } else {
-        toast.error("Đăng xuất thất bại, vui lòng thử lại!");
+      if (pathname !== "/user-login") {
+        router.push("/user-login");
       }
+
+      toast.success("Đăng xuất thành công");
     } catch (error) {
       console.error("Lỗi khi đăng xuất:", error);
       toast.error("Đăng xuất thất bại");
