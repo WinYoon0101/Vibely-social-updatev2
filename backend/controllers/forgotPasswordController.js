@@ -1,15 +1,10 @@
 const User = require('../model/User');
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 const bcrypt = require('bcryptjs');
+const getEmailTemplate = require('../utils/emailTemplate');
 
-// Tạo transporter để gửi email
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    }
-});
+// Khởi tạo Resend
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Tạo mã xác thực ngẫu nhiên 6 số
 const generateVerificationCode = () => {
@@ -31,15 +26,32 @@ exports.sendVerificationCode = async (req, res) => {
         user.verificationCodeExpires = Date.now() + 10 * 60 * 1000; // Mã hết hạn sau 10 phút
         await user.save();
 
-        // Gửi email
-        const mailOptions = {
-            from: process.env.EMAIL_USER,
-            to: email,
-            subject: 'Mã xác thực đặt lại mật khẩu',
-            text: `Mã xác thực của bạn là: ${verificationCode}. Mã này sẽ hết hạn sau 10 phút.`
-        };
+        const htmlContent = getEmailTemplate(
+            'Khôi phục mật khẩu Vibely',
+            `Mã xác thực của bạn là: ${verificationCode}`,
+            `
+            <p>Chào bạn,</p>
+            <p>Chúng tôi nhận được yêu cầu đặt lại mật khẩu cho tài khoản Vibely của bạn. Vui lòng sử dụng mã xác thực dưới đây để tiến hành đặt lại mật khẩu:</p>
+            <div class="otp-box">
+                <p class="otp-code">${verificationCode}</p>
+            </div>
+            <p>Mã này sẽ hết hạn sau <strong>10 phút</strong>.</p>
+            <p>Nếu bạn không yêu cầu đặt lại mật khẩu, xin hãy bỏ qua email này.</p>
+            `
+        );
 
-        await transporter.sendMail(mailOptions);
+        // Gửi email bằng Resend
+        const { data, error } = await resend.emails.send({
+            from: process.env.EMAIL_USER || 'Vibely <onboarding@resend.dev>',
+            to: email,
+            subject: 'Mã xác thực đặt lại mật khẩu - Vibely',
+            html: htmlContent
+        });
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
         res.status(200).json({ message: 'Đã gửi mã xác thực qua email' });
     } catch (error) {
         res.status(500).json({ message: 'Lỗi server', error: error.message });

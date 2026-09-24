@@ -1,7 +1,11 @@
 const Inquiry = require("../model/Inquiry");
 const User = require("../model/User");
 const asyncHandler = require("express-async-handler");
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
+const getEmailTemplate = require("../utils/emailTemplate");
+
+// Khởi tạo Resend
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Lấy tất cả các yêu cầu hỗ trợ
 const getInquiries = asyncHandler(async (req, res) => {
@@ -59,23 +63,32 @@ const updateInquiry = asyncHandler(async (req, res) => {
         inquiry.response = response;
         inquiry.respondedAt = Date.now();
 
-        // Send email response
-        const transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS
-            }
+        const htmlContent = getEmailTemplate(
+            'Phản hồi từ đội ngũ hỗ trợ Vibely',
+            `Phản hồi cho yêu cầu: ${inquiry.subject}`,
+            `
+            <p>Chào bạn,</p>
+            <p>Cảm ơn bạn đã liên hệ với đội ngũ hỗ trợ của <strong>Vibely Social</strong>. Dưới đây là phản hồi cho yêu cầu <em>"${inquiry.subject}"</em> của bạn:</p>
+            <div style="background-color: #f9f9f9; border-left: 4px solid #23CAF1; padding: 15px; margin: 20px 0;">
+                <p style="margin: 0; white-space: pre-wrap;">${response}</p>
+            </div>
+            <p>Nếu bạn có bất kỳ câu hỏi nào khác, đừng ngần ngại gửi thêm yêu cầu hỗ trợ mới trên ứng dụng.</p>
+            <p>Trân trọng,<br/>Đội ngũ hỗ trợ Vibely</p>
+            `
+        );
+
+        // Send email response using Resend
+        const { data, error } = await resend.emails.send({
+            from: process.env.EMAIL_USER || 'Vibely <onboarding@resend.dev>',
+            to: inquiry.userId.email,
+            subject: `Phản hồi yêu cầu hỗ trợ: ${inquiry.subject}`,
+            html: htmlContent
         });
 
-        const mailOptions = {
-            from: process.env.EMAIL_USER,
-            to: inquiry.userId.email,
-            subject: `Response to your inquiry: ${inquiry.subject}`,
-            text: response
-        };
-
-        await transporter.sendMail(mailOptions);
+        if (error) {
+            console.error("Resend error:", error);
+            throw new Error(error.message);
+        }
     }
 
     await inquiry.save();

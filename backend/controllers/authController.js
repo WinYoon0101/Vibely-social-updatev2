@@ -11,17 +11,12 @@ const Story = require("../model/Story");
 const Inquiry = require("../model/Inquiry");
 const Group = require("../model/Group");
 
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 const Notification = require('../model/Notification');
+const getEmailTemplate = require('../utils/emailTemplate');
 
-// Tạo transporter để gửi email
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    }
-});
+// Khởi tạo Resend
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Đăng ký cho người dùng
 const registerUser = async (req, res) => {
@@ -291,20 +286,30 @@ const changePassword = async (req, res) => {
     }
 };
 
-// Hàm gửi OTP
 const sendOTPEmail = async (email, otp) => {
-    const mailOptions = {
-        from: process.env.EMAIL_USER,
+    const htmlContent = getEmailTemplate(
+        'Xác thực email đăng ký Vibely',
+        `Mã OTP của bạn là: ${otp}`,
+        `
+        <p>Chào bạn,</p>
+        <p>Cảm ơn bạn đã đăng ký tài khoản tại Vibely Social. Để hoàn tất việc đăng ký, vui lòng sử dụng mã xác thực bên dưới:</p>
+        <div class="otp-box">
+            <p class="otp-code">${otp}</p>
+        </div>
+        <p>Mã này sẽ hết hạn sau <strong>5 phút</strong>.</p>
+        `
+    );
+
+    const { data, error } = await resend.emails.send({
+        from: process.env.EMAIL_USER || 'Vibely <onboarding@resend.dev>',
         to: email,
         subject: 'Xác thực email đăng ký Vibely',
-        html: `
-        <h1>Xác thực email đăng ký Vibely</h1>
-        <p>Mã OTP của bạn là: <strong>${otp}</strong></p>
-        <p>Mã này sẽ hết hạn sau 5 phút.</p>
-      `
-    };
+        html: htmlContent
+    });
 
-    await transporter.sendMail(mailOptions);
+    if (error) {
+        throw new Error(error.message);
+    }
 };
 
 // Tạo và gửi OTP
