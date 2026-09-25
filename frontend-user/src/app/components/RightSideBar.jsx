@@ -43,7 +43,7 @@ const RightSideBar = () => {
   };
 
   useEffect(() => {
-    const examDate = new Date("2026-06-11");
+    const examDate = new Date("2027-06-11");
     const today = new Date();
     const diffTime = Math.ceil((examDate - today) / (1000 * 60 * 60 * 24));
     setCountdown(diffTime);

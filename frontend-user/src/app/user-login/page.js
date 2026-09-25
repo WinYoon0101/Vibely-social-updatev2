@@ -318,7 +318,7 @@ const Page = () => {
                     className="mt-4"
                   >
                     <Button variant="outline" className="w-full bg-slate-200" onClick={handleGuestLogin}>
-                      Khách viếng thăm
+                      Tài khoản Demo
                     </Button>
                   </motion.div>
                 </div>
